@@ -42,6 +42,9 @@ class ApplicationFront extends Application
   
     function logout()
     {
+		session_start();
+	
+	    session_unset();
 	}
   
 }

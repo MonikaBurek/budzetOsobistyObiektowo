@@ -14,4 +14,5 @@
   define('NO_LOGIN_REQUIRED', 10);
   define('LOGIN_OK', 11);
   define('LOGIN_FAILED', 12);
+  define('TEST', 13);
 ?>

@@ -28,7 +28,10 @@ catch(Exception $e){
         case 'login':
 	        include 'login.php';
 			break;
-		
+		case 'logout':
+	        $application->logout();
+			header ('Location:index.php');
+			break;
 		default:
 
 		include 'templates/mainTemplate.php';		

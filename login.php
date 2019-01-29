@@ -7,16 +7,20 @@
         header("Location:index.php?action=showMain");
         exit();
       case LOGIN_FAILED:
-        $application->setMessage("Nieprawidłowa nazwa lub hasło!");
+        $application->setMessage("Nieprawidłowy login lub hasło!");
+        break;
+	 case FORM_DATA_MISSING:
+        $application->setMessage("Podaj login i hasło!");
         break;
       case SERVER_ERROR:
-	  $application->setMessage("Błąd serwera!ERROR SERVER");
+	  $application->setMessage("Błąd serwera!");
+	  break;
       default:
-        $application->setMessage("Błąd serwera!");
+        $application->setMessage("Wyjątek.");
     }
   }
   else{
     $application->setMessage("Najpierw musisz się wylogować!");
   }
-  //header("Location:index.php?action=showLoginForm");
+  header("Location:index.php?action=showLoginForm");
 ?>

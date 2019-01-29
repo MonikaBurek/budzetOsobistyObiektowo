@@ -42,9 +42,9 @@
 					
 					<div class="collapse navbar-collapse" id="myNavbar">
 						<ul class="nav navbar-nav">
-							<li><a href="index.php">Strona główna</a></li>
+							<li class="active"><a href="index.php">Strona główna</a></li>
 							<li><a href="addIncome.php">Dodaj przychód</a></li>
-							<li class="active"><a href="addExpense.php">Dodaj wydatek</a></li>
+							<li><a href="addExpense.php">Dodaj wydatek</a></li>
 							<li><a href="viewBalance.php">Przeglądaj bilans</a></li>
 							<li class="dropdown">
 								<a class="dropdown-toggle" data-toggle="dropdown" href="#">Ustawienia <span class="caret"></span></a>
@@ -56,7 +56,7 @@
 							</li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
-							<li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Wyloguj się</a></li>
+							<li><a href="index.php?action=logout"><span class="glyphicon glyphicon-log-out"></span> Wyloguj się</a></li>
 						</ul>
 					</div>
 				</div>
