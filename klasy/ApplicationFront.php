@@ -36,7 +36,8 @@ class ApplicationFront extends Application
 
     function loginUser()
     {
-       return LOGIN_OK;
+       $newLogin = new Login($this->connection);
+	   return $newLogin->login();
     }
   
     function logout()

@@ -9,7 +9,7 @@
 		<meta name="author" content="Monika Burek">
 			
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">	
-		<link rel="stylesheet" href="css/style.css" type="text/css"/>
+		<link rel="stylesheet" href="style.css" type="text/css"/>
 		<link rel="stylesheet" href="css/fontello.css" type="text/css"/>
 		<link href="https://fonts.googleapis.com/css?family=Lato:400,700&amp;subset=latin-ext" rel="stylesheet">
     </head>
