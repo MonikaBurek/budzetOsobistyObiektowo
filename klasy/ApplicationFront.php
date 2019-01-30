@@ -39,6 +39,12 @@ class ApplicationFront extends Application
        $newLogin = new Login($this->connection);
 	   return $newLogin->login();
     }
+	
+	function registerUser()
+	{
+		$register = new Registration($this->connection);
+		return $register->register();
+	}
   
     function logout()
     {
