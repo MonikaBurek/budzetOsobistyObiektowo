@@ -1,7 +1,6 @@
 <?php
 class Validation
 {
-	//Validate your login
 	function ValidationOfLogin($name)
 	{
 	   //Check length login
@@ -39,4 +38,6 @@ class Validation
 		
 	    return ACTION_OK;
 	}
+	
+	
 }

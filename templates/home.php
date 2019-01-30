@@ -8,8 +8,6 @@
 			<h3 class="articleHeader">Jak działa aplikacja?</h3>
 			<p>Za pomocą zakładek menu głównego dodajemy przychody i wydatki (Dodaj przychód, Dodaj wydatek - wypełniamy formularz, przypisujemy kategorie). Używając zakładki Przeglądaj bilans możemy analizować nasze wydatki i przychody w danym okresie dla danych kategorii. Jest możliwość zmiany wpisów oraz personalizacji kategorii przychodów i wydatków.</p>
 						
-			<h3 class="articleHeader">O autorze</h3>
-			<p>Mam na imię Monika. Jestem uczestniczką szkolenia Przyszły Programista.</p>
 		</article>		
 	</div>
 							
