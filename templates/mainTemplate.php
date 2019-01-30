@@ -45,7 +45,7 @@
 						<ul class="nav navbar-nav">
 							<li class="active"><a href="index.php">Strona główna</a></li>
 							<li><a href="addIncome.php">Dodaj przychód</a></li>
-							<li><a href="addExpense.php">Dodaj wydatek</a></li>
+							<li><a href="index.php?action=showExpenseForm">Dodaj wydatek</a></li>
 							<li><a href="viewBalance.php">Przeglądaj bilans</a></li>
 							<li class="dropdown">
 								<a class="dropdown-toggle" data-toggle="dropdown" href="#">Ustawienia <span class="caret"></span></a>
@@ -74,6 +74,9 @@
 							break;
 						case 'showRegistrationForm':
 							include 'templates/registrationForm.php';
+							break;
+						case 'showExpenseForm':
+							include 'templates/expenseForm.php';
 							break;
 						case 'showMain':
 						include 'templates/home.php';

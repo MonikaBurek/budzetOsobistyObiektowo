@@ -41,9 +41,6 @@ catch (Exception $e) {
 				case FORM_DATA_MISSING:
                     $application->setMessage("Podaj login i hasło!");
                     break;
-				case ACTION_FAILED:
-				    $application->setMessage('Obecnie rejestracja nie jest możliwa.');
-					break;
 				case BAD_LOGIN_LENGTH:
 					$application->setMessage('Login musi posiadać od 5 do 20 znaków!');
 					break;
@@ -63,7 +60,7 @@ catch (Exception $e) {
 					$application->setMessage('TEST');
 					break;
 				default:
-					$application->setMessage('Default');
+					$application->setMessage('Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!');
 					break;
 			endswitch;
 			header ('Location: index.php?action=showRegistrationForm');
