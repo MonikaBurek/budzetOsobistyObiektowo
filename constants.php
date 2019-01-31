@@ -22,5 +22,10 @@
   define('RECATCHA_FALIED',24);
   define('USER_NAME_ALREADY_EXISTS', 25);
 
-  
+  define('AMOUNT_NOT_NUMBER',31);
+  define('AMOUNT_TOO_HIGH',32);
+  define('NO_DATE',32);
+  define('WRONG_DATE',33);
+  define('COMMENT_TOO_LONG',34);
+
 ?>

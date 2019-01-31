@@ -43,7 +43,7 @@
 					
 					<div class="collapse navbar-collapse" id="myNavbar">
 						<ul class="nav navbar-nav">
-							<li class="active"><a href="index.php">Strona główna</a></li>
+							<li><a href="index.php?action=showMain">Strona główna</a></li>
 							<li><a href="addIncome.php">Dodaj przychód</a></li>
 							<li><a href="index.php?action=showExpenseForm">Dodaj wydatek</a></li>
 							<li><a href="viewBalance.php">Przeglądaj bilans</a></li>
@@ -76,7 +76,7 @@
 							include 'templates/registrationForm.php';
 							break;
 						case 'showExpenseForm':
-							include 'templates/expenseForm.php';
+						    $application->showExpenseForm();
 							break;
 						case 'showMain':
 						include 'templates/home.php';

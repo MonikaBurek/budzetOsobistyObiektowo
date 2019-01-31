@@ -56,15 +56,27 @@ catch (Exception $e) {
 				case USER_NAME_ALREADY_EXISTS:
 				    $application->setMessage('Istnieje już konto dla podanego loginu.');
 					break;
-				case TEST:
-					$application->setMessage('TEST');
-					break;
 				default:
 					$application->setMessage('Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!');
 					break;
 			endswitch;
 			header ('Location: index.php?action=showRegistrationForm');
 			break;
+			case 'addExpense':
+				switch ($application->addExpense()):
+			    case ACTION_OK:
+				    $application->setMessage('Zapisano wydatek w bazie danych.');
+				    //header ('Location:index.php?action=showExpenseForm');
+					return;
+				case TEST:
+					$application->setMessage('TEST');
+					break;
+				default:
+					$application->setMessage('Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!');
+					break;
+				endswitch;
+				header ('Location: index.php?action=showExpenseForm');
+				break;					
 		default:
 
 		include 'templates/mainTemplate.php';		

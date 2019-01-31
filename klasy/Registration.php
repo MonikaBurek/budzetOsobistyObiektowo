@@ -56,7 +56,7 @@ class Registration
 		$password = $_POST['password'];
 		
 		$va = new Validation();
-		switch ($va->ValidationOfLogin($name)) {
+		switch ($va->validationLogin($name)) {
 		    case BAD_LOGIN_LENGTH:
 		        return BAD_LOGIN_LENGTH;
 			case NON_ALPHANUMERIC_LOGIN:
@@ -66,13 +66,13 @@ class Registration
 		$name = strtolower($name);  // Format: name
 		$_SESSION['formName'] = $name;
 		
-		if ($va->ValidationOfPassword($password) == BAD_PASSWORD_LENGTH) {
+		if ($va->validationPassword($password) == BAD_PASSWORD_LENGTH) {
 			return BAD_PASSWORD_LENGTH;
 		}
 		
 		$passwordHash = password_hash($password, PASSWORD_DEFAULT);
 		
-		if ($va->ValidationOfRecatcha() == false) {
+		if ($va->validationRecatcha() == false) {
 			return RECATCHA_FALIED;
 		}
 		
