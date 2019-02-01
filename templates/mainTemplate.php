@@ -76,7 +76,10 @@
 							include 'templates/registrationForm.php';
 							break;
 						case 'showExpenseForm':
-						    $application->showExpenseForm();
+						    $application->showExpenseForm($statement);
+							break;
+						case 'successExpense':
+							include 'templates/successExpense.php';
 							break;
 						case 'showMain':
 						include 'templates/home.php';

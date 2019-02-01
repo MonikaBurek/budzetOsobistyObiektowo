@@ -48,10 +48,12 @@ class ApplicationFront extends Application
   
 	function addExpense()
 	{
+		$expenseM = new ExpenseManagement($this->connection);
+		return $expenseM->addExpense();
 		
 	}
 	
-	function showExpenseForm()
+	function showExpenseForm($statement)
 	{
 		$userId = $this->userLoggedIn->id;
 		$elementFormExpense = new Form($this->connection);

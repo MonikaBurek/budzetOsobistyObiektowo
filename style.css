@@ -445,7 +445,7 @@ a:hover, a:visited
 	color: #66B032;
 	font-weight: 700;
 	padding-top:50px;
-	padding-bottom:50px;
+	padding-bottom:40px;
 	text-align:center;
 	-webkit-box-shadow: 10px 10px 26px -5px rgba(9,40,52,0.23);
 	-moz-box-shadow: 10px 10px 26px -5px rgba(9,40,52,0.23);
@@ -499,11 +499,11 @@ h4.bilansHeader
 .statement
 {
 	
-	font-size: 20px;
+	font-size: 18px;
     background-color: #66B032;
     color: #092834;
-	border: 2 solid #092834;
 	border-radius: 5px;
 	letter-spacing: 2px;
-	margin-bottom: 30px;
+	margin-bottom: 10px;
+	margin-top: 10px;
 }

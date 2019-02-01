@@ -23,7 +23,7 @@ class Form
 				$str .= '<label class="radio-inline">';
 				$str .= '<input type="radio" name="paymentMethod" value="'.$row['name'];
 					
-					if(isset($_SESSION['formPaymentMethod']))
+				if(isset($_SESSION['formPaymentMethod']))
 					{
 						if($row['name'] == $_SESSION['formPaymentMethod']) 
 						{
@@ -35,6 +35,7 @@ class Form
 					$str .= '</div>';
 					$str .= '<div class="col-sm-5"></div>';
 					$str .= '</div>';	
+			        					
 			}
 				
 			$resultOfQuery->free_result();

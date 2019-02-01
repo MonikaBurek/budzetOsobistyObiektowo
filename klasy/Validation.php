@@ -45,12 +45,10 @@ class Validation
 			$amount = round($amount,2);
 		} else {
 			return AMOUNT_NOT_NUMBER;
-			//"Kwota musi być liczbą. Format:1234.45";
 		}
 		
 		if ($amount >= 1000000000) {
 			return AMOUNT_TOO_HIGH;
-			//"Kwota musi być liczbą mniejszą od 1 000 000 000.";
 		}
 		
 		return ACTION_OK;
@@ -60,23 +58,21 @@ class Validation
 	{
 		if ($date == NULL) {
 			return NO_DATE;
-			//"Wybierz datę dla wydatku."
 		}
 		
 		$currentDate = date('Y-m-d');
 		
 		if ($date > $currentDate) {
 			return WRONG_DATE;
-			// "Data musi być aktualna lub wcześniejsza."
 		}
 		return ACTION_OK;
 	}
+	
 	
 	function validationComment($comment)
 	{
 		if (strlen($comment) > 100) {
 			return COMMENT_TOO_LONG;
-			//"Komentarz może mieć maksymalnie 100 znaków.";
 		}
 		return ACTION_OK;
 	}

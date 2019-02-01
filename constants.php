@@ -27,5 +27,6 @@
   define('NO_DATE',32);
   define('WRONG_DATE',33);
   define('COMMENT_TOO_LONG',34);
-
+  define('NO_PAYMENT_METHOD',35);
+  define('NO_CATEGORY',36);
 ?>
