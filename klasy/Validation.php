@@ -1,7 +1,7 @@
 <?php
 class Validation
 {
-	function ValidationOfLogin($name)
+	function validationLogin($name)
 	{
 	   //Check length login
 		if ((strlen($name) < 5) || (strlen($name)>20)) {
@@ -15,7 +15,7 @@ class Validation
 		return ACTION_OK;
 	}	
 
-	function ValidationOfPassword($password)
+	function validationPassword($password)
 	{
         //Check password length
 		if ((strlen($password) < 8) || (strlen($password) > 20)) {
@@ -25,7 +25,7 @@ class Validation
 		return ACTION_OK;
 	}
 	
-	function ValidationOfReCatcha()
+	function validationReCatcha()
 	{
 	    //validate re-catcha
 		$secretKey = "6LfuoY0UAAAAAPGV0SeocHv151zy8erKGg6AEHFh";
@@ -39,5 +39,42 @@ class Validation
 	    return ACTION_OK;
 	}
 	
+	function validationAmount($amount)
+	{
+		if (is_numeric($amount)) {
+			$amount = round($amount,2);
+		} else {
+			return AMOUNT_NOT_NUMBER;
+		}
+		
+		if ($amount >= 1000000000) {
+			return AMOUNT_TOO_HIGH;
+		}
+		
+		return ACTION_OK;
+	}
+	
+	function validationDate($date)
+	{
+		if ($date == NULL) {
+			return NO_DATE;
+		}
+		
+		$currentDate = date('Y-m-d');
+		
+		if ($date > $currentDate) {
+			return WRONG_DATE;
+		}
+		return ACTION_OK;
+	}
+	
+	
+	function validationComment($comment)
+	{
+		if (strlen($comment) > 100) {
+			return COMMENT_TOO_LONG;
+		}
+		return ACTION_OK;
+	}
 	
 }

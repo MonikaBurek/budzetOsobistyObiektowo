@@ -46,6 +46,23 @@ class ApplicationFront extends Application
 		return $register->register();
 	}
   
+	function addExpense()
+	{
+		$userId = $this->userLoggedIn->id;
+		$expenseM = new ExpenseManagement($this->connection);
+		return $expenseM->addExpense($userId);
+		
+	}
+	
+	function showExpenseForm($statement)
+	{
+		$userId = $this->userLoggedIn->id;
+		$elementFormExpense = new Form($this->connection);
+		$strPayment = $elementFormExpense->displayInputForPaymentMethod($userId);
+		$strCategoryExpense = $elementFormExpense->displayInputForExpensesCategory($userId);
+		include 'templates/expenseForm.php';
+	}
+  
     function logout()
     {
 		session_start();
