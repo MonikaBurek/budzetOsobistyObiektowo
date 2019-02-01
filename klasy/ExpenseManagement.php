@@ -8,7 +8,7 @@ class ExpenseManagement
 	    $this->connection = $connection;
 	}
 	
-    function addExpense()
+    function addExpense($userId)
     {
 	    if (!$this->connection) return SERVER_ERROR;
 	
@@ -56,19 +56,16 @@ class ExpenseManagement
 		} else {
 			return NO_CATEGORY;	 
 		}
-		
 		if ($va->validationComment($comment) == COMMENT_TOO_LONG) {
 				return COMMENT_TOO_LONG;
 		}
-		
-		
-		
-		
-		
-		
-		
-		return ACTION_OK;
-    }
 	
-	
+	    $sql="INSERT INTO expenses VALUES (NULL, '$userId',(SELECT id FROM expenses_category_assigned_to_users WHERE user_id ='$userId' AND name ='$category'),(SELECT id FROM payment_methods_assigned_to_users WHERE user_id ='$userId' AND name='$paymentMethod'),'$amount','$date','$comment')";
+		//Adding a expense to the database
+		if ($this->connection->query($sql)) {
+			return ACTION_OK;
+		} else {
+			return SERVER_ERROR;
+		}
+    }	
 }
