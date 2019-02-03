@@ -106,7 +106,66 @@ catch (Exception $e) {
 					break;
 				endswitch;
 				header ('Location: index.php?action=showExpenseForm');
-				break;					
+				break;	
+		case 'addIncome':
+				switch ($application->addIncome()):
+			    case ACTION_OK:
+				    $application->setMessage('Zapisano przychód w bazie danych.');
+				    header ('Location:index.php?action=successIncome');
+					return;
+				case SERVER_ERROR:
+	                $application->setMessage("Błąd serwera!");
+	                break;
+				case FORM_DATA_MISSING:
+                    $application->setMessage("Wypełnij wszystkie pola formularza.");
+                    break;	
+				case AMOUNT_NOT_NUMBER:
+	                $application->setMessage("Kwota musi być liczbą. Format:1234.45");
+	                break;	
+				case AMOUNT_TOO_HIGH:
+	                $application->setMessage("Kwota musi być liczbą mniejszą od 1 000 000 000.");
+	                break;
+				case NO_DATE:
+	                $application->setMessage("Wybierz datę dla wydatku.");
+	                break;
+                case WRONG_DATE:
+	                $application->setMessage("Data musi być aktualna lub wcześniejsza.");
+	                break;
+				case NO_CATEGORY:
+	                $application->setMessage("Wybierz kategorię dla wydatku.");
+	                break;
+				case COMMENT_TOO_LONG:
+	                $application->setMessage("Komentarz może mieć maksymalnie 100 znaków.");
+	                break;
+				case TEST:
+					$application->setMessage('TEST');
+					break;
+				default:
+					$application->setMessage('Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!');
+					break;
+				endswitch;
+				header ('Location: index.php?action=showIncomeForm');
+				break;	
+		case 'savePeriod':
+			switch ($application->savePeriod()):
+			    case SELECTED_PERIOD:
+				    header ('Location:index.php?action=showDateForm');
+					break;
+				case DEFINED_PERIOD:
+					header ('Location:index.php?action=saveDate');
+				default:
+					$application->setMessage('Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!');
+					break;
+			endswitch;
+			break;	
+		case 'saveDate';
+			switch ($application->saveDate()):
+			    
+				default:
+					$application->setMessage('Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!');
+					break;
+			endswitch;
+			break;	
 		default:
 
 		include 'templates/mainTemplate.php';		

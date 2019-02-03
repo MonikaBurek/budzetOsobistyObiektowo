@@ -29,4 +29,8 @@
   define('COMMENT_TOO_LONG',34);
   define('NO_PAYMENT_METHOD',35);
   define('NO_CATEGORY',36);
+  
+  define('SELECTED_PERIOD',40);
+  define('DEFINED_PERIOD',41);
+  
 ?>

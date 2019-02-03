@@ -44,9 +44,9 @@
 					<div class="collapse navbar-collapse" id="myNavbar">
 						<ul class="nav navbar-nav">
 							<li><a href="index.php?action=showMain">Strona główna</a></li>
-							<li><a href="addIncome.php">Dodaj przychód</a></li>
+							<li><a href="index.php?action=showIncomeForm">Dodaj przychód</a></li>
 							<li><a href="index.php?action=showExpenseForm">Dodaj wydatek</a></li>
-							<li><a href="viewBalance.php">Przeglądaj bilans</a></li>
+							<li><a href="index.php?action=periodOfTimeForm">Przeglądaj bilans</a></li>
 							<li class="dropdown">
 								<a class="dropdown-toggle" data-toggle="dropdown" href="#">Ustawienia <span class="caret"></span></a>
 									<ul class="dropdown-menu">
@@ -80,6 +80,21 @@
 							break;
 						case 'successExpense':
 							include 'templates/successExpense.php';
+							break;
+						case 'showIncomeForm':
+						    $application->showIncomeForm($statement);
+							break;
+						case 'successIncome':
+							include 'templates/successIncome.php';
+							break;
+						case 'periodOfTimeForm':
+							include 'templates/periodOfTimeForm.php';
+							break;
+						case 'showDateForm':
+							include 'templates/showDateForm.php';
+							break;
+						case'viewBalance':
+							$application->viewBalance();
 							break;
 						case 'showMain':
 						include 'templates/home.php';

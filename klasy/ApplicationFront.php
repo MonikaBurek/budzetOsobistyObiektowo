@@ -62,6 +62,38 @@ class ApplicationFront extends Application
 		$strCategoryExpense = $elementFormExpense->displayInputForExpensesCategory($userId);
 		include 'templates/expenseForm.php';
 	}
+	
+	function addIncome()
+	{
+		$userId = $this->userLoggedIn->id;
+		$incomeM = new IncomeManagement($this->connection);
+		return $incomeM->addIncome($userId);
+		
+	}
+	
+	function showIncomeForm($statement)
+	{
+		$userId = $this->userLoggedIn->id;
+		$elementFormIncome = new Form($this->connection);
+		$strCategoryIncome = $elementFormIncome->displayInputForIncomesCategory($userId);
+		include 'templates/incomeForm.php';
+	}
+	
+	function savePeriod()
+	{
+		$balance = new Balance($this->connection);
+		return $balance->savePeriod();	
+	}
+	
+	function saveDate()
+	{
+		'lala';
+	}
+	
+	function viewBalance()
+	{
+		echo 'lalala';
+	}
   
     function logout()
     {
