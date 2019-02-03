@@ -5,16 +5,9 @@
   define('SERVER_ERROR', 3);
 
   define('FORM_DATA_MISSING', 4);
-
-
-  define('INVALID_ID', 6);
-  
-
-  define('LOGIN_REQUIRED', 9);
-  define('NO_LOGIN_REQUIRED', 10);
-  define('LOGIN_OK', 11);
-  define('LOGIN_FAILED', 12);
-  define('TEST', 13);
+  define('LOGIN_OK', 5);
+  define('LOGIN_FAILED', 6);
+  define('TEST', 7);
   
   define('BAD_LOGIN_LENGTH',21);
   define('NON_ALPHANUMERIC_LOGIN',22);
@@ -32,5 +25,7 @@
   
   define('SELECTED_PERIOD',40);
   define('DEFINED_PERIOD',41);
+  
+  define('END_DATE_TOO_SMALL',50);
   
 ?>

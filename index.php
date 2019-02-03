@@ -110,7 +110,6 @@ catch (Exception $e) {
 		case 'addIncome':
 				switch ($application->addIncome()):
 			    case ACTION_OK:
-				    $application->setMessage('Zapisano przychód w bazie danych.');
 				    header ('Location:index.php?action=successIncome');
 					return;
 				case SERVER_ERROR:
@@ -137,9 +136,6 @@ catch (Exception $e) {
 				case COMMENT_TOO_LONG:
 	                $application->setMessage("Komentarz może mieć maksymalnie 100 znaków.");
 	                break;
-				case TEST:
-					$application->setMessage('TEST');
-					break;
 				default:
 					$application->setMessage('Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!');
 					break;
@@ -152,7 +148,7 @@ catch (Exception $e) {
 				    header ('Location:index.php?action=showDateForm');
 					break;
 				case DEFINED_PERIOD:
-					header ('Location:index.php?action=saveDate');
+					header ('Location:index.php?action=viewBalance');
 				default:
 					$application->setMessage('Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!');
 					break;
@@ -160,11 +156,30 @@ catch (Exception $e) {
 			break;	
 		case 'saveDate';
 			switch ($application->saveDate()):
-			    
+			    case ACTION_OK:
+					header ('Location:index.php?action=viewBalance');
+					return;
+					break;
+				case ACTION_FAILED:
+				    $application->setMessage('action_field');
+				    break;
+				case NO_DATE:
+	                $application->setMessage("Wypełnij wszystkie pola formularza.");
+	                break;
+                case WRONG_DATE:
+	                $application->setMessage("Data musi być aktualna lub wcześniejsza.");
+	                break;
+				case END_DATE_TOO_SMALL:
+				    $application->setMessage("Data końca okresu nie może być mniejsza od daty początku okresu.");
+	                break;
+				case TEST:
+					$application->setMessage('TEST');
+					break;
 				default:
 					$application->setMessage('Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!');
 					break;
 			endswitch;
+			header ('Location: index.php?action=showDateForm');
 			break;	
 		default:
 

@@ -87,7 +87,8 @@ class ApplicationFront extends Application
 	
 	function saveDate()
 	{
-		'lala';
+		$balance = new Balance($this->connection);
+		return $balance->saveDate();	
 	}
 	
 	function viewBalance()

@@ -47,5 +47,16 @@
 						
 			</form>
 		</div>
-	</div>							
+	</div>
+	<div class="row text-center ">
+		<div class="col-md-5 col-md-offset-2 bg1">
+	        <div class="statement">
+            <?php
+                if($statement):
+                    echo $statement;
+			     endif ?>
+            </div>  
+	    </div>
+	</div>
+								
 </div>
