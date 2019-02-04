@@ -95,11 +95,12 @@ class ApplicationFront extends Application
 	{
 		$userId = $this->userLoggedIn->id;
 		$balance = new Balance($this->connection);
-		
 		$dates = $balance->getDatesOfPeriodOfTime();
 		$balanceFront = new BalanceFront($this->connection);
 		$tableIncomes = $balanceFront->viewIncomesStatement($dates, $userId);
-		
+		$tableExpenses = $balanceFront->viewExpensesStatement($dates, $userId);
+		$dataPoints = $balanceFront->getDataPoints($dates, $userId);
+		 
 		include 'templates/viewBalance.php';
 		
 	}

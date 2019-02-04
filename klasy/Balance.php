@@ -14,7 +14,7 @@ class Balance
 		
 		if (isset($_POST['periodOfTime'])) {
 			$periodOfTime = $_POST['periodOfTime'];
-			$_SESSION['periodOfTime'] = $periodOfTime;
+			$_SESSION['formPeriodOfTime'] = $periodOfTime;
 			if ($_SESSION['formPeriodOfTime'] =="selectedPeriod") {
 				return SELECTED_PERIOD;
 			} else {
@@ -71,26 +71,24 @@ class Balance
 		    $periodOfTime = $_SESSION['formPeriodOfTime'];
 		    $now = date('Y-m-d');
 			
-		if($periodOfTime == "currentMonth")
-		{
-			$datesPeriod[0] = date('Y-m-d',strtotime("first day of this month"));
-			$datesPeriod[1] = date('Y-m-d',strtotime("now"));
-		}
-		else if($periodOfTime == "previousMonth")
-		{
-			$datesPeriod[0] = date('Y-m-d',strtotime("first day of previous month"));
-			$datesPeriod[1] = date('Y-m-d',strtotime("last day of previous month"));
-		}
-		else if($periodOfTime == "currentYear")
-		{
-			$datesPeriod[0] = date('Y-m-d',strtotime("1 January this year"));
-			$datesPeriod[1] = date('Y-m-d',strtotime("now"));
-		}
-		else if($periodOfTime == "selectedPeriod")
-		{
-			$datesPeriod[0] = $_SESSION['periodStartDate'];
-			$datesPeriod[1] = $_SESSION['periodEndDate'];	
-		}
+		switch ($periodOfTime) {
+			case "currentMonth":
+				$datesPeriod[0] = date('Y-m-d',strtotime("first day of this month"));
+			    $datesPeriod[1] = date('Y-m-d',strtotime("now"));
+			    break;
+			case "previousMonth":
+				$datesPeriod[0] = date('Y-m-d',strtotime("first day of previous month"));
+			    $datesPeriod[1] = date('Y-m-d',strtotime("last day of previous month")); 
+			    break;
+			case "currentYear":
+				$datesPeriod[0] = date('Y-m-d',strtotime("1 January this year"));
+			    $datesPeriod[1] = date('Y-m-d',strtotime("now")); 
+				break;
+			case "selectedPeriod":
+				$datesPeriod[0] = $_SESSION['periodStartDate'];
+			    $datesPeriod[1] = $_SESSION['periodEndDate'];
+                break;
+			}
 
 		return $datesPeriod;
 		}		

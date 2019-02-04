@@ -14,7 +14,7 @@
 		<link href="https://fonts.googleapis.com/css?family=Lato:400,700&amp;subset=latin-ext" rel="stylesheet">
 		<script src='https://www.google.com/recaptcha/api.js'></script>
     </head>
-    <body>
+    <body <?php if($action =='viewBalance') echo 'onload="createPieChart()"'?>>
 		<?php if($application->userLoggedIn): ?>
         <article class="articleFourElements">
 		<?php else: ?>
@@ -113,6 +113,8 @@
 			
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+			<?php if($action =='viewBalance'):?> <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+			<?php endif;?>
 		</article>
     </body>
 </html>
