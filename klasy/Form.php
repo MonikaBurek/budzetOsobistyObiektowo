@@ -31,10 +31,10 @@ class Form
 						}
 					}
 					
-					$str .= '">'.$row['name'].'</label>';
-					$str .= '</div>';
-					$str .= '<div class="col-sm-5"></div>';
-					$str .= '</div>';	
+				$str .= '">'.$row['name'].'</label>';
+				$str .= '</div>';
+				$str .= '<div class="col-sm-5"></div>';
+				$str .= '</div>';	
 			        					
 			}
 				
@@ -70,6 +70,49 @@ class Form
 					if(isset($_SESSION['formCategoryExpense']))
 					{
 						if($row['name'] == $_SESSION['formCategoryExpense']) 
+						{
+							$str .= '"checked ="checked"';
+						}
+					}
+					
+				$str .= '">'.$row['name'].'</label>';
+				$str .= '</div>';
+				$str .= '<div class="col-sm-5"></div>';
+				$str .= '</div>';	
+			}
+				
+			$resultOfQuery->free_result();
+			
+	    } else {
+			$str .= '<div class="row ">';
+			$str .= '<div class="col-sm-4 col-sm-offset-1">';
+			$str .= 'Brak kategorii wydatków.';
+			$str .= '</div>';
+			$str .= '<div class="col-sm-5"></div>';
+			$str .= '</div>';			
+		}
+	
+	    return $str;
+	}
+	
+	function displayInputForIncomesCategory($userId)
+	{
+		$resultOfQuery=$this->connection->query("SELECT name FROM incomes_category_assigned_to_users WHERE user_id ='$userId'");
+			
+		if(!$resultOfQuery) return SERVER_ERROR;
+				
+		$howNames = $resultOfQuery->num_rows;
+		$str = '';	
+		if ($howNames>0) {
+			while ($row = $resultOfQuery->fetch_assoc()) {
+				$str .= '<div class="row ">';
+				$str .= '<div class="col-sm-4 col-sm-offset-1">';
+				$str .= '<label class="radio-inline">';
+				$str .= '<input type="radio" name="categoryOfIncome" value="'.$row['name'];
+					
+					if(isset($_SESSION['formCategoryIncome']))
+					{
+						if($row['name'] == $_SESSION['formCategoryIncome']) 
 						{
 							$str .= '"checked ="checked"';
 						}

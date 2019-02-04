@@ -14,7 +14,7 @@
 		<link href="https://fonts.googleapis.com/css?family=Lato:400,700&amp;subset=latin-ext" rel="stylesheet">
 		<script src='https://www.google.com/recaptcha/api.js'></script>
     </head>
-    <body>
+    <body <?php if($action =='viewBalance') echo 'onload="createPieChart()"'?>>
 		<?php if($application->userLoggedIn): ?>
         <article class="articleFourElements">
 		<?php else: ?>
@@ -44,9 +44,9 @@
 					<div class="collapse navbar-collapse" id="myNavbar">
 						<ul class="nav navbar-nav">
 							<li><a href="index.php?action=showMain">Strona główna</a></li>
-							<li><a href="addIncome.php">Dodaj przychód</a></li>
+							<li><a href="index.php?action=showIncomeForm">Dodaj przychód</a></li>
 							<li><a href="index.php?action=showExpenseForm">Dodaj wydatek</a></li>
-							<li><a href="viewBalance.php">Przeglądaj bilans</a></li>
+							<li><a href="index.php?action=periodOfTimeForm">Przeglądaj bilans</a></li>
 							<li class="dropdown">
 								<a class="dropdown-toggle" data-toggle="dropdown" href="#">Ustawienia <span class="caret"></span></a>
 									<ul class="dropdown-menu">
@@ -81,6 +81,21 @@
 						case 'successExpense':
 							include 'templates/successExpense.php';
 							break;
+						case 'showIncomeForm':
+						    $application->showIncomeForm($statement);
+							break;
+						case 'successIncome':
+							include 'templates/successIncome.php';
+							break;
+						case 'periodOfTimeForm':
+							include 'templates/periodOfTimeForm.php';
+							break;
+						case 'showDateForm':
+							include 'templates/showDateForm.php';
+							break;
+						case'viewBalance':
+							$application->viewBalance();
+							break;
 						case 'showMain':
 						include 'templates/home.php';
 						break;
@@ -98,6 +113,8 @@
 			
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+			<?php if($action =='viewBalance'):?> <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+			<?php endif;?>
 		</article>
     </body>
 </html>

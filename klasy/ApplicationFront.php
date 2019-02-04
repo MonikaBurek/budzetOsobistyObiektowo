@@ -62,6 +62,52 @@ class ApplicationFront extends Application
 		$strCategoryExpense = $elementFormExpense->displayInputForExpensesCategory($userId);
 		include 'templates/expenseForm.php';
 	}
+	
+	function addIncome()
+	{
+		$userId = $this->userLoggedIn->id;
+		$incomeM = new IncomeManagement($this->connection);
+		return $incomeM->addIncome($userId);
+		
+	}
+	
+	function showIncomeForm($statement)
+	{
+		$userId = $this->userLoggedIn->id;
+		$elementFormIncome = new Form($this->connection);
+		$strCategoryIncome = $elementFormIncome->displayInputForIncomesCategory($userId);
+		include 'templates/incomeForm.php';
+	}
+	
+	function savePeriod()
+	{
+		$balance = new Balance($this->connection);
+		return $balance->savePeriod();	
+	}
+	
+	function saveDate()
+	{
+		$balance = new Balance($this->connection);
+		return $balance->saveDate();	
+	}
+	
+	function viewBalance()
+	{
+		$userId = $this->userLoggedIn->id;
+		$balance = new Balance($this->connection);
+		$dates = $balance->getDatesOfPeriodOfTime();
+		$balanceFront = new BalanceFront($this->connection);
+		$tableIncomes = $balanceFront->viewIncomesStatement($dates, $userId);
+		$tableExpenses = $balanceFront->viewExpensesStatement($dates, $userId);
+		$noExpenses	= $balanceFront->getNoExpenses($dates, $userId);
+		if ($noExpenses == false) {
+			$dataPoints = $balanceFront->getDataPoints($dates, $userId);
+		}
+		$sumIncomes = $balanceFront->getSumIncomes($dates, $userId);
+        $sumExpenses = $balanceFront->getSumExpenses($dates, $userId); 
+        
+		include 'templates/viewBalance.php';
+	}
   
     function logout()
     {
