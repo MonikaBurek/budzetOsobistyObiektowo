@@ -51,8 +51,7 @@ class Balance
 		    }
 			$_SESSION['formEndDate'] = $endDate;
 			
-			if($endDate < $startDate)
-			{
+			if ($endDate < $startDate) {
 				return END_DATE_TOO_SMALL;
 			}
 			
@@ -64,4 +63,36 @@ class Balance
 		return TEST;
 		}
 	}
+	
+	function getDatesOfPeriodOfTime() 
+	{
+		if (isset($_SESSION['formPeriodOfTime'])) {
+		
+		    $periodOfTime = $_SESSION['formPeriodOfTime'];
+		    $now = date('Y-m-d');
+			
+		if($periodOfTime == "currentMonth")
+		{
+			$datesPeriod[0] = date('Y-m-d',strtotime("first day of this month"));
+			$datesPeriod[1] = date('Y-m-d',strtotime("now"));
+		}
+		else if($periodOfTime == "previousMonth")
+		{
+			$datesPeriod[0] = date('Y-m-d',strtotime("first day of previous month"));
+			$datesPeriod[1] = date('Y-m-d',strtotime("last day of previous month"));
+		}
+		else if($periodOfTime == "currentYear")
+		{
+			$datesPeriod[0] = date('Y-m-d',strtotime("1 January this year"));
+			$datesPeriod[1] = date('Y-m-d',strtotime("now"));
+		}
+		else if($periodOfTime == "selectedPeriod")
+		{
+			$datesPeriod[0] = $_SESSION['periodStartDate'];
+			$datesPeriod[1] = $_SESSION['periodEndDate'];	
+		}
+
+		return $datesPeriod;
+		}		
+    }	
 }

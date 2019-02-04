@@ -31,10 +31,10 @@ class Form
 						}
 					}
 					
-					$str .= '">'.$row['name'].'</label>';
-					$str .= '</div>';
-					$str .= '<div class="col-sm-5"></div>';
-					$str .= '</div>';	
+				$str .= '">'.$row['name'].'</label>';
+				$str .= '</div>';
+				$str .= '<div class="col-sm-5"></div>';
+				$str .= '</div>';	
 			        					
 			}
 				
@@ -75,10 +75,10 @@ class Form
 						}
 					}
 					
-					$str .= '">'.$row['name'].'</label>';
-					$str .= '</div>';
-					$str .= '<div class="col-sm-5"></div>';
-					$str .= '</div>';	
+				$str .= '">'.$row['name'].'</label>';
+				$str .= '</div>';
+				$str .= '<div class="col-sm-5"></div>';
+				$str .= '</div>';	
 			}
 				
 			$resultOfQuery->free_result();
