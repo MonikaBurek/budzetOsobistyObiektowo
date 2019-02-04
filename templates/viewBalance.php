@@ -14,10 +14,7 @@
 								
 	<div class="row ">
 		<div class="col-md-6  col-sm-12 col-md-offset-3 ">
-		<?php print_r($dataPoints);?>
-		
-		
-		
+				
 <script>
 function createPieChart () 
 {
@@ -59,5 +56,72 @@ function explodePie (e)
 }
 </script>	
 							
+<?php		
+	if ($noExpenses == false)
+		echo '<div id="chartContainer"></div>';
+?>
+							
+		</div>
+		<div class="col-md-3"></div>
+	</div>
+					
+    <div class="row emptyRow"></div>				
+				
+	<div class="row ">
+		<div class="col-md-6 col-md-offset-3 bg7">
+			<div class="col-md-5">Suma przychodów [zł]:</div>
+			<div class="col-md-4">
+				<div class="well well-sm wellResult">
+					<?php echo $sumIncomes ?>
+		        </div>
+			</div>	
+			<div class="col-md-3"></div>	
+		</div>
+		<div class="col-md-3"></div>
+	</div>
+					
+	<div class="row ">
+		<div class="col-md-6 col-md-offset-3 bg7 ">
+			<div class="col-md-5">Suma wydatków [zł]:</div>
+			<div class="col-md-4">
+				<div class="well well-sm wellResult">
+				   <?php echo $sumExpenses ?>
+				</div>
+			</div>	
+			<div class="col-md-3"></div>	
+		</div>
+		<div class="col-md-3"></div>
+	</div>
+					
+	<div class="row ">
+		<div class="col-md-6 col-md-offset-3 bg7 ">
+		    <div class="col-md-3 col-md-offset-2">Różnica:</div>
+			<div class="col-md-3">
+				<div class="well well-sm wellFinalResult">
+				    <div id="differenceNumber">
+						<?php
+						$difference = $sumIncomes - $sumExpenses;
+						echo number_format($difference,2,'.', '');
+						?>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4"></div>	
+		</div>
+		<div class="col-md-3"></div>
+	</div>
+	
+	<div class="row ">
+		<div class="col-md-6 col-md-offset-3 bg7">
+			<div class="col-md-6 col-md-offset-3 bg8">
+				<div id="differenceText"></div>
+				<button class="btnSave" onclick="displayText()">Sprawdź czy dobrze zarządzasz finasami?</button>
+				<script src="js/functionDisplayText.js"></script>
+			</div>
+			<div class="col-md-3 "></div>
+		</div>	
+		<div class="col-md-3 "></div>	
+	</div>
+					
+	<div class="row emptyRow"></div>
 </div>
-

@@ -99,10 +99,14 @@ class ApplicationFront extends Application
 		$balanceFront = new BalanceFront($this->connection);
 		$tableIncomes = $balanceFront->viewIncomesStatement($dates, $userId);
 		$tableExpenses = $balanceFront->viewExpensesStatement($dates, $userId);
-		$dataPoints = $balanceFront->getDataPoints($dates, $userId);
-		 
+		$noExpenses	= $balanceFront->getNoExpenses($dates, $userId);
+		if ($noExpenses == false) {
+			$dataPoints = $balanceFront->getDataPoints($dates, $userId);
+		}
+		$sumIncomes = $balanceFront->getSumIncomes($dates, $userId);
+        $sumExpenses = $balanceFront->getSumExpenses($dates, $userId); 
+        
 		include 'templates/viewBalance.php';
-		
 	}
   
     function logout()
