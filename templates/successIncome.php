@@ -1,4 +1,4 @@
-<?php if(!isset($application)) die();?> 
+<?php if (!isset($application)) die();?> 
 <?php
 if (isset($_SESSION['formAmountIncome'])) unset($_SESSION['formAmountIncome']);
 if (isset($_SESSION['formDateIncome'])) unset($_SESSION['formDateIncome']);

@@ -1,4 +1,4 @@
-<?php if(!isset($application)) die();?>
+<?php if (!isset($application)) die();?>
 <div class="row text-justify ">
     <div class="col-md-8 col-md-offset-2 bg3">
         <article>

@@ -67,7 +67,7 @@ function explodePie (e)
 					
     <div class="row emptyRow"></div>				
 				
-	<div class="row ">
+	<div class="row">
 		<div class="col-md-6 col-md-offset-3 bg7">
 			<div class="col-md-5">Suma przychodów [zł]:</div>
 			<div class="col-md-4">

@@ -1,8 +1,8 @@
 <?php
-  if(!isset($application)) die();
+  if (!isset($application)) die();
 
-  if(!$application->userLoggedIn){
-    switch ($application->loginUser()){
+  if (!$application->userLoggedIn) {
+    switch ($application->loginUser()) {
       case LOGIN_OK:
         header("Location:index.php?action=showMain");
         exit();

@@ -14,7 +14,7 @@ class Registration
 				
 		if (!$resultOfQuery) return SERVER_ERROR;
 				
-		$howLogins=$resultOfQuery->num_rows;
+		$howLogins = $resultOfQuery->num_rows;
 		if ($howLogins > 0) {
 			return USER_NAME_ALREADY_EXISTS;
 		}
@@ -76,11 +76,11 @@ class Registration
 			return RECATCHA_FALIED;
 		}
 		
-		if($this->checkIfUserExists($name) == USER_NAME_ALREADY_EXISTS) {
+		if ($this->checkIfUserExists($name) == USER_NAME_ALREADY_EXISTS) {
 			return USER_NAME_ALREADY_EXISTS;
 		} 
 		
-		if($this->addUserToDatabase($name,$passwordHash) == ACTION_OK) {
+		if ($this->addUserToDatabase($name,$passwordHash) == ACTION_OK) {
 			return ACTION_OK;
 		} else {
 			return SERVER_ERROR;

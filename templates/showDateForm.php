@@ -1,4 +1,4 @@
-<?php if(!isset($application)) die();?> 
+<?php if (!isset($application)) die();?> 
 <div class="container"> 
 	<div class="row text-justify">			
 		<div class="col-md-5 col-md-offset-2 bg3">
@@ -26,8 +26,7 @@
 						<label class="control-label col-sm-4 text-right" for="endDate">Koniec okresu:</label>
 						<div class="col-sm-6">
 							<input type="date" name="endDate" value="<?php
-											if (isset($_SESSION['formEndDate']))
-											{
+											if (isset($_SESSION['formEndDate'])) {
 												echo $_SESSION['formEndDate'];
 												unset($_SESSION['formEndDate']);
 											}

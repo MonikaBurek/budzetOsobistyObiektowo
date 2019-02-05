@@ -1,4 +1,4 @@
-<?php if(!isset($application)) die(); ?>
+<?php if (!isset($application)) die(); ?>
 <div id="loginDiv">
 	
 	<div class="row text-center">
@@ -53,7 +53,7 @@
 		<div class="col-md-4 col-md-offset-4 bg1">
 	        <div class="statement">
                 <?php
-                if($statement):
+                if ($statement):
                     echo $statement;
                 endif ?>
             </div>

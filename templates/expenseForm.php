@@ -1,4 +1,4 @@
-<?php if(!isset($this)) die(); ?>
+<?php if (!isset($this)) die(); ?>
 <div id="expenseDiv">
    <div class="row text-justify ">
 	    <div class="col-md-8 col-md-offset-2 bg3">
@@ -20,8 +20,7 @@
 						<label class="control-label col-sm-1"  for="amount">Kwota:</label>
 						<div class="col-sm-6">
 							<input type="text" class="form-control" value="<?php 
-											if (isset($_SESSION['formAmountExpense']))
-											{
+											if (isset($_SESSION['formAmountExpense'])) {
 												echo $_SESSION['formAmountExpense'];
 												unset($_SESSION['formAmountExpense']);
 											}
@@ -36,13 +35,10 @@
 						<label class="control-label col-sm-1" for="dateExpense">Data:</label>
 						<div class="col-sm-6">
 							<input type="date" name="date" value="<?php 
-											if (isset($_SESSION['formDateExpense']))
-											{
+											if (isset($_SESSION['formDateExpense'])) {
 												echo $_SESSION['formDateExpense'];
 												unset($_SESSION['formDateExpense']);
-											}
-											else
-											{
+											} else {
 												echo date('Y-m-d'); 
 											}
 										?>" class="form-control">
@@ -64,8 +60,7 @@
 				<div class="form-group rowExpense">
 					<label for="comment">Komentarz (opcjonalnie):</label>
 					<textarea class="form-control" rows="1" name = "comment" ><?php 
-											if (isset($_SESSION['formCommentExpense']))
-											{
+											if (isset($_SESSION['formCommentExpense'])) {
 												echo $_SESSION['formCommentExpense'];
 												unset($_SESSION['formCommentExpense']);
 											}

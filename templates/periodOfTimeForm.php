@@ -1,13 +1,13 @@
-<?php if(!isset($application)) die();?> 
+<?php if (!isset($application)) die();?> 
 <?php 
 
-if(isset($_SESSION['formPeriodOfTime']))
+if (isset($_SESSION['formPeriodOfTime']))
 	unset($_SESSION['formPeriodOfTime']);
 
-if(isset($_SESSION['periodStartDate']))
+if (isset($_SESSION['periodStartDate']))
 	unset($_SESSION['periodStartDate']);
     
-if(isset($_SESSION['periodEndDate']))
+if (isset($_SESSION['periodEndDate']))
 	unset($_SESSION['periodEndDate']);
 ?>
 <div class="row text-justify">
