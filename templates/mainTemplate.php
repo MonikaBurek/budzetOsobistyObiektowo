@@ -30,7 +30,7 @@
 				</div>
 			</header>
 			
-			<?php if($application->userLoggedIn): ?>
+			<?php if ($application->userLoggedIn): ?>
 			<nav class="navbar navbar-default navbarProperties">
 				<div class="container text-center">
 					<div class="navbar-header">
@@ -43,10 +43,14 @@
 					
 					<div class="collapse navbar-collapse" id="myNavbar">
 						<ul class="nav navbar-nav">
-							<li><a href="index.php?action=showMain">Strona główna</a></li>
-							<li><a href="index.php?action=showIncomeForm">Dodaj przychód</a></li>
-							<li><a href="index.php?action=showExpenseForm">Dodaj wydatek</a></li>
-							<li><a href="index.php?action=periodOfTimeForm">Przeglądaj bilans</a></li>
+							<li <?php if ($action == "showMain"){echo 'class="active"';} ?>>
+							<a href="index.php?action=showMain">Strona główna</a></li>
+							<li <?php if ($action == "showIncomeForm"){echo 'class="active"';}?>>
+							<a href="index.php?action=showIncomeForm">Dodaj przychód</a></li>
+							<li <?php if ($action == "showExpenseForm"){echo 'class="active"';} ?>>
+							<a href="index.php?action=showExpenseForm">Dodaj wydatek</a></li>
+							<li <?php if ($action == "periodOfTimeForm" || $action =='viewBalance'|| $action == 'showDateForm' ){echo 'class="active"';}?>>
+							<a href="index.php?action=periodOfTimeForm">Przeglądaj bilans</a></li>
 							<li class="dropdown">
 								<a class="dropdown-toggle" data-toggle="dropdown" href="#">Ustawienia <span class="caret"></span></a>
 									<ul class="dropdown-menu">
