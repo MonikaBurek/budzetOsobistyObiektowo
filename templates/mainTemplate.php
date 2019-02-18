@@ -14,8 +14,8 @@
 		<link href="https://fonts.googleapis.com/css?family=Lato:400,700&amp;subset=latin-ext" rel="stylesheet">
 		<script src='https://www.google.com/recaptcha/api.js'></script>
     </head>
-    <body <?php if( $action =='viewBalance') echo 'onload="createPieChart()"'?>>
-		<?php if ($application->userLoggedIn): ?>
+    <body <?php if($action =='viewBalance') echo 'onload="createPieChart()"'?>>
+		<?php if($application->userLoggedIn): ?>
         <article class="articleFourElements">
 		<?php else: ?>
 		<article class="articleThreeElements">
@@ -30,7 +30,7 @@
 				</div>
 			</header>
 			
-			<?php if ($application->userLoggedIn): ?>
+			<?php if($application->userLoggedIn): ?>
 			<nav class="navbar navbar-default navbarProperties">
 				<div class="container text-center">
 					<div class="navbar-header">
@@ -43,20 +43,15 @@
 					
 					<div class="collapse navbar-collapse" id="myNavbar">
 						<ul class="nav navbar-nav">
-							<li <?php if ($action == "showMain") {echo 'class="active"';} ?>>
-							<a href="index.php?action=showMain">Strona główna</a></li>
-							<li <?php if ($action == "showIncomeForm") {echo 'class="active"';}?>>
-							<a href="index.php?action=showIncomeForm">Dodaj przychód</a></li>
-							<li <?php if ($action == "showExpenseForm") {echo 'class="active"';} ?>>
-							<a href="index.php?action=showExpenseForm">Dodaj wydatek</a></li>
-							<li <?php if ($action == "periodOfTimeForm" || $action =='viewBalance'|| $action == 'showDateForm' ) {echo 'class="active"';}?>>
-							<a href="index.php?action=periodOfTimeForm">Przeglądaj bilans</a></li>
+							<li><a href="index.php?action=showMain">Strona główna</a></li>
+							<li><a href="index.php?action=showIncomeForm">Dodaj przychód</a></li>
+							<li><a href="index.php?action=showExpenseForm">Dodaj wydatek</a></li>
+							<li><a href="index.php?action=periodOfTimeForm">Przeglądaj bilans</a></li>
 							<li class="dropdown">
 								<a class="dropdown-toggle" data-toggle="dropdown" href="#">Ustawienia <span class="caret"></span></a>
 									<ul class="dropdown-menu">
-										<li><a href="#">Zmień dane</a></li>
-										<li><a href="#">Zmień kategorie</a></li>
-										<li><a href="#">Usuń ostatnie wpisy</a></li>
+										<li><a href="index.php?action=showChangePasswordForm">Zmień dane</a></li>
+										<li><a href="#">Konfiguruj kategorie</a></li>
 									</ul>
 							</li>
 						</ul>
@@ -97,8 +92,14 @@
 						case 'showDateForm':
 							include 'templates/showDateForm.php';
 							break;
-						case'viewBalance':
+						case 'viewBalance':
 							$application->viewBalance();
+							break;
+						case 'showChangePasswordForm':
+						    include 'templates/changePasswordForm.php';
+							break;
+						case 'successPassword':
+							include 'templates/successPassword.php';
 							break;
 						case 'showMain':
 						include 'templates/home.php';
@@ -117,7 +118,7 @@
 			
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-			<?php if ($action == 'viewBalance'):?> <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+			<?php if($action =='viewBalance'):?> <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 			<?php endif;?>
 		</article>
     </body>

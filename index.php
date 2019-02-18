@@ -4,7 +4,7 @@ spl_autoload_register('classLoader');
 session_start();
 
 try {
-  $application = new ApplicationFront("localhost", "mburek_ubuzet","!BazaBudzet123", "mburek_budzetosobisty");
+  $application = new ApplicationFront("localhost", "root", "", "personal_budget");
 }
 catch (Exception $e) {
   echo 'Problem z bazą danych. ' . $e->getMessage();
@@ -154,7 +154,7 @@ catch (Exception $e) {
 					break;
 			endswitch;
 			break;	
-		case 'saveDate';
+		case 'saveDate':
 			switch ($application->saveDate()):
 			    case ACTION_OK:
 					header ('Location:index.php?action=viewBalance');
@@ -180,7 +180,29 @@ catch (Exception $e) {
 					break;
 			endswitch;
 			header ('Location: index.php?action=showDateForm');
-			break;	
+			break;
+        case 'saveNewPassword':
+		    switch ($application->saveNewPassword()):
+			    case ACTION_OK:
+					header ('Location:index.php?action=successPassword');
+					return;
+					break;
+				case BAD_PASSWORD_LENGTH:
+					$application->setMessage('Hasło musi posiadać od 8 do 20 znaków!');
+					break;
+				case DIFFERENT_PASSWORDS:
+					$application->setMessage('Hasła muszą być identyczne');
+					break;	
+				case SERVER_ERROR:
+	                $application->setMessage("Błąd serwera!");
+	                break;
+				default:
+					$application->setMessage('Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!');
+					break;
+			endswitch;
+			header ('Location: index.php?action=showChangePasswordForm');
+			break;
+		
 		default:
 
 		include 'templates/mainTemplate.php';		

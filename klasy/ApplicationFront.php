@@ -109,6 +109,15 @@ class ApplicationFront extends Application
 		include 'templates/viewBalance.php';
 	}
   
+    function saveNewPassword()
+	{
+		$userId = $this->userLoggedIn->id;
+	   	$newPassword = new Settings($this->connection);
+		
+		return $newPassword->saveNewPassword($userId);
+	}
+	
+
     function logout()
     {
 		session_start();

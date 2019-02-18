@@ -1,4 +1,4 @@
-<?php if (!isset($application)) die();?> 
+<?php if(!isset($application)) die();?> 
 <div id="loginDiv">
 	
 	<div class="row text-center">
@@ -30,7 +30,7 @@
 					<label class="control-label col-sm-3" for="name">Login:</label>
 					<div class="col-sm-9">
 						<input type="text" class="form-control" value="<?php 
-						    if (isset($_SESSION['formName'])) {
+							if (isset($_SESSION['formName'])){
 								echo $_SESSION['formName'];
 								unset($_SESSION['formName']);
 							}?>" name="name" placeholder="Podaj login">
@@ -43,7 +43,7 @@
 					</div>
 				</div>
 				<div class="col-sm-offset-1 col-sm-11">
-					<div class="g-recaptcha" data-sitekey="6Lc8028UAAAAAFQCzQEqlfLdnLK5fwfNXgwzBvsB"></div>
+					<div class="g-recaptcha" data-sitekey="6LfuoY0UAAAAAFxcJ0GLvNWq1lr1kvh9cQLwRpEK"></div>
 				</div>
 				
 				<div class="form-group"> 
