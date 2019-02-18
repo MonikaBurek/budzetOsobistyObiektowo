@@ -40,4 +40,6 @@ class Settings
 		
 		return SERVER_ERROR;
 	}
+	
+	
 }

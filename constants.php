@@ -29,5 +29,7 @@
   define('END_DATE_TOO_SMALL',50);
   
   define('DIFFERENT_PASSWORDS',60);
+  define('EDIT_CATEGORY',61);
+   define('DELETE_CATEGORY',62);
   
 ?>

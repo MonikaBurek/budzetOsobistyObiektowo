@@ -27,7 +27,7 @@
 				</div>
 			
 				<div class="form-group"> 
-					<div class="col-sm-offset-1col-sm-11">
+					<div class="col-sm-offset-1 col-sm-11">
 					    <button type="submit" class="btnSetting">Zapisz</button>
 					</div>
 				</div>

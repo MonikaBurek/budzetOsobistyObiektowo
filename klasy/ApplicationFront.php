@@ -113,11 +113,27 @@ class ApplicationFront extends Application
 	{
 		$userId = $this->userLoggedIn->id;
 	   	$newPassword = new Settings($this->connection);
-		
 		return $newPassword->saveNewPassword($userId);
 	}
 	
-
+	function showCategoryPersonalization($statement)
+	{
+		$userId = $this->userLoggedIn->id;
+		$elementFormExpense = new Form($this->connection);
+		$strCategoryExpense = $elementFormExpense->displayInputForExpensesCategory($userId);
+		include 'templates/categoryPersonalization.php';
+    }
+	
+	function editDeleteCategory()
+	{
+		if (isset($_POST['edit'])) {
+			return EDIT_CATEGORY;
+		}
+	    elseif (isset($_POST['delete'])) {
+			return DELETE_CATEGORY;
+		}
+	}
+	
     function logout()
     {
 		session_start();

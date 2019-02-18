@@ -43,15 +43,18 @@
 					
 					<div class="collapse navbar-collapse" id="myNavbar">
 						<ul class="nav navbar-nav">
-							<li><a href="index.php?action=showMain">Strona główna</a></li>
-							<li><a href="index.php?action=showIncomeForm">Dodaj przychód</a></li>
-							<li><a href="index.php?action=showExpenseForm">Dodaj wydatek</a></li>
-							<li><a href="index.php?action=periodOfTimeForm">Przeglądaj bilans</a></li>
-							<li class="dropdown">
-								<a class="dropdown-toggle" data-toggle="dropdown" href="#">Ustawienia <span class="caret"></span></a>
+							<li <?php if ($action == "showMain") {echo 'class="active"';} ?>>
+							<a href="index.php?action=showMain">Strona główna</a></li>
+							<li <?php if ($action == "showIncomeForm") {echo 'class="active"';}?>>
+							<a href="index.php?action=showIncomeForm">Dodaj przychód</a></li>
+							<li <?php if ($action == "showExpenseForm") {echo 'class="active"';} ?>>
+							<a href="index.php?action=showExpenseForm">Dodaj wydatek</a></li>
+							<li <?php if ($action == "periodOfTimeForm" || $action =='viewBalance'|| $action == 'showDateForm' ) {echo 'class="active"';}?>><a href="index.php?action=periodOfTimeForm">Przeglądaj bilans</a></li>
+							<li <?php if ($action == "showChangePasswordForm" || $action =='showCategoryPersonalization') {echo 'class="active"';}?>class="dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown">Ustawienia <span class="caret"></span></a>
 									<ul class="dropdown-menu">
 										<li><a href="index.php?action=showChangePasswordForm">Zmień dane</a></li>
-										<li><a href="#">Konfiguruj kategorie</a></li>
+										<li><a href="index.php?action=showCategoryPersonalization">Konfiguruj kategorie</a></li>
 									</ul>
 							</li>
 						</ul>
@@ -101,6 +104,17 @@
 						case 'successPassword':
 							include 'templates/successPassword.php';
 							break;
+						case 'showCategoryPersonalization':
+							$application->showCategoryPersonalization($statement);
+						case 'editDeleteCategory':
+						    switch ($application->editDeleteCategory()):
+			                    case EDIT_CATEGORY:
+					            include 'templates/editCategory.php';
+					            break;
+								case DELETE_CATEGORY:
+					            include 'templates/deleteCategory.php';
+					            break;
+							break;	
 						case 'showMain':
 						include 'templates/home.php';
 						break;
