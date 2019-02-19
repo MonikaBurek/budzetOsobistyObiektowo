@@ -119,20 +119,13 @@ class ApplicationFront extends Application
 	function showCategoryPersonalization($statement)
 	{
 		$userId = $this->userLoggedIn->id;
-		$elementFormExpense = new Form($this->connection);
-		$strCategoryExpense = $elementFormExpense->displayInputForExpensesCategory($userId);
+		$tableCategoryExpenses = new Settings($this->connection);
+		$strCategoryExpenses = $tableCategoryExpenses->showTableCategory($userId);
+		
 		include 'templates/categoryPersonalization.php';
     }
 	
-	function editDeleteCategory()
-	{
-		if (isset($_POST['edit'])) {
-			return EDIT_CATEGORY;
-		}
-	    elseif (isset($_POST['delete'])) {
-			return DELETE_CATEGORY;
-		}
-	}
+	
 	
     function logout()
     {

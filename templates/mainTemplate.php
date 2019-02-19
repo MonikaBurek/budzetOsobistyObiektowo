@@ -106,15 +106,9 @@
 							break;
 						case 'showCategoryPersonalization':
 							$application->showCategoryPersonalization($statement);
+							break;
 						case 'editDeleteCategory':
-						    switch ($application->editDeleteCategory()):
-			                    case EDIT_CATEGORY:
-					            include 'templates/editCategory.php';
-					            break;
-								case DELETE_CATEGORY:
-					            include 'templates/deleteCategory.php';
-					            break;
-							break;	
+						    
 						case 'showMain':
 						include 'templates/home.php';
 						break;

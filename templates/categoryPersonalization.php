@@ -1,49 +1,24 @@
 <?php if(!isset($this)) die(); ?>
 <div id="categoryPersonalizationDiv">
-   <div class="row text-justify ">
-	     <div class="row">
+   <div class="row text-center ">
+	    <div class="col-md-8 col-md-offset-2 bg1">
 				<h3 class="articleHeader">Personalizacja kategorii wydatków</h3>
-			</div>
-		<div class="col-md-5 col-md-offset-1 bg3">
-		   
-			<form action = "index.php?action=editDeleteCategory" method = "post">
-				<div class="row rowExpense">
-					<span class="titleForm">Twoje kategorie wydatków:</span>
-				</div>
-				
-				<?php echo $strCategoryExpense ?>
-		    
-				<div class="row ">
-					<div class="col-sm-4 col-sm-offset-2">
-						<button type="submit" name="edit" class="btnSetting">Edytuj</button>
-					</div>
-					<div class="col-sm-6">
-						<button type="submit" name="delete" class="btnSetting">Usuń</button>
-					</div>
-				</div>	
-			</form>	
 		</div>
-		<div class="col-md-5 col-md-offset-1 bg3">
-		    <form action = "index.php?action=addCategory" method = "post">
-				<div class="row rowExpense">
-					<span class="titleForm">Dodaj nową kategorię wydatku</span>
-				</div>
-				<div class="row rowExpense">
-					<div class="form-group">
-						<label class="control-label col-sm-4" for="category">Nazwa kategorii:</label>
-						<div class="col-sm-7">
-							<input type="text" class="form-control" name="category" placeholder="Podaj nazwę kategorii">
-						</div>
-					</div>
-				</div>
-		        
-				<div class="form-group"> 
-					<div class="col-sm-offset-4 col-sm-4">
-					    <button type="submit" class="btnSetting">Zapisz</button>
-					</div>
-				</div>	
-			</form>	
-		</div> 
+		<div class="col-md-2"></div>
+		
+		<div class="col-md-3 col-md-offset-2 bg3 bg9">
+		     <ul class="nav nav-pills nav-stacked">
+				<li><a class ="navPillsProperties" href="#">Dodaj nową kategorię</a></li>
+				<li><a class ="navPillsProperties" href="#">Edytuj kategorię</a></li>
+				<li><a class ="navPillsProperties" href="#">Usuń kategorię</a></li>
+			</ul>
+		</div>
+		<div class="col-md-5 bg3">
+			<h4>Twoje kategorie wydatków</h4>
+			</br>
+			<?php echo $strCategoryExpenses ?>	
+		</div>
+		<div class="col-md-2"></div>
 		
 	</div>
    
