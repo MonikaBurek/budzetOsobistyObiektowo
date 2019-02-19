@@ -8,9 +8,9 @@
 		
 		<div class="col-md-3 col-md-offset-2 bg3 bg9">
 		     <ul class="nav nav-pills nav-stacked">
-				<li><a class ="navPillsProperties" href="#">Dodaj nową kategorię</a></li>
-				<li><a class ="navPillsProperties" href="#">Edytuj kategorię</a></li>
-				<li><a class ="navPillsProperties" href="#">Usuń kategorię</a></li>
+				<li><a class="navPillsProperties" href="index.php?action=addCategoryForm">Dodaj nową kategorię</a></li>
+				<li><a class="navPillsProperties" href="index.php?action=editCategoryForm">Edytuj kategorię</a></li>
+				<li><a class="navPillsProperties" href="index.php?action=deleteCategoryForm">Usuń kategorię</a></li>
 			</ul>
 		</div>
 		<div class="col-md-5 bg3">

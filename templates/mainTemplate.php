@@ -107,6 +107,9 @@
 						case 'showCategoryPersonalization':
 							$application->showCategoryPersonalization($statement);
 							break;
+						case 'addCategoryForm':
+							$application->addCategoryForm($statement);
+							break;
 						case 'editDeleteCategory':
 						    
 						case 'showMain':

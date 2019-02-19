@@ -202,7 +202,21 @@ catch (Exception $e) {
 			endswitch;
 			header ('Location: index.php?action=showChangePasswordForm');
 			break;
-		
+		case 'addNewCategory':
+		    switch ($application->addNewCategory()):
+			    case ACTION_OK:
+					header ('Location:index.php?action=successPassword');
+					return;
+					break;
+				case SERVER_ERROR:
+	                $application->setMessage("Błąd serwera!");
+	                break;
+				default:
+					$application->setMessage('Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!');
+					break;
+			endswitch;
+			header ('Location: index.php?action=addCategoryForm');
+			break;
 		default:
 
 		include 'templates/mainTemplate.php';		

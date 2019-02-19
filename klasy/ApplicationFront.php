@@ -125,6 +125,16 @@ class ApplicationFront extends Application
 		include 'templates/categoryPersonalization.php';
     }
 	
+	function addCategoryForm($statement)
+	{
+		$userId = $this->userLoggedIn->id;
+		$tableCategoryExpenses = new Settings($this->connection);
+		$strCategoryExpenses = $tableCategoryExpenses->showTableCategory($userId);
+		
+		include 'templates/addCategoryForm.php';
+    }
+	
+	
 	
 	
     function logout()

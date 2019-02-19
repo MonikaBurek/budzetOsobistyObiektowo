@@ -535,3 +535,11 @@ h4.bilansHeader
 	    padding: 10px;
 	}
 }
+
+.title
+{
+	font-size: 20px;
+	font-weight: 700;
+	letter-spacing: 1px;
+	padding-top: 10px;
+}
