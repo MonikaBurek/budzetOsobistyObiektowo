@@ -208,6 +208,15 @@ catch (Exception $e) {
 					header ('Location:index.php?action=successPassword');
 					return;
 					break;
+				case FORM_DATA_MISSING:
+                    $application->setMessage("Wypełnij wszystkie pola formularza.");
+                    break;
+				case CATEGORY_NAME_ALREADY_EXISTS:
+				    $application->setMessage('Istnieje już taka kategoria.');
+					break;
+				case CATEGORY_TOO_LONG:
+				    $application->setMessage("Nazwa kategorii może mieć maksymalnie 50 znaków.");
+	                break;
 				case SERVER_ERROR:
 	                $application->setMessage("Błąd serwera!");
 	                break;

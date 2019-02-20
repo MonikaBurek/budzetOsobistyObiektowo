@@ -77,4 +77,12 @@ class Validation
 		return ACTION_OK;
 	}
 	
+	function validationCategory($category)
+	{
+		if (strlen($category) > 50) {
+			return CATEGORY_TOO_LONG;
+		}
+		return ACTION_OK;
+	}
+	
 }

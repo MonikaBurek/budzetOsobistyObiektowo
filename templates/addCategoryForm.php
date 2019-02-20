@@ -11,7 +11,7 @@
 					<div class="form-group">
 						<label class="control-label col-sm-4" for="category">Nazwa kategorii:</label>
 						<div class="col-sm-7">
-							<input type="text" class="form-control" name="category" placeholder="Podaj nazwę kategorii">
+						    <input type="text" class="form-control" name="nameCategory" placeholder="Podaj nazwę kategorii">
 						</div>
 					</div>
 				</div>

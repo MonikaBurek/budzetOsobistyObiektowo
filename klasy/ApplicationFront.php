@@ -119,8 +119,9 @@ class ApplicationFront extends Application
 	function showCategoryPersonalization($statement)
 	{
 		$userId = $this->userLoggedIn->id;
-		$tableCategoryExpenses = new Settings($this->connection);
-		$strCategoryExpenses = $tableCategoryExpenses->showTableCategory($userId);
+		$tableCategory = new Settings($this->connection);
+		$strCategoryExpenses = $tableCategory->showTableCategoryExpenses($userId);
+		$strCategoryIncomes = $tableCategory->showTableCategoryIncomes($userId);
 		
 		include 'templates/categoryPersonalization.php';
     }
@@ -128,13 +129,18 @@ class ApplicationFront extends Application
 	function addCategoryForm($statement)
 	{
 		$userId = $this->userLoggedIn->id;
-		$tableCategoryExpenses = new Settings($this->connection);
-		$strCategoryExpenses = $tableCategoryExpenses->showTableCategory($userId);
+		$tableCategory = new Settings($this->connection);
+		$strCategoryExpenses = $tableCategory->showTableCategoryExpenses($userId);
 		
 		include 'templates/addCategoryForm.php';
     }
 	
-	
+	function addNewCategory()
+	{
+		$userId = $this->userLoggedIn->id;
+		$newCategory = new Settings($this->connection);
+		return $newCategory->addNewCategory($userId);
+	}
 	
 	
     function logout()

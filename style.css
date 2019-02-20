@@ -512,16 +512,17 @@ h4.bilansHeader
 {
 	background-color: #092834;
 	border:0px;
-	border-radius:0px;
+	border-radius:2px;
 	font-size:18px;
 	color: #F0F7D4;
+	padding: 10px;
 }
 
 .bg9
 {
 	background-color: white;
 	padding-top : 85px;
-	padding-bottom: 85px;
+	padding-bottom: 75px;
 }
 
 @media(max-width: 720px)
