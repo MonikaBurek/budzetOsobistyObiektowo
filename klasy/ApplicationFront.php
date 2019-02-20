@@ -160,6 +160,16 @@ class ApplicationFront extends Application
 		return $editCategory->editCategory($userId,$wtd);
 	}
 	
+	function deleteCategoryForm($statement,$wtd)
+	{
+		$userId = $this->userLoggedIn->id;
+		$elementForm = new Form($this->connection);
+		$strCategoryIncome = $elementForm->displayInputForIncomesCategory($userId);
+		$strCategoryExpense = $elementForm->displayInputForExpensesCategory($userId);
+		
+		include 'templates/deleteCategoryForm.php';
+	}
+	
     function logout()
     {
 		session_start();

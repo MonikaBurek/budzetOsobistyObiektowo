@@ -114,7 +114,8 @@
 						    $application->editCategoryForm($statement,$wtd);
 							break;
 						case 'deleteCategoryForm':
-						    
+						    $application->deleteCategoryForm($statement,$wtd);
+							break;
 						case 'showMain':
 						include 'templates/home.php';
 						break;
