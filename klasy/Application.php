@@ -11,8 +11,9 @@ class Application
     function initDB($host, $user, $pass, $db)
     {
         $connection = new MyDB($host, $user, $pass, $db);
-		$connection->set_charset("utf8");
-        if ($connection->connect_errno) {
+		$connection->set_charset('utf8');
+		
+		if ($connection->connect_errno) {
             $msg = "Brak po³¹czenia z baz¹ danych: ";
             $msg .= $connection->connect_error;
             throw new Exception($msg);

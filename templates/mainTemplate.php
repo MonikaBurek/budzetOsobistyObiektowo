@@ -3,7 +3,7 @@
 <html lang="pl">
     <head>
 		<title>Aplikacja</title>
-		<meta charset="utf-8">
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="keywords" content="budżet, osobisty, domowy" />
 		<meta name="author" content="Monika Burek">

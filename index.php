@@ -21,6 +21,7 @@ catch (Exception $e) {
 	if (isset($_GET['action'])) {
         $action = $_GET['action'];
 	}
+	
 	if (isset($_GET['wtd'])) {
     $wtd = $_GET['wtd'];
     }

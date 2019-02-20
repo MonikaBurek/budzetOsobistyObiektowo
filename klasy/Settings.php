@@ -135,9 +135,8 @@ class Settings
 	{
 		if ($wtd == 'expenseCategory') {
 		    $sql = "SELECT e.id FROM `expenses_category_assigned_to_users` e INNER JOIN users u ON e.user_id = u.id WHERE u.id='$userId' AND e.name='$nameCategory'";
-			
 		} elseif ($wtd == 'incomeCategory') {
-		    $sql = "SELECT i.id FROM `incomes_category_assigned_to_users` i INNER JOIN users u ON i.user_id = u.id WHERE u.id='$userId' AND i.name='$nameCategory'";	
+		    $sql = "SELECT i.id FROM `incomes_category_assigned_to_users` i INNER JOIN users u ON i.user_id = u.id WHERE u.id='$userId' AND i.name='$nameCategory'";		
 		} else {
 		return TEST;
 		}
@@ -153,6 +152,25 @@ class Settings
 		return ACTION_OK;
 	}
 	
+	function addCategoryToDatabase($nameCategory,$wtd)
+	{
+       
+	   if ($wtd == 'expenseCategory') {
+		    $sql = "SELECT e.id FROM `expenses_category_assigned_to_users` e INNER JOIN users u ON e.user_id = u.id WHERE u.id='$userId' AND e.name='$nameCategory'";
+			
+		} elseif ($wtd == 'incomeCategory') {
+		    $sql = "SELECT i.id FROM `incomes_category_assigned_to_users` i INNER JOIN users u ON i.user_id = u.id WHERE u.id='$userId' AND i.name='$nameCategory'";	
+		} else {
+		return TEST;
+		}
+		
+		if ($this->connection->query($sql)) {
+			return ACTION_OK;
+		}
+		
+		return SERVER_ERROR;
+	}	
+	
 	function addNewCategory($userId, $wtd)
 	{
 		if (!$this->connection) return SERVER_ERROR;
@@ -160,6 +178,7 @@ class Settings
 	    if(!isset($_POST['nameCategory'])) return FORM_DATA_MISSING;
 			
 		$nameCategory = $_POST['nameCategory'];
+		
 		$nameCategory = htmlentities($nameCategory,ENT_QUOTES, "UTF-8");
 		
 		$nameCategory = ucfirst(strtolower($nameCategory));  // Format: Name
