@@ -110,7 +110,10 @@
 						case 'addCategoryForm':
 							$application->addCategoryForm($statement,$wtd);
 							break;
-						case 'editDeleteCategory':
+						case 'editCategoryForm':
+						    $application->editCategoryForm($statement,$wtd);
+							break;
+						case 'deleteCategoryForm':
 						    
 						case 'showMain':
 						include 'templates/home.php';

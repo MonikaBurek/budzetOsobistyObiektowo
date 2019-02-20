@@ -143,6 +143,20 @@ class ApplicationFront extends Application
 		return $newCategory->addNewCategory($userId,$wtd);
 	}
 	
+	function editCategoryForm($statement,$wtd)
+	{
+		$userId = $this->userLoggedIn->id;
+		$elementForm = new Form($this->connection);
+		$strCategoryIncome = $elementForm->displayInputForIncomesCategory($userId);
+		$strCategoryExpense = $elementForm->displayInputForExpensesCategory($userId);
+		
+		include 'templates/editCategoryForm.php';
+	}
+	
+	function editCategory($wtd)
+	{
+		
+	}
 	
     function logout()
     {
