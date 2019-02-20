@@ -21,6 +21,10 @@ catch (Exception $e) {
 	if (isset($_GET['action'])) {
         $action = $_GET['action'];
 	}
+	if (isset($_GET['wtd'])) {
+    $wtd = $_GET['wtd'];
+    }
+
 	
 	$statement = $application->getMessage();
 
@@ -203,9 +207,9 @@ catch (Exception $e) {
 			header ('Location: index.php?action=showChangePasswordForm');
 			break;
 		case 'addNewCategory':
-		    switch ($application->addNewCategory()):
+		    switch ($application->addNewCategory($wtd)):
 			    case ACTION_OK:
-					header ('Location:index.php?action=successPassword');
+					header ('Location:index.php?action=showCategoryPersonalization');
 					return;
 					break;
 				case FORM_DATA_MISSING:
@@ -220,11 +224,15 @@ catch (Exception $e) {
 				case SERVER_ERROR:
 	                $application->setMessage("Błąd serwera!");
 	                break;
+				case TEST:
+	                $application->setMessage("TEST");
+	                break;	
 				default:
 					$application->setMessage('Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!');
 					break;
 			endswitch;
-			header ('Location: index.php?action=addCategoryForm');
+			header ('Location: index.php?action=addCategoryForm&wtd='.$wtd);
+			echo  $wtd;
 			break;
 		default:
 

@@ -2,9 +2,14 @@
 <div class="addCategoryForm">
     <div class="row text-center ">
 		<div class="col-md-5 col-md-offset-4 bg1">
-			<form action = "index.php?action=addNewCategory" method = "post">
+			<form action = "index.php?action=addNewCategory&amp;wtd=<?=$wtd?>" method = "post">
 				<div class="row rowExpense">
+				<?php if($wtd == 'expenseCategory'):?>
 					<h3 class="articleHeader">Dodaj nową kategorię wydatku</h3>
+				<?php endif;?>	
+				<?php if($wtd == 'incomeCategory'):?>
+					<h3 class="articleHeader">Dodaj nową kategorię przychodu</h3>
+				<?php endif;?>
 				</div>
 				
 				<div class="row rowExpense">
@@ -37,8 +42,14 @@
 	
 	<div class="row text-center ">
 		<div class="col-md-5 col-md-offset-4 bg3">
-			<h4>Twoje kategorie wydatków</h4>
-			<?php echo $strCategoryExpenses ?>	
+		<?php if($wtd == 'expenseCategory'):?>
+			<h4 class="title">Twoje kategorie wydatków</h4>
+			<?php echo $strCategoryExpenses ?>
+		<?php endif;?>	
+		<?php if($wtd == 'incomeCategory'):?>
+		    <h4 class="title">Twoje kategorie przychodów</h4>
+			<?php echo $strCategoryIncomes ?>
+        <?php endif;?>			
 	    </div>
 	</div>
 	

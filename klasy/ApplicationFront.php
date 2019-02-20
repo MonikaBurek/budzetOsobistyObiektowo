@@ -126,20 +126,21 @@ class ApplicationFront extends Application
 		include 'templates/categoryPersonalization.php';
     }
 	
-	function addCategoryForm($statement)
+	function addCategoryForm($statement,$wtd)
 	{
 		$userId = $this->userLoggedIn->id;
 		$tableCategory = new Settings($this->connection);
 		$strCategoryExpenses = $tableCategory->showTableCategoryExpenses($userId);
+		$strCategoryIncomes = $tableCategory->showTableCategoryIncomes($userId);
 		
 		include 'templates/addCategoryForm.php';
     }
 	
-	function addNewCategory()
+	function addNewCategory($wtd)
 	{
 		$userId = $this->userLoggedIn->id;
 		$newCategory = new Settings($this->connection);
-		return $newCategory->addNewCategory($userId);
+		return $newCategory->addNewCategory($userId,$wtd);
 	}
 	
 	

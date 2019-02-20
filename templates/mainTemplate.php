@@ -108,7 +108,7 @@
 							$application->showCategoryPersonalization($statement);
 							break;
 						case 'addCategoryForm':
-							$application->addCategoryForm($statement);
+							$application->addCategoryForm($statement,$wtd);
 							break;
 						case 'editDeleteCategory':
 						    

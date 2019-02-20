@@ -131,9 +131,16 @@ class Settings
         return $str;		
 	}
 	
-	function checkIfCategoryExists($nameCategory,$userId)
+	function checkIfCategoryExists($nameCategory,$userId, $wtd)
 	{
-		$sql = "SELECT e.id FROM `expenses_category_assigned_to_users` e INNER JOIN users u ON e.user_id = u.id WHERE u.id='$userId' AND e.name='$nameCategory'";
+		if ($wtd == 'expenseCategory') {
+		    $sql = "SELECT e.id FROM `expenses_category_assigned_to_users` e INNER JOIN users u ON e.user_id = u.id WHERE u.id='$userId' AND e.name='$nameCategory'";
+			
+		} elseif ($wtd == 'incomeCategory') {
+		    $sql = "SELECT i.id FROM `incomes_category_assigned_to_users` i INNER JOIN users u ON i.user_id = u.id WHERE u.id='$userId' AND i.name='$nameCategory'";	
+		} else {
+		return TEST;
+		}
 		
 		$resultOfQuery = $this->connection->query($sql);
 				
@@ -146,7 +153,7 @@ class Settings
 		return ACTION_OK;
 	}
 	
-	function addNewCategory($userId)
+	function addNewCategory($userId, $wtd)
 	{
 		if (!$this->connection) return SERVER_ERROR;
 	
@@ -161,7 +168,7 @@ class Settings
 				return CATEGORY_TOO_LONG;
 		}
 		
-		if($this->checkIfCategoryExists($nameCategory,$userId) == CATEGORY_NAME_ALREADY_EXISTS) {
+		if($this->checkIfCategoryExists($nameCategory,$userId,$wtd) == CATEGORY_NAME_ALREADY_EXISTS) {
 			return CATEGORY_NAME_ALREADY_EXISTS;
 		}
 		
