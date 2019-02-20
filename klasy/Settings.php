@@ -137,8 +137,6 @@ class Settings
 		    $sql = "SELECT e.id FROM `expenses_category_assigned_to_users` e INNER JOIN users u ON e.user_id = u.id WHERE u.id='$userId' AND e.name='$nameCategory'";
 		} elseif ($wtd == 'incomeCategory') {
 		    $sql = "SELECT i.id FROM `incomes_category_assigned_to_users` i INNER JOIN users u ON i.user_id = u.id WHERE u.id='$userId' AND i.name='$nameCategory'";		
-		} else {
-		return TEST;
 		}
 		
 		$resultOfQuery = $this->connection->query($sql);
@@ -159,8 +157,6 @@ class Settings
 		    $sql = "INSERT INTO `expenses_category_assigned_to_users` VALUES (NULL, '$userId','$nameCategory')";	
 		} elseif ($wtd == 'incomeCategory') {
 		    $sql = "INSERT INTO `incomes_category_assigned_to_users` VALUES (NULL, '$userId','$nameCategory')";	
-		} else {
-		return TEST;
 		}
 		
 		if ($this->connection->query($sql)) {
@@ -195,5 +191,61 @@ class Settings
 		} else {
 			return SERVER_ERROR;
 		}
+	}
+	
+	function deleteCategoryWithDatabase($nameCategoryForm, $userId, $wtd)
+	{
+		if ($wtd == 'expenseCategory') {
+		    $sql = "DELETE `expenses_category_assigned_to_users` WHERE `user_id`= '$userId' AND `name`='$nameCategory'";	
+		} elseif ($wtd == 'incomeCategory') {
+		    $sql = "DELETE `incomes_category_assigned_to_users` WHERE `user_id`= '$userId' AND `name`='$nameCategory'";	
+		} 
+		
+		if ($this->connection->query($sql)) {
+			return ACTION_OK;
+		}
+		
+		return SERVER_ERROR;
+	}
+	 
+	 
+	function editCategory($userId,$wtd)
+	{
+		if (!$this->connection) return SERVER_ERROR;
+	
+	    if(!isset($_POST['nameCategory'])) return FORM_DATA_MISSING;
+			
+		$newCategory = $_POST['nameCategory'];
+		if ($wtd == 'expenseCategory') {
+		    $nameCategoryForm =	$_POST['categoryOfExpense'];
+		} elseif ($wtd == 'incomeCategory') {
+		    $nameCategoryForm =	$_POST['categoryOfIncome'];	
+		} 
+		
+		$newCategory = htmlentities($newCategory,ENT_QUOTES, "UTF-8");
+		
+		$newCategory = ucfirst(strtolower($newCategory));  // Format: Name
+		$va = new Validation();
+		if ($va->validationCategory($newCategory) == CATEGORY_TOO_LONG) {
+				return CATEGORY_TOO_LONG;
+		}
+		
+		if($this->checkIfCategoryExists($newCategory,$userId,$wtd) == CATEGORY_NAME_ALREADY_EXISTS) {
+			return CATEGORY_NAME_ALREADY_EXISTS;
+		}
+		
+		if ($wtd == 'expenseCategory') {
+		    $sql = "UPDATE `expenses_category_assigned_to_users` SET name ='$newCategory' WHERE user_id = $userId AND name = '$nameCategoryForm'";
+		} elseif ($wtd == 'incomeCategory') {
+		    $sql = "UPDATE `incomes_category_assigned_to_users` SET name ='$newCategory' WHERE user_id = $userId AND name = '$nameCategoryForm'";		
+		} 
+		
+		if ($this->connection->query($sql)) {
+			return ACTION_OK;
+		}
+		
+		return SERVER_ERROR;
+		
+		
 	}
 }

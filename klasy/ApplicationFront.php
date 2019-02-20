@@ -155,7 +155,9 @@ class ApplicationFront extends Application
 	
 	function editCategory($wtd)
 	{
-		
+		$userId = $this->userLoggedIn->id;
+		$editCategory = new Settings($this->connection);
+		return $editCategory->editCategory($userId,$wtd);
 	}
 	
     function logout()
