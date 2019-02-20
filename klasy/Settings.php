@@ -152,14 +152,13 @@ class Settings
 		return ACTION_OK;
 	}
 	
-	function addCategoryToDatabase($nameCategory,$wtd)
+	function addCategoryToDatabase($nameCategory,$userId, $wtd)
 	{
        
 	   if ($wtd == 'expenseCategory') {
-		    $sql = "SELECT e.id FROM `expenses_category_assigned_to_users` e INNER JOIN users u ON e.user_id = u.id WHERE u.id='$userId' AND e.name='$nameCategory'";
-			
+		    $sql = "INSERT INTO `expenses_category_assigned_to_users` VALUES (NULL, '$userId','$nameCategory')";	
 		} elseif ($wtd == 'incomeCategory') {
-		    $sql = "SELECT i.id FROM `incomes_category_assigned_to_users` i INNER JOIN users u ON i.user_id = u.id WHERE u.id='$userId' AND i.name='$nameCategory'";	
+		    $sql = "INSERT INTO `incomes_category_assigned_to_users` VALUES (NULL, '$userId','$nameCategory')";	
 		} else {
 		return TEST;
 		}
@@ -191,6 +190,10 @@ class Settings
 			return CATEGORY_NAME_ALREADY_EXISTS;
 		}
 		
-		return ACTION_OK;
+		if ($this->addCategoryToDatabase($nameCategory, $userId, $wtd) == ACTION_OK) {
+			return ACTION_OK;
+		} else {
+			return SERVER_ERROR;
+		}
 	}
 }
