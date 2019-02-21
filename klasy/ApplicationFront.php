@@ -170,6 +170,13 @@ class ApplicationFront extends Application
 		include 'templates/deleteCategoryForm.php';
 	}
 	
+	function deleteCategory($wtd)
+	{
+		$userId = $this->userLoggedIn->id;
+		$deleteCategory = new Settings($this->connection);
+		return $deleteCategory->deleteCategory($userId, $wtd);
+	}
+	
     function logout()
     {
 		session_start();

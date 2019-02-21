@@ -191,14 +191,14 @@ class Settings
 		} else {
 			return SERVER_ERROR;
 		}
-	}
-	
-	function deleteCategoryWithDatabase($nameCategoryForm, $userId, $wtd)
+	} 
+	 
+	function editCategoryToDatabase($newCategory,$wtd, $userId, $nameCategoryForm)
 	{
 		if ($wtd == 'expenseCategory') {
-		    $sql = "DELETE `expenses_category_assigned_to_users` WHERE `user_id`= '$userId' AND `name`='$nameCategory'";	
+		    $sql = "UPDATE `expenses_category_assigned_to_users` SET name ='$newCategory' WHERE user_id = $userId AND name = '$nameCategoryForm'";
 		} elseif ($wtd == 'incomeCategory') {
-		    $sql = "DELETE `incomes_category_assigned_to_users` WHERE `user_id`= '$userId' AND `name`='$nameCategory'";	
+		    $sql = "UPDATE `incomes_category_assigned_to_users` SET name ='$newCategory' WHERE user_id = $userId AND name = '$nameCategoryForm'";	
 		} 
 		
 		if ($this->connection->query($sql)) {
@@ -206,7 +206,7 @@ class Settings
 		}
 		
 		return SERVER_ERROR;
-	}
+	}	
 	 
 	 
 	function editCategory($userId,$wtd)
@@ -227,17 +227,26 @@ class Settings
 		$newCategory = ucfirst(strtolower($newCategory));  // Format: Name
 		$va = new Validation();
 		if ($va->validationCategory($newCategory) == CATEGORY_TOO_LONG) {
-				return CATEGORY_TOO_LONG;
+			return CATEGORY_TOO_LONG;
 		}
 		
 		if($this->checkIfCategoryExists($newCategory,$userId,$wtd) == CATEGORY_NAME_ALREADY_EXISTS) {
 			return CATEGORY_NAME_ALREADY_EXISTS;
 		}
 		
+		if ($this->editCategoryToDatabase($newCategory,$wtd, $userId, $nameCategoryForm) == ACTION_OK) {
+			return ACTION_OK;
+		} else {
+			return SERVER_ERROR;
+		} 
+	}
+	
+	function deleteEntriesWithDatabase($nameCategory, $userId, $wtd)
+	{
 		if ($wtd == 'expenseCategory') {
-		    $sql = "UPDATE `expenses_category_assigned_to_users` SET name ='$newCategory' WHERE user_id = $userId AND name = '$nameCategoryForm'";
+		    $sql = "DELETE FROM `expenses` WHERE `user_id`=$userId AND `expense_category_assigned_to_user_id`= (SELECT id FROM `expenses_category_assigned_to_users` WHERE `user_id`=$userId And `name`='$nameCategory')";	
 		} elseif ($wtd == 'incomeCategory') {
-		    $sql = "UPDATE `incomes_category_assigned_to_users` SET name ='$newCategory' WHERE user_id = $userId AND name = '$nameCategoryForm'";		
+		    $sql = "DELETE FROM `incomes` WHERE `user_id`=$userId AND `income_category_assigned_to_user_id`= (SELECT id FROM `expenses_category_assigned_to_users` WHERE `user_id`=$userId And `name`='$nameCategory')";	
 		} 
 		
 		if ($this->connection->query($sql)) {
@@ -245,7 +254,111 @@ class Settings
 		}
 		
 		return SERVER_ERROR;
+	}
+	
+	function deleteCategoryWithDatabase($nameCategory, $userId, $wtd)
+	{
+		if ($wtd == 'expenseCategory') {
+		    $sql = "DELETE FROM `expenses_category_assigned_to_users` WHERE `user_id`= $userId AND `name`='$nameCategory'";	
+		} elseif ($wtd == 'incomeCategory') {
+		    $sql = "DELETE FROM `incomes_category_assigned_to_users` WHERE `user_id`= $userId AND `name`='$nameCategory'";	
+		} 
 		
+		if ($this->connection->query($sql)) {
+			return ACTION_OK;
+		}
 		
+		return SERVER_ERROR;
+	}
+	
+	function prepareNameOfCategory($userId, $wtd)
+	{
+		$newCategory = $_POST['nameCategory'];
+		$newCategory = htmlentities($newCategory,ENT_QUOTES, "UTF-8");
+		
+		$newCategory = ucfirst(strtolower($newCategory));  // Format: Name
+		$va = new Validation();
+		if ($va->validationCategory($newCategory) == CATEGORY_TOO_LONG) {
+				return CATEGORY_TOO_LONG;
+		}
+		
+		if ($this->checkIfCategoryExists($newCategory,$userId,$wtd) == CATEGORY_NAME_ALREADY_EXISTS) {
+			$_SESSION['formNewCategory'] = $newCategory;
+			return ACTION_OK;
+		} elseif ($this->checkIfCategoryExists($newCategory,$userId,$wtd) == ACTION_OK) {
+			if ($this->addCategoryToDatabase($newCategory, $userId, $wtd) == ACTION_OK) {
+				$_SESSION['formNewCategory'] = $newCategory;
+				return ACTION_OK;
+			} else {
+				return SERVER_ERROR;
+			}
+		}
+		
+	}
+	
+	function editEntriesWithDatabase($newCategory,$nameCategoryForm, $userId, $wtd)
+	{
+		if ($wtd == 'expenseCategory') {
+		    $sql = "UPDATE `expenses` SET `expense_category_assigned_to_user_id`= (SELECT id FROM `expenses_category_assigned_to_users` WHERE `user_id`=$userId And `name`='$newCategory') WHERE `user_id`= $userId AND `expense_category_assigned_to_user_id`= (SELECT id FROM `expenses_category_assigned_to_users` WHERE `user_id`=$userId AND `name`='$nameCategoryForm')";
+		} elseif ($wtd == 'incomeCategory') {
+		      $sql = "UPDATE `incomes` SET `income_category_assigned_to_user_id`= (SELECT id FROM `incomes_category_assigned_to_users` WHERE `user_id`=$userId And `name`='$newCategory') WHERE `user_id`= $userId AND `income_category_assigned_to_user_id`= (SELECT id FROM `incomes_category_assigned_to_users` WHERE `user_id`=$userId AND `name`='$nameCategoryForm')";
+		} 
+		
+		if ($this->connection->query($sql)) {
+			return ACTION_OK;
+		}
+		
+		return SERVER_ERROR;
+	}
+	
+	function deleteCategory($userId,$wtd)
+	{
+        if (!$this->connection) return SERVER_ERROR;
+	
+		if ($wtd == 'expenseCategory') {
+			if (!isset($_POST['categoryOfExpense'])) {
+				return NO_CATEGORY;
+			} 
+			$nameCategoryForm =	$_POST['categoryOfExpense'];
+		} elseif ($wtd == 'incomeCategory') {
+		    if (!isset ($_POST['categoryOfIncome'])) {
+		        return NO_CATEGORY;
+			}
+			$nameCategoryForm =	$_POST['categoryOfIncome'];
+		} 
+		
+		if (!isset ($_POST['deleteMethod'])) {
+			return NO_DELETE_METHOD;
+		}
+		
+		$deleteMethod = $_POST['deleteMethod'];
+		
+		if ($deleteMethod == 'deleteEntries') {
+			if ($this->deleteEntriesWithDatabase($nameCategoryForm, $userId, $wtd) == ACTION_OK) {
+				if ($this->deleteCategoryWithDatabase($nameCategoryForm, $userId, $wtd) == ACTION_OK) {
+			       return ACTION_OK;
+		        } else {
+			       return SERVER_ERROR;
+		        } 
+		    } else {
+			    return SERVER_ERROR;
+		    }
+		} elseif ($deleteMethod == 'newCategory') {
+			if ($this->prepareNameOfCategory($userId, $wtd) == ACTION_OK) {
+				$newCategory = $_SESSION['formNewCategory'];
+			    if ($this->editEntriesWithDatabase($newCategory,$nameCategoryForm, $userId, $wtd) == ACTION_OK) {
+				    if ($this->deleteCategoryWithDatabase($nameCategoryForm, $userId, $wtd) == ACTION_OK) {
+			            return ACTION_OK;
+		            } else {
+			            return SERVER_ERROR;
+		            } 
+			    } else {
+				    return SERVER_ERROR;
+			    }
+			} else {
+				return SERVER_ERROR;
+			} 
+			
+		}  	
 	}
 }

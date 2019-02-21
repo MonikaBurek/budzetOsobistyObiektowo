@@ -31,5 +31,6 @@
   define('DIFFERENT_PASSWORDS', 60);
   define('CATEGORY_NAME_ALREADY_EXISTS', 61);
   define('CATEGORY_TOO_LONG', 62);
+  define('NO_DELETE_METHOD',63);
   
 ?>

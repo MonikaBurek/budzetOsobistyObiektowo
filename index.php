@@ -264,9 +264,12 @@ catch (Exception $e) {
 				case FORM_DATA_MISSING:
                     $application->setMessage("Wypełnij wszystkie pola formularza.");
                     break;
-				case CATEGORY_NAME_ALREADY_EXISTS:
-				    $application->setMessage('Istnieje już taka kategoria.');
-					break;
+				case NO_CATEGORY:
+	                $application->setMessage("Wybierz kategorię, którą chcesz usunąć.");
+	                break;
+				case NO_DELETE_METHOD:
+				    $application->setMessage("Wybierz parametr usunięcia kategorii.");
+	                break;
 				case CATEGORY_TOO_LONG:
 				    $application->setMessage("Nazwa kategorii może mieć maksymalnie 50 znaków.");
 	                break;
@@ -280,7 +283,7 @@ catch (Exception $e) {
 					$application->setMessage('Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!');
 					break;
 			endswitch;
-			header ('Location: index.php?action=editCategoryForm&wtd='.$wtd);
+			header ('Location: index.php?action=deleteCategoryForm&wtd='.$wtd);
 			break;
 		default:
 
