@@ -507,3 +507,40 @@ h4.bilansHeader
 	margin-bottom: 10px;
 	margin-top: 10px;
 }
+
+.navPillsProperties
+{
+	background-color: #092834;
+	border:0px;
+	border-radius:2px;
+	font-size:18px;
+	color: #F0F7D4;
+	padding: 10px;
+}
+
+.bg9
+{
+	background-color: white;
+	padding-top : 85px;
+	padding-bottom: 75px;
+}
+
+@media(max-width: 720px)
+{
+	.bg9
+	{
+	   padding-top: 10px;
+	}
+	.bg3
+	{
+	    padding: 10px;
+	}
+}
+
+.title
+{
+	font-size: 20px;
+	font-weight: 700;
+	letter-spacing: 1px;
+	padding-top: 10px;
+}

@@ -4,7 +4,7 @@ spl_autoload_register('classLoader');
 session_start();
 
 try {
-  $application = new ApplicationFront("localhost", "mburek_ubuzet","!BazaBudzet123", "mburek_budzetosobisty");
+  $application = new ApplicationFront("localhost", "root", "", "personal_budget");
 }
 catch (Exception $e) {
   echo 'Problem z bazą danych. ' . $e->getMessage();
@@ -21,6 +21,11 @@ catch (Exception $e) {
 	if (isset($_GET['action'])) {
         $action = $_GET['action'];
 	}
+	
+	if (isset($_GET['wtd'])) {
+    $wtd = $_GET['wtd'];
+    }
+
 	
 	$statement = $application->getMessage();
 
@@ -154,7 +159,7 @@ catch (Exception $e) {
 					break;
 			endswitch;
 			break;	
-		case 'saveDate';
+		case 'saveDate':
 			switch ($application->saveDate()):
 			    case ACTION_OK:
 					header ('Location:index.php?action=viewBalance');
@@ -180,7 +185,106 @@ catch (Exception $e) {
 					break;
 			endswitch;
 			header ('Location: index.php?action=showDateForm');
-			break;	
+			break;
+        case 'saveNewPassword':
+		    switch ($application->saveNewPassword()):
+			    case ACTION_OK:
+					header ('Location:index.php?action=successPassword');
+					return;
+					break;
+				case BAD_PASSWORD_LENGTH:
+					$application->setMessage('Hasło musi posiadać od 8 do 20 znaków!');
+					break;
+				case DIFFERENT_PASSWORDS:
+					$application->setMessage('Hasła muszą być identyczne');
+					break;	
+				case SERVER_ERROR:
+	                $application->setMessage("Błąd serwera!");
+	                break;
+				default:
+					$application->setMessage('Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!');
+					break;
+			endswitch;
+			header ('Location: index.php?action=showChangePasswordForm');
+			break;
+		case 'addNewCategory':
+		    switch ($application->addNewCategory($wtd)):
+			    case ACTION_OK:
+					header ('Location:index.php?action=showCategoryPersonalization');
+					return;
+					break;
+				case FORM_DATA_MISSING:
+                    $application->setMessage("Wypełnij wszystkie pola formularza.");
+                    break;
+				case CATEGORY_NAME_ALREADY_EXISTS:
+				    $application->setMessage('Istnieje już taka kategoria.');
+					break;
+				case CATEGORY_TOO_LONG:
+				    $application->setMessage("Nazwa kategorii może mieć maksymalnie 50 znaków.");
+	                break;
+				case SERVER_ERROR:
+	                $application->setMessage("Błąd serwera!");
+	                break;	
+				default:
+					$application->setMessage('Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!');
+					break;
+			endswitch;
+			header ('Location: index.php?action=addCategoryForm&wtd='.$wtd);
+			break;
+		case 'editCategory':
+		    switch ($application->editCategory($wtd)):
+			    case ACTION_OK:
+					header ('Location:index.php?action=showCategoryPersonalization');
+					return;
+					break;
+				case FORM_DATA_MISSING:
+                    $application->setMessage("Wypełnij wszystkie pola formularza.");
+                    break;
+				case CATEGORY_NAME_ALREADY_EXISTS:
+				    $application->setMessage('Istnieje już taka kategoria.');
+					break;
+				case CATEGORY_TOO_LONG:
+				    $application->setMessage("Nazwa kategorii może mieć maksymalnie 50 znaków.");
+	                break;
+				case SERVER_ERROR:
+	                $application->setMessage("Błąd serwera!");
+	                break;	
+				default:
+					$application->setMessage('Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!');
+					break;
+			endswitch;
+			header ('Location: index.php?action=editCategoryForm&wtd='.$wtd);
+			break;
+		case 'deleteCategory':
+		    switch ($application->deleteCategory($wtd)):
+			    case ACTION_OK:
+					header ('Location:index.php?action=showCategoryPersonalization');
+					return;
+					break;
+				case FORM_DATA_MISSING:
+                    $application->setMessage("Wypełnij wszystkie pola formularza.");
+                    break;
+				case NO_CATEGORY:
+	                $application->setMessage("Wybierz kategorię, którą chcesz usunąć.");
+	                break;
+				case NO_DELETE_METHOD:
+				    $application->setMessage("Wybierz parametr usunięcia kategorii.");
+	                break;
+				case CATEGORY_TOO_LONG:
+				    $application->setMessage("Nazwa kategorii może mieć maksymalnie 50 znaków.");
+	                break;
+				case SERVER_ERROR:
+	                $application->setMessage("Błąd serwera!");
+	                break;
+				case TEST:
+	                $application->setMessage("TEST");
+	                break;	
+				default:
+					$application->setMessage('Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!');
+					break;
+			endswitch;
+			header ('Location: index.php?action=deleteCategoryForm&wtd='.$wtd);
+			break;
 		default:
 
 		include 'templates/mainTemplate.php';		

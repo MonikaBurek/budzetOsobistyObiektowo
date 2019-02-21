@@ -109,6 +109,74 @@ class ApplicationFront extends Application
 		include 'templates/viewBalance.php';
 	}
   
+    function saveNewPassword()
+	{
+		$userId = $this->userLoggedIn->id;
+	   	$newPassword = new Settings($this->connection);
+		return $newPassword->saveNewPassword($userId);
+	}
+	
+	function showCategoryPersonalization($statement)
+	{
+		$userId = $this->userLoggedIn->id;
+		$tableCategory = new Settings($this->connection);
+		$strCategoryExpenses = $tableCategory->showTableCategoryExpenses($userId);
+		$strCategoryIncomes = $tableCategory->showTableCategoryIncomes($userId);
+		
+		include 'templates/categoryPersonalization.php';
+    }
+	
+	function addCategoryForm($statement,$wtd)
+	{
+		$userId = $this->userLoggedIn->id;
+		$tableCategory = new Settings($this->connection);
+		$strCategoryExpenses = $tableCategory->showTableCategoryExpenses($userId);
+		$strCategoryIncomes = $tableCategory->showTableCategoryIncomes($userId);
+		
+		include 'templates/addCategoryForm.php';
+    }
+	
+	function addNewCategory($wtd)
+	{
+		$userId = $this->userLoggedIn->id;
+		$newCategory = new Settings($this->connection);
+		return $newCategory->addNewCategory($userId,$wtd);
+	}
+	
+	function editCategoryForm($statement,$wtd)
+	{
+		$userId = $this->userLoggedIn->id;
+		$elementForm = new Form($this->connection);
+		$strCategoryIncome = $elementForm->displayInputForIncomesCategory($userId);
+		$strCategoryExpense = $elementForm->displayInputForExpensesCategory($userId);
+		
+		include 'templates/editCategoryForm.php';
+	}
+	
+	function editCategory($wtd)
+	{
+		$userId = $this->userLoggedIn->id;
+		$editCategory = new Settings($this->connection);
+		return $editCategory->editCategory($userId,$wtd);
+	}
+	
+	function deleteCategoryForm($statement,$wtd)
+	{
+		$userId = $this->userLoggedIn->id;
+		$elementForm = new Form($this->connection);
+		$strCategoryIncome = $elementForm->displayInputForIncomesCategory($userId);
+		$strCategoryExpense = $elementForm->displayInputForExpensesCategory($userId);
+		
+		include 'templates/deleteCategoryForm.php';
+	}
+	
+	function deleteCategory($wtd)
+	{
+		$userId = $this->userLoggedIn->id;
+		$deleteCategory = new Settings($this->connection);
+		return $deleteCategory->deleteCategory($userId, $wtd);
+	}
+	
     function logout()
     {
 		session_start();

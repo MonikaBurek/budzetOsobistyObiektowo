@@ -3,7 +3,7 @@
 <html lang="pl">
     <head>
 		<title>Aplikacja</title>
-		<meta charset="utf-8" />
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="keywords" content="budżet, osobisty, domowy" />
 		<meta name="author" content="Monika Burek">
@@ -14,8 +14,8 @@
 		<link href="https://fonts.googleapis.com/css?family=Lato:400,700&amp;subset=latin-ext" rel="stylesheet">
 		<script src='https://www.google.com/recaptcha/api.js'></script>
     </head>
-    <body <?php if( $action =='viewBalance') echo 'onload="createPieChart()"'?>>
-		<?php if ($application->userLoggedIn): ?>
+    <body <?php if($action =='viewBalance') echo 'onload="createPieChart()"'?>>
+		<?php if($application->userLoggedIn): ?>
         <article class="articleFourElements">
 		<?php else: ?>
 		<article class="articleThreeElements">
@@ -30,7 +30,7 @@
 				</div>
 			</header>
 			
-			<?php if ($application->userLoggedIn): ?>
+			<?php if($application->userLoggedIn): ?>
 			<nav class="navbar navbar-default navbarProperties">
 				<div class="container text-center">
 					<div class="navbar-header">
@@ -49,14 +49,12 @@
 							<a href="index.php?action=showIncomeForm">Dodaj przychód</a></li>
 							<li <?php if ($action == "showExpenseForm") {echo 'class="active"';} ?>>
 							<a href="index.php?action=showExpenseForm">Dodaj wydatek</a></li>
-							<li <?php if ($action == "periodOfTimeForm" || $action =='viewBalance'|| $action == 'showDateForm' ) {echo 'class="active"';}?>>
-							<a href="index.php?action=periodOfTimeForm">Przeglądaj bilans</a></li>
-							<li class="dropdown">
-								<a class="dropdown-toggle" data-toggle="dropdown" href="#">Ustawienia <span class="caret"></span></a>
+							<li <?php if ($action == "periodOfTimeForm" || $action =='viewBalance'|| $action == 'showDateForm' ) {echo 'class="active"';}?>><a href="index.php?action=periodOfTimeForm">Przeglądaj bilans</a></li>
+							<li <?php if ($action == "showChangePasswordForm" || $action =='showCategoryPersonalization') {echo 'class="active"';}?>class="dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown">Ustawienia <span class="caret"></span></a>
 									<ul class="dropdown-menu">
-										<li><a href="#">Zmień dane</a></li>
-										<li><a href="#">Zmień kategorie</a></li>
-										<li><a href="#">Usuń ostatnie wpisy</a></li>
+										<li><a href="index.php?action=showChangePasswordForm">Zmień dane</a></li>
+										<li><a href="index.php?action=showCategoryPersonalization">Konfiguruj kategorie</a></li>
 									</ul>
 							</li>
 						</ul>
@@ -97,8 +95,26 @@
 						case 'showDateForm':
 							include 'templates/showDateForm.php';
 							break;
-						case'viewBalance':
+						case 'viewBalance':
 							$application->viewBalance();
+							break;
+						case 'showChangePasswordForm':
+						    include 'templates/changePasswordForm.php';
+							break;
+						case 'successPassword':
+							include 'templates/successPassword.php';
+							break;
+						case 'showCategoryPersonalization':
+							$application->showCategoryPersonalization($statement);
+							break;
+						case 'addCategoryForm':
+							$application->addCategoryForm($statement,$wtd);
+							break;
+						case 'editCategoryForm':
+						    $application->editCategoryForm($statement,$wtd);
+							break;
+						case 'deleteCategoryForm':
+						    $application->deleteCategoryForm($statement,$wtd);
 							break;
 						case 'showMain':
 						include 'templates/home.php';
@@ -117,7 +133,7 @@
 			
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-			<?php if ($action == 'viewBalance'):?> <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+			<?php if($action =='viewBalance'):?> <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 			<?php endif;?>
 		</article>
     </body>
