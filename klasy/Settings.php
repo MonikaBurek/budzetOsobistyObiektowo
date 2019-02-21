@@ -222,7 +222,7 @@ class Settings
 		    $nameCategoryForm =	$_POST['categoryOfIncome'];	
 		} 
 		
-		$newCategory = htmlentities($newCategory,ENT_QUOTES, "UTF-8");
+		$newCategory = htmlentities($newCategory, ENT_QUOTES, "UTF-8");
 		
 		$newCategory = ucfirst(strtolower($newCategory));  // Format: Name
 		$va = new Validation();
