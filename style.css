@@ -283,6 +283,7 @@ p
 {
 	background-color:white;
 	padding: 25px;
+	border-radius: 2px;
 	
 }	
 
@@ -557,4 +558,14 @@ h4.bilansHeader
 	background-color:white;
 	padding: 25px;
 	margin-top: 30px;
+	border-radius: 2px;
+}
+.bg11
+{
+	background-color:white;
+	padding: 25px;
+	margin-top: 30px;
+	margin-left:20px;
+	border: 2px solid #CFD8DC;
+    border-radius: 5px;
 }
