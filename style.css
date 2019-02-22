@@ -544,3 +544,17 @@ h4.bilansHeader
 	letter-spacing: 1px;
 	padding-top: 10px;
 }
+.titleSmall
+{
+	font-size: 16px;
+	font-weight: 700;
+	letter-spacing: 1px;
+	padding-top: 10px;
+	text-align: center;
+}
+.bg10
+{
+	background-color:white;
+	padding: 25px;
+	margin-top: 30px;
+}

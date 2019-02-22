@@ -122,6 +122,39 @@ function explodePie (e)
 		</div>	
 		<div class="col-md-3 "></div>	
 	</div>
+	
+	<div class="row text-center">
+	    <div class="col-md-9 col-md-offset-2 bg10">	
+		    <?php echo $tableAllExpenses ?>
+		</div>
+		
+	</div> 
+	
+	<div class="row">
+		<div class="col-md-4 col-md-offset-2 bg10">	
+			<span class="titleSmall">Edytuj lub usuń wybrany wydatek.</span><br/>
+			<span>Podaj numer Id wydatku.</span>
+			<form action = "index.php?action=editOrDeleteExpense" method = "post">
+	            <div class="row rowExpense">
+					<div class="form-group">
+						<label class="control-label col-sm-1" for="idExpense">Id:</label>
+						<div class="col-sm-5">
+						    <input type="text" class="form-control" name="idExpense" placeholder="Id wydatku">
+						</div>
+						<div class="col-sm-5"></div>
+					</div>
+				</div>
+				<div class="form-group"> 
+					<div  class="col-sm-4">
+						<button type="submit" name ="edit" class="btnSetting">Edytuj</button>
+					</div>
+					<div class="col-sm-offset-2 col-sm-4">
+						<button type="submit" name="delete" class="btnSetting">Usuń</button>
+					</div>
+				</div>		
 					
+			</form>	
+		</div>
+	</div>				
 	<div class="row emptyRow"></div>
 </div>

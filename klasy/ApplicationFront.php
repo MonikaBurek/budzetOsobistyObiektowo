@@ -97,6 +97,7 @@ class ApplicationFront extends Application
 		$balance = new Balance($this->connection);
 		$dates = $balance->getDatesOfPeriodOfTime();
 		$balanceFront = new BalanceFront($this->connection);
+		$tableAllExpenses = $balanceFront->showTableWithExpenses($dates, $userId);
 		$tableIncomes = $balanceFront->viewIncomesStatement($dates, $userId);
 		$tableExpenses = $balanceFront->viewExpensesStatement($dates, $userId);
 		$noExpenses	= $balanceFront->getNoExpenses($dates, $userId);
