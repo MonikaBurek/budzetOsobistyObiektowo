@@ -150,11 +150,15 @@ class BalanceFront
 		
 		$sql ="SELECT SUM(i.amount) FROM users u INNER JOIN incomes i ON u.id = i.user_id WHERE u.id = $userId AND i.date_of_income >= '$startDate' AND  i.date_of_income <= '$endDate'";
 		
-		$MyDB = new MyDB;
-		
-		$sumIncomes = $this->connection->getQuerySingleResult($sql);
-		
-		return $sumIncomes;		
+		$resultOfQuery=$this->connection->query($sql);
+			
+		if(!$resultOfQuery) return SERVER_ERROR;
+				
+		if ($row = $resultOfQuery->fetch_row()) {
+            return $row[0];
+        } else {
+        return false;
+        }		
     }
 	
     function getSumExpenses($dates, $userId)
@@ -164,11 +168,15 @@ class BalanceFront
 		
 		$sql ="SELECT SUM(e.amount) FROM users u INNER JOIN expenses e ON u.id = e.user_id WHERE u.id = $userId AND e.date_of_expense >= '$startDate' AND  e.date_of_expense <= '$endDate'";
 		
-		$MyDB = new MyDB;
-		
-		$sumExpenses = $this->connection->getQuerySingleResult($sql);
-		
-		return $sumExpenses;		
+		$resultOfQuery=$this->connection->query($sql);
+			
+		if(!$resultOfQuery) return SERVER_ERROR;
+				
+		if ($row = $resultOfQuery->fetch_row()) {
+            return $row[0];
+        } else {
+        return false;
+        }		
     }
 
 	function getNoExpenses($dates, $userId)
@@ -228,6 +236,8 @@ class BalanceFront
 			$str .= '<th>Sposób płatności</th>'; 
 			$str .= '<th>Kategoria</th>';
 			$str .= '<th>Komentarz</th>';
+			$str .= '<th>Edytuj</th>';
+			$str .= '<th>Usuń</th>';
 			$str .= '</tr>'; 
 			$str .= '</thead>'; 
 			$str .= '<tbody>';			
@@ -239,6 +249,8 @@ class BalanceFront
 				$str .= '<td>'.$row['payment'].'</td>';
 				$str .= '<td>'.$row['category'].'</td>';
 				$str .= '<td>'.$row['expense_comment'].'</td>';
+				$str .= '<td style="text-align:center;"><a href="index.php?action=editEntery&amp;wtd=expense;&ampid='.$row['id'].'"><span class="colorIcon"><i class="icon-pencil"></i></span></a></td>';
+				$str .= '<td style="text-align:center;"><a href="index.php?action=deleteEntery&amp;wtd=expense&amp;id='.$row['id'].'"><span class="colorIcon"><i class="icon-trash"></i></span></a></td>';
 				$str .= '</tr>'; 				
 			} 
 			$resultOfQuery->free_result();
@@ -285,6 +297,8 @@ class BalanceFront
 			$str .= '<th>Data</th>'; 
 			$str .= '<th>Kategoria</th>';
 			$str .= '<th>Komentarz</th>';
+			$str .= '<th>Edytuj</th>';
+			$str .= '<th>Usuń</th>';
 			$str .= '</tr>'; 
 			$str .= '</thead>'; 
 			$str .= '<tbody>';			
@@ -295,6 +309,8 @@ class BalanceFront
 				$str .= '<td>'.$row['date_of_income'].'</td>';
 				$str .= '<td>'.$row['category'].'</td>';
 				$str .= '<td>'.$row['income_comment'].'</td>';
+				$str .= '<td style="text-align:center;"><a href="index.php?action=editEntery&amp;wtd=income&amp;id='.$row['id'].'"><span class="colorIcon"><i class="icon-pencil"></i></span></a></td>';
+				$str .= '<td style="text-align:center;"><a href="index.php?action=deleteEntery&amp;wtd=income&amp;id='.$row['id'].'"><span class="colorIcon"><i class="icon-trash"></i></span></a></td>';
 				$str .= '</tr>'; 				
 			} 
 			$resultOfQuery->free_result();

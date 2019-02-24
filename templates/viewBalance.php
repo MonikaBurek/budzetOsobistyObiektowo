@@ -124,70 +124,20 @@ function explodePie (e)
 	</div>
 
 
-	<div class="row ">
-		<div class="col-md-7 bg10">	
+	<div class="row">
+		<div class="col-md-11 col-md-offset-1 bg10">	
 		    <?php echo $tableAllIncomes ?>
 		</div>
-		<?php if ($noExpenses == false):?>
-		<div class="col-md-4 bg11">	
-			
-			<span class="titleSmall">Edytuj lub usuń wybrany przychód.</span><br/>
-			<span>Podaj numer Id wydatku.</span>
-			<form action = "index.php?action=editOrDeleteIncome" method = "post">
-	            <div class="row rowExpense">
-					<div class="form-group">
-						<label class="control-label col-md-offset-2 col-md-1" for="idIncome">Id:</label>
-						<div class="col-md-5">
-						    <input type="text" class="form-control" name="idIncome" placeholder="Id przychodu">
-						</div>
-						<div class="col-md-5"></div>
-					</div>
-				</div>
-				<div class="form-group"> 
-					<div  class="col-md-4">
-						<button type="submit" name ="edit" class="btnSetting">Edytuj</button>
-					</div>
-					<div class="col-md-offset-2 col-md-4">
-						<button type="submit" name="delete" class="btnSetting">Usuń</button>
-					</div>
-				</div>				
-			</form>	
-			
-		</div>
-<?php endif?>		
+		
 	</div> 
 	
 	
 	
 	<div class="row">
-	    <div class="col-md-7 bg10">	
+	    <div class="col-md-11 col-md-offset-1 bg10">	
 		    <?php echo $tableAllExpenses ?>
 		</div>
-		<?php if ($noExpenses == false):?>
-		<div class="col-md-4 bg11">			
-			<span class="titleSmall">Edytuj lub usuń wybrany wydatek.</span><br/>
-			<span>Podaj numer Id wydatku.</span>
-			<form action = "index.php?action=editOrDeleteExpense" method = "post">
-	            <div class="row rowExpense">
-					<div class="form-group">
-						<label class="control-label col-md-1" for="idExpense">Id:</label>
-						<div class="col-md-5">
-						    <input type="text" class="form-control" name="idExpense" placeholder="Id wydatku">
-						</div>
-						<div class="col-md-5"></div>
-					</div>
-				</div>
-				<div class="form-group"> 
-					<div  class="col-md-4">
-						<button type="submit" name ="edit" class="btnSetting">Edytuj</button>
-					</div>
-					<div class="col-md-offset-2 col-md-4">
-						<button type="submit" name="delete" class="btnSetting">Usuń</button>
-					</div>
-				</div>				
-			</form>		
-		</div>
- <?php endif?>		
+		
 	</div> 
 			
 	<div class="row emptyRow"></div>

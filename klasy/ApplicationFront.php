@@ -179,6 +179,17 @@ class ApplicationFront extends Application
 		return $deleteCategory->deleteCategory($userId, $wtd);
 	}
 	
+	function deleteEntry($wtd,$id)
+	{
+		$deleteEntry = new Entery($this->connection);
+		return $deleteEntry->deleteEntery($wtd,$id);
+		
+	}
+	
+	function showStatement($statement)
+	{
+		include 'templates/showStatement.php';
+	}
     function logout()
     {
 		session_start();

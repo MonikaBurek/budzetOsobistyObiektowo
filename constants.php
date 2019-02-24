@@ -33,4 +33,6 @@
   define('CATEGORY_TOO_LONG', 62);
   define('NO_DELETE_METHOD',63);
   
+  define('INCORRECT_ID',70);
+  
 ?>
