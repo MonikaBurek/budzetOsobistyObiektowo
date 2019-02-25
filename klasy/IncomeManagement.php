@@ -20,6 +20,16 @@ class IncomeManagement
 		
 		$amount = $_POST['amount'];
 		$amount = htmlentities($amount,ENT_QUOTES, "UTF-8");
+		$_SESSION['formAmountIncome'] = $amount;
+		
+		$date = $_POST['date'];
+		$date = htmlentities($date,ENT_QUOTES, "UTF-8");
+		$_SESSION['formDateIncome']= $date;
+		
+		if (isset($_POST['categoryOfIncome'])) {
+			$category = $_POST['categoryOfIncome'];
+			$_SESSION['formCategoryIncome'] = $category;
+		}
 		
 		$va = new Validation();
 		switch ($va->validationAmount($amount)) {
@@ -28,24 +38,15 @@ class IncomeManagement
 			case AMOUNT_TOO_HIGH:
 			    return AMOUNT_TOO_HIGH;
 	    }
-		$_SESSION['formAmountIncome'] = $amount;
 		
-		
-		$date = $_POST['date'];
-		$date = htmlentities($date,ENT_QUOTES, "UTF-8");
 		switch ($va->validationDate($date)) {
 		    case NO_DATE:
 		        return NO_DATE;
 			case WRONG_DATE:
 			    return WRONG_DATE;
 		}
-		$_SESSION['formDateIncome']= $date;
-		
-		//if categories Income are selected
-		if (isset($_POST['categoryOfIncome'])) {
-			$category = $_POST['categoryOfIncome'];
-			$_SESSION['formCategoryIncome'] = $category;
-		} else {
+	
+		if (!isset($_POST['categoryOfIncome'])) {
 			return NO_CATEGORY;	 
 		}
 		if ($va->validationComment($comment) == COMMENT_TOO_LONG) {

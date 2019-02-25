@@ -216,7 +216,7 @@ catch (Exception $e) {
 					return;
 					break;
 				case FORM_DATA_MISSING:
-                    $application->setMessage("Wypełnij wszystkie pola formularza.");
+                    $application->setMessage("Podaj nazwę kategorii.");
                     break;
 				case CATEGORY_NAME_ALREADY_EXISTS:
 				    $application->setMessage('Istnieje już taka kategoria.');
@@ -240,8 +240,11 @@ catch (Exception $e) {
 					return;
 					break;
 				case FORM_DATA_MISSING:
-                    $application->setMessage("Wypełnij wszystkie pola formularza.");
+                    $application->setMessage("Podaj nazwę kategorii.");
                     break;
+				case NO_CATEGORY:
+	                $application->setMessage("Wybierz kategorię.");
+					break;
 				case CATEGORY_NAME_ALREADY_EXISTS:
 				    $application->setMessage('Istnieje już taka kategoria.');
 					break;
@@ -264,7 +267,7 @@ catch (Exception $e) {
 					return;
 					break;
 				case FORM_DATA_MISSING:
-                    $application->setMessage("Wypełnij wszystkie pola formularza.");
+                    $application->setMessage("Podaj nową nazwę kategorii.");
                     break;
 				case NO_CATEGORY:
 	                $application->setMessage("Wybierz kategorię, którą chcesz usunąć.");
