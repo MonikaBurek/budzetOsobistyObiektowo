@@ -62,7 +62,21 @@ class ExpenseManagement
 				return COMMENT_TOO_LONG;
 		}
 	
-	    $sql="INSERT INTO expenses VALUES (NULL, '$userId',(SELECT id FROM expenses_category_assigned_to_users WHERE user_id ='$userId' AND name ='$category'),(SELECT id FROM payment_methods_assigned_to_users WHERE user_id ='$userId' AND name='$paymentMethod'),'$amount','$date','$comment')";
+		if (isset($_GET['wtd'])) {
+			$wtd = $_GET['wtd'];
+        }
+		
+		if (isset($_GET['id'])) {
+			$id = (int) $_GET['id'];
+		}
+		
+	    if ($wtd == 'expenseEdit') {
+		    $sql="UPDATE expenses SET expense_category_assigned_to_user_id = (SELECT id FROM expenses_category_assigned_to_users WHERE user_id ='$userId' AND name ='$category'),payment_methods_assigned_to_user_id = (SELECT id FROM payment_methods_assigned_to_users WHERE user_id ='$userId' AND name='$paymentMethod'),amount ='$amount',date_of_expense ='$date', expense_comment='$comment') WHERE id=$id";
+		} else {
+		    $sql="INSERT INTO expenses VALUES (NULL, '$userId',(SELECT id FROM expenses_category_assigned_to_users WHERE user_id ='$userId' AND name ='$category'),(SELECT id FROM payment_methods_assigned_to_users WHERE user_id ='$userId' AND name='$paymentMethod'),'$amount','$date','$comment')";
+		} 
+	
+	   
 		//Adding a expense to the database
 		if ($this->connection->query($sql)) {
 			return ACTION_OK;

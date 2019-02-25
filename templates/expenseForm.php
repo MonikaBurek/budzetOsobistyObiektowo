@@ -74,7 +74,7 @@
 				
 				<div class="row ">
 					<div class="col-sm-5 col-sm-offset-2">
-						<button type="submit" class="btnSetting">Dodaj</button>
+						<button type="submit" class="btnSetting">Zapisz</button>
 					</div>
 					<div class="col-sm-5">
 						<button type="submit" class="btnSetting">Anuluj</button>

@@ -304,7 +304,25 @@ catch (Exception $e) {
 					break;					
 				default:
 					$application->setMessage('Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!');
-					
+					break;
+			endswitch;
+			header ('Location: index.php?action=showStatement');
+			break;
+		case 'editEntery':
+		    switch ($application->editEntery($wtd, $id)):
+			    case ACTION_OK:
+					header ('Location:index.php?action=viewBalance');
+					return;
+					break;
+				case SERVER_ERROR:
+	                $application->setMessage("Błąd serwera!");
+					break;
+	            case INCORRECT_ID :
+	                $application->setMessage("Błędny numer id");
+					break;					
+				default:
+					$application->setMessage('Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!');
+					break;
 			endswitch;
 			header ('Location: index.php?action=showStatement');
 			break;
