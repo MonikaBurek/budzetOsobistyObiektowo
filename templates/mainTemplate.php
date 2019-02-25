@@ -116,6 +116,9 @@
 						case 'deleteCategoryForm':
 						    $application->deleteCategoryForm($statement,$wtd);
 							break;
+						case 'showStatement':
+							$application->showStatement($statement);
+							break;
 						case 'showMain':
 						include 'templates/home.php';
 						break;
@@ -128,7 +131,7 @@
 			</main>
 			
 			<footer class="container-fluid text-center">
-				Wszystkie prawa zastrzeżone &copy; 2018  Dziękuję za wizytę!
+				Wszystkie prawa zastrzeżone &copy; 2019  Dziękuję za wizytę!
 			</footer>
 			
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

@@ -97,6 +97,8 @@ class ApplicationFront extends Application
 		$balance = new Balance($this->connection);
 		$dates = $balance->getDatesOfPeriodOfTime();
 		$balanceFront = new BalanceFront($this->connection);
+		$tableAllExpenses = $balanceFront->showTableWithExpenses($dates, $userId);
+		$tableAllIncomes = $balanceFront->showTableWithIncomes($dates, $userId);
 		$tableIncomes = $balanceFront->viewIncomesStatement($dates, $userId);
 		$tableExpenses = $balanceFront->viewExpensesStatement($dates, $userId);
 		$noExpenses	= $balanceFront->getNoExpenses($dates, $userId);
@@ -177,6 +179,17 @@ class ApplicationFront extends Application
 		return $deleteCategory->deleteCategory($userId, $wtd);
 	}
 	
+	function deleteEntry($wtd,$id)
+	{
+		$deleteEntry = new Entery($this->connection);
+		return $deleteEntry->deleteEntery($wtd,$id);
+		
+	}
+	
+	function showStatement($statement)
+	{
+		include 'templates/showStatement.php';
+	}
     function logout()
     {
 		session_start();

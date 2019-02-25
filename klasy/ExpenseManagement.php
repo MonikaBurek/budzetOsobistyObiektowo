@@ -20,6 +20,21 @@ class ExpenseManagement
 		
 		$amount = $_POST['amount'];
 		$amount = htmlentities($amount,ENT_QUOTES, "UTF-8");
+		$_SESSION['formAmountExpense'] = $amount;
+		
+		$date = $_POST['date'];
+		$date = htmlentities($date,ENT_QUOTES, "UTF-8");
+		$_SESSION['formDateExpense']= $date;
+		
+		if (isset($_POST['paymentMethod'])) {
+			$paymentMethod = $_POST['paymentMethod'];
+			$_SESSION['formPaymentMethod'] = $paymentMethod;
+		}
+		
+		if (isset($_POST['categoryOfExpense'])) {
+			$category = $_POST['categoryOfExpense'];
+			$_SESSION['formCategoryExpense'] = $category;
+		}
 		
 		$va = new Validation();
 		switch ($va->validationAmount($amount)) {
@@ -28,32 +43,19 @@ class ExpenseManagement
 			case AMOUNT_TOO_HIGH:
 			    return AMOUNT_TOO_HIGH;
 	    }
-		$_SESSION['formAmountExpense'] = $amount;
 		
-		
-		$date = $_POST['date'];
-		$date = htmlentities($date,ENT_QUOTES, "UTF-8");
 		switch ($va->validationDate($date)) {
 		    case NO_DATE:
 		        return NO_DATE;
 			case WRONG_DATE:
 			    return WRONG_DATE;
 		}
-		$_SESSION['formDateExpense']= $date;
 		
-		//if paymentmethod  are selected
-		if (isset($_POST['paymentMethod'])) {
-			$paymentMethod = $_POST['paymentMethod'];
-			$_SESSION['formPaymentMethod'] = $paymentMethod;
-		} else {
+		if (!isset($_POST['paymentMethod'])) {
 			return NO_PAYMENT_METHOD;
 		}
 		
-		//if categories expense are selected
-		if (isset($_POST['categoryOfExpense'])) {
-			$category = $_POST['categoryOfExpense'];
-			$_SESSION['formCategoryExpense'] = $category;
-		} else {
+		if (!isset($_POST['categoryOfExpense'])) {
 			return NO_CATEGORY;	 
 		}
 		if ($va->validationComment($comment) == COMMENT_TOO_LONG) {

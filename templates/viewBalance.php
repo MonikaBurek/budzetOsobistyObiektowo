@@ -122,6 +122,23 @@ function explodePie (e)
 		</div>	
 		<div class="col-md-3 "></div>	
 	</div>
-					
+
+
+	<div class="row">
+		<div class="col-md-11 col-md-offset-1 bg10">	
+		    <?php echo $tableAllIncomes ?>
+		</div>
+		
+	</div> 
+	
+	
+	
+	<div class="row">
+	    <div class="col-md-11 col-md-offset-1 bg10">	
+		    <?php echo $tableAllExpenses ?>
+		</div>
+		
+	</div> 
+			
 	<div class="row emptyRow"></div>
 </div>

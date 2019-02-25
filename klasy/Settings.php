@@ -170,19 +170,19 @@ class Settings
 	{
 		if (!$this->connection) return SERVER_ERROR;
 	
-	    if(!isset($_POST['nameCategory'])) return FORM_DATA_MISSING;
+	    if(!isset($_POST['nameCategory']) || $_POST['nameCategory'] =='' ) return FORM_DATA_MISSING;
 			
 		$nameCategory = $_POST['nameCategory'];
 		
 		$nameCategory = htmlentities($nameCategory,ENT_QUOTES, "UTF-8");
 		
-		$nameCategory = ucfirst(strtolower($nameCategory));  // Format: Name
+		$nameCategory = ucfirst(mb_strtolower($nameCategory,"UTF-8"));  // Format: Name
 		$va = new Validation();
 		if ($va->validationCategory($nameCategory) == CATEGORY_TOO_LONG) {
 				return CATEGORY_TOO_LONG;
 		}
 		
-		if($this->checkIfCategoryExists($nameCategory,$userId,$wtd) == CATEGORY_NAME_ALREADY_EXISTS) {
+		if($this->checkIfCategoryExists($nameCategory, $userId, $wtd) == CATEGORY_NAME_ALREADY_EXISTS) {
 			return CATEGORY_NAME_ALREADY_EXISTS;
 		}
 		
@@ -213,18 +213,26 @@ class Settings
 	{
 		if (!$this->connection) return SERVER_ERROR;
 	
-	    if(!isset($_POST['nameCategory'])) return FORM_DATA_MISSING;
+	    if(!isset($_POST['nameCategory']) || $_POST['nameCategory'] =='') return FORM_DATA_MISSING;
 			
 		$newCategory = $_POST['nameCategory'];
 		if ($wtd == 'expenseCategory') {
+			if(!isset($_POST['categoryOfExpense'])) {
+				return NO_CATEGORY;
+			} else {
 		    $nameCategoryForm =	$_POST['categoryOfExpense'];
+			}
 		} elseif ($wtd == 'incomeCategory') {
+			if(!isset($_POST['categoryOfIncome'])){
+				return NO_CATEGORY;
+			} else {
 		    $nameCategoryForm =	$_POST['categoryOfIncome'];	
+			}
 		} 
 		
 		$newCategory = htmlentities($newCategory, ENT_QUOTES, "UTF-8");
 		
-		$newCategory = ucfirst(strtolower($newCategory));  // Format: Name
+		$newCategory = ucfirst(mb_strtolower($newCategory,"UTF-8"));  // Format: Name
 		$va = new Validation();
 		if ($va->validationCategory($newCategory) == CATEGORY_TOO_LONG) {
 			return CATEGORY_TOO_LONG;
@@ -273,10 +281,11 @@ class Settings
 	
 	function prepareNameOfCategory($userId, $wtd)
 	{
+		if(!isset($_POST['nameCategory']) || $_POST['nameCategory'] =='' ) return FORM_DATA_MISSING;
 		$newCategory = $_POST['nameCategory'];
 		$newCategory = htmlentities($newCategory,ENT_QUOTES, "UTF-8");
 		
-		$newCategory = ucfirst(strtolower($newCategory));  // Format: Name
+		$newCategory = ucfirst(mb_strtolower($newCategory,"UTF-8"));  // Format: Name
 		$va = new Validation();
 		if ($va->validationCategory($newCategory) == CATEGORY_TOO_LONG) {
 				return CATEGORY_TOO_LONG;
@@ -355,6 +364,8 @@ class Settings
 			    } else {
 				    return SERVER_ERROR;
 			    }
+			} elseif ($this->prepareNameOfCategory($userId, $wtd) == FORM_DATA_MISSING){
+				return FORM_DATA_MISSING;
 			} else {
 				return SERVER_ERROR;
 			} 

@@ -49,7 +49,7 @@ article
 
 .colorIcon
 {
-	color: #091A2D
+	color: #091A2D;
 }
 
 .info
@@ -283,6 +283,7 @@ p
 {
 	background-color:white;
 	padding: 25px;
+	border-radius: 2px;
 	
 }	
 
@@ -543,4 +544,28 @@ h4.bilansHeader
 	font-weight: 700;
 	letter-spacing: 1px;
 	padding-top: 10px;
+}
+.titleSmall
+{
+	font-size: 16px;
+	font-weight: 700;
+	letter-spacing: 1px;
+	padding-top: 10px;
+	text-align: center;
+}
+.bg10
+{
+	background-color:white;
+	padding: 25px;
+	margin-top: 30px;
+	border-radius: 2px;
+}
+.bg11
+{
+	background-color:white;
+	padding: 25px;
+	margin-top: 30px;
+	margin-left:20px;
+	border: 2px solid #CFD8DC;
+    border-radius: 5px;
 }

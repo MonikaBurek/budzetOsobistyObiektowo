@@ -13,11 +13,10 @@ catch (Exception $e) {
 
 	if ($application->userLoggedIn) {
 		$action = 'showMain';
-
 	} else {
 		$action = 'showLoginForm';
-
     }
+	
 	if (isset($_GET['action'])) {
         $action = $_GET['action'];
 	}
@@ -26,6 +25,9 @@ catch (Exception $e) {
     $wtd = $_GET['wtd'];
     }
 
+	if (isset($_GET['id'])) {
+    $id = (int) $_GET['id'];
+    }
 	
 	$statement = $application->getMessage();
 
@@ -214,7 +216,7 @@ catch (Exception $e) {
 					return;
 					break;
 				case FORM_DATA_MISSING:
-                    $application->setMessage("Wypełnij wszystkie pola formularza.");
+                    $application->setMessage("Podaj nazwę kategorii.");
                     break;
 				case CATEGORY_NAME_ALREADY_EXISTS:
 				    $application->setMessage('Istnieje już taka kategoria.');
@@ -238,8 +240,11 @@ catch (Exception $e) {
 					return;
 					break;
 				case FORM_DATA_MISSING:
-                    $application->setMessage("Wypełnij wszystkie pola formularza.");
+                    $application->setMessage("Podaj nazwę kategorii.");
                     break;
+				case NO_CATEGORY:
+	                $application->setMessage("Wybierz kategorię.");
+					break;
 				case CATEGORY_NAME_ALREADY_EXISTS:
 				    $application->setMessage('Istnieje już taka kategoria.');
 					break;
@@ -262,7 +267,7 @@ catch (Exception $e) {
 					return;
 					break;
 				case FORM_DATA_MISSING:
-                    $application->setMessage("Wypełnij wszystkie pola formularza.");
+                    $application->setMessage("Podaj nową nazwę kategorii.");
                     break;
 				case NO_CATEGORY:
 	                $application->setMessage("Wybierz kategorię, którą chcesz usunąć.");
@@ -284,6 +289,24 @@ catch (Exception $e) {
 					break;
 			endswitch;
 			header ('Location: index.php?action=deleteCategoryForm&wtd='.$wtd);
+			break;
+		case 'deleteEntery':
+		    switch ($application->deleteEntry($wtd,$id)):
+			    case ACTION_OK:
+					header ('Location:index.php?action=viewBalance');
+					return;
+					break;
+				case SERVER_ERROR:
+	                $application->setMessage("Błąd serwera!");
+					break;
+	            case INCORRECT_ID :
+	                $application->setMessage("Błędny numer id");
+					break;					
+				default:
+					$application->setMessage('Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!');
+					
+			endswitch;
+			header ('Location: index.php?action=showStatement');
 			break;
 		default:
 
