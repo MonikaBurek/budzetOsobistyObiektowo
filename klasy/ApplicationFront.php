@@ -60,6 +60,7 @@ class ApplicationFront extends Application
 		$elementFormExpense = new Form($this->connection);
 		$strPayment = $elementFormExpense->displayInputForPaymentMethod($userId);
 		$strCategoryExpense = $elementFormExpense->displayInputForExpensesCategory($userId);
+		
 		include 'templates/expenseForm.php';
 	}
 	
@@ -184,6 +185,25 @@ class ApplicationFront extends Application
 		$deleteEntry = new Entery($this->connection);
 		return $deleteEntry->deleteEntery($wtd,$id);
 		
+	}
+	
+	function editEntery($wtd, $id)
+	{
+		$editEntry = new Entery($this->connection);
+		return $editEntry->editEntery($wtd,$id);
+	}
+	
+	function showEnteryForm($wtd, $id, $statement)
+	{
+		$showEntryForm = new Entery($this->connection);
+		$showEntryForm->showEnteryForm($wtd,$id);
+		if ($wtd == 'expenseEdit') {
+		    $this->showExpenseForm($statement);
+		} elseif ($wtd == 'incomeEdit') {
+		    $this->showIncomeForm($statement);
+		} 
+		
+		return $wtd;
 	}
 	
 	function showStatement($statement)

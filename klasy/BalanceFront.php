@@ -249,7 +249,7 @@ class BalanceFront
 				$str .= '<td>'.$row['payment'].'</td>';
 				$str .= '<td>'.$row['category'].'</td>';
 				$str .= '<td>'.$row['expense_comment'].'</td>';
-				$str .= '<td style="text-align:center;"><a href="index.php?action=editEntery&amp;wtd=expense;&ampid='.$row['id'].'"><span class="colorIcon"><i class="icon-pencil"></i></span></a></td>';
+				$str .= '<td style="text-align:center;"><a href="index.php?action=showEnteryForm&amp;wtd=expenseEdit&amp;id='.$row['id'].'"><span class="colorIcon"><i class="icon-pencil"></i></span></a></td>';
 				$str .= '<td style="text-align:center;"><a href="index.php?action=deleteEntery&amp;wtd=expense&amp;id='.$row['id'].'"><span class="colorIcon"><i class="icon-trash"></i></span></a></td>';
 				$str .= '</tr>'; 				
 			} 
@@ -309,7 +309,7 @@ class BalanceFront
 				$str .= '<td>'.$row['date_of_income'].'</td>';
 				$str .= '<td>'.$row['category'].'</td>';
 				$str .= '<td>'.$row['income_comment'].'</td>';
-				$str .= '<td style="text-align:center;"><a href="index.php?action=editEntery&amp;wtd=income&amp;id='.$row['id'].'"><span class="colorIcon"><i class="icon-pencil"></i></span></a></td>';
+				$str .= '<td style="text-align:center;"><a href="index.php?action=showEnteryForm&amp;wtd=incomeEdit&amp;id='.$row['id'].'"><span class="colorIcon"><i class="icon-pencil"></i></span></a></td>';
 				$str .= '<td style="text-align:center;"><a href="index.php?action=deleteEntery&amp;wtd=income&amp;id='.$row['id'].'"><span class="colorIcon"><i class="icon-trash"></i></span></a></td>';
 				$str .= '</tr>'; 				
 			} 
