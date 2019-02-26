@@ -8,6 +8,103 @@ class ExpenseManagement
 	    $this->connection = $connection;
 	}
 	
+	function checkEditRights($id, $userId)
+	{
+		if (!$this->connection) return SERVER_ERROR;
+		
+		$sql = "SELECT `user_id` FROM `expenses` WHERE `id`= $id AND `user_id`= $userId";
+		
+		$resultOfQuery = $this->connection->query($sql);
+				
+		if (!$resultOfQuery) return SERVER_ERROR;
+					
+		$how = $resultOfQuery->num_rows;
+		if ($how > 0) {
+			return USER_HAVE_RIGHTS;
+		}
+		return NOT_ENOUGH_RIGHTS;
+	}
+	
+	function showEditForm($action, $userId, $statement)
+	{
+		if (!$this->connection) return SERVER_ERROR;
+		
+		if ($action == 'edit') {
+			if (!isset($_GET['id'])){
+				echo 'Brak parametru id';
+				return NO_ID_PARAMETERS;
+			}
+			
+			if (($id = (int)$_GET['id']) < 1) {
+				echo 'Nieprawidłowy parametr id';
+				return INCORRECT_ID;
+			}
+			
+			if ($this->checkEditRights($id,$userId) == NOT_ENOUGH_RIGHTS) {
+				echo 'Brak uprawnień';
+				return NOT_ENOUGH_RIGHTS;			
+			}
+			
+			$sql = "SELECT * FROM `expenses` WHERE `id`=$id";
+			if (!$result = $this->connection->query($sql)) {
+				echo 'Brak połaczenia z bazą';
+				return SERVER_ERROR;
+			}
+			
+			if (!$row1 = $result->fetch_assoc()) {
+				echo 'brak wyniku zapytania';
+				return INCORRECT_ID;
+			}			
+			
+			if ($resultOfQuery=$this->connection->query($sql)) {
+			$how=$resultOfQuery->num_rows;
+				if ($how>0) {
+					$row = $resultOfQuery->fetch_assoc() ;
+					$_SESSION['formAmountExpense'] = $row['amount'];
+					$_SESSION['formDateExpense'] = $row['date_of_expense'];
+					$expenseCategoryId = $row['expense_category_assigned_to_user_id'];
+					$paymentMethodId = $row['payment_method_assigned_to_user_id'];
+					$_SESSION['formCommentExpense'] = $row['expense_comment'];
+					
+				}
+		    }
+			$sql2 = "SELECT `name` FROM `expenses_category_assigned_to_users` WHERE id=$expenseCategoryId";
+			if ($resultOfQuerySql2=$this->connection->query($sql2)) {
+			$how=$resultOfQuerySql2->num_rows;
+				if ($how>0) {
+					$row = $resultOfQuerySql2->fetch_assoc();
+					$_SESSION['formCategoryExpense'] =  $row['name'];	
+				}
+			}
+			
+			$sql3 = "SELECT `name` FROM `payment_methods_assigned_to_users` WHERE id = $paymentMethodId";
+			if ($resultOfQuerySql3 = $this->connection->query($sql3)) {
+			$how = $resultOfQuerySql3->num_rows;
+				if ($how>0) {
+					$row = $resultOfQuerySql3->fetch_assoc();
+					$_SESSION['formPaymentMethod'] =  $row['name'];	
+				}
+			}
+		    $parametr = 'modifyExpense';
+		
+		} else { //New expense
+			$_SESSION['formAmountExpense'] = '';
+			$_SESSION['formDateExpense'] = date('Y-m-d');
+			$_SESSION['formCommentExpense'] = '';
+			$_SESSION['formCategoryExpense'] =  '';
+            $_SESSION['formPaymentMethod'] =  '';				
+			$parametr = 'addExpense';
+		}
+		
+		
+		$elementFormExpense = new Form($this->connection);
+		$strPayment = $elementFormExpense->displayInputForPaymentMethod($userId);
+		$strCategoryExpense = $elementFormExpense->displayInputForExpensesCategory($userId);
+		
+		include 'templates/expenseForm.php';
+	}
+	
+	
     function addExpense($userId)
     {
 	    if (!$this->connection) return SERVER_ERROR;

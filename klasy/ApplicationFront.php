@@ -46,23 +46,28 @@ class ApplicationFront extends Application
 		return $register->register();
 	}
   
-	function addExpense()
+	function expenseManagment()
 	{
 		$userId = $this->userLoggedIn->id;
-		$expenseM = new ExpenseManagement($this->connection);
-		return $expenseM->addExpense($userId);
+		$expense = new ExpenseManagement($this->connection);
 		
+			
 	}
 	
-	function showExpenseForm($statement)
+	function showEditExpenseForm($action, $statement)
 	{
 		$userId = $this->userLoggedIn->id;
-		$elementFormExpense = new Form($this->connection);
-		$strPayment = $elementFormExpense->displayInputForPaymentMethod($userId);
-		$strCategoryExpense = $elementFormExpense->displayInputForExpensesCategory($userId);
-		
-		include 'templates/expenseForm.php';
+		$expense = new ExpenseManagement($this->connection);
+		return $expense->showEditForm($action, $userId, $statement);
 	}
+	
+	function editExpense($action)
+	{
+		$userId = $this->userLoggedIn->id;
+		$expense = new ExpenseManagement($this->connection);
+		
+	}	
+	
 	
 	function addIncome()
 	{
@@ -193,18 +198,6 @@ class ApplicationFront extends Application
 		return $editEntry->editEntery($wtd,$id);
 	}
 	
-	function showEnteryForm($wtd, $id, $statement)
-	{
-		$showEntryForm = new Entery($this->connection);
-		$showEntryForm->showEnteryForm($wtd,$id);
-		if ($wtd == 'expenseEdit') {
-		    $this->showExpenseForm($statement);
-		} elseif ($wtd == 'incomeEdit') {
-		    $this->showIncomeForm($statement);
-		} 
-		
-		return $wtd;
-	}
 	
 	function showStatement($statement)
 	{

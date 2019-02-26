@@ -73,7 +73,7 @@ catch (Exception $e) {
 			header ('Location: index.php?action=showRegistrationForm');
 			break;
 			case 'addExpense':
-				switch ($application->addExpense()):
+				switch ($application->editExpense('add')):
 			    case ACTION_OK:
 				    $application->setMessage('Zapisano wydatek w bazie danych.');
 				    header ('Location:index.php?action=successExpense');
@@ -112,12 +112,14 @@ catch (Exception $e) {
 					$application->setMessage('Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!');
 					break;
 				endswitch;
-				header ('Location: index.php?action=showExpenseForm');
+				header ('Location: index.php?action=showAddForm');
 				break;	
-		case 'addIncome':
-				switch ($application->addIncome()):
+			case 'modifyExpense':
+			$id = 0;
+				switch ($expense->editExpense('edit',$id)):
 			    case ACTION_OK:
-				    header ('Location:index.php?action=successIncome');
+				    $application->setMessage('Zapisano wydatek w bazie danych.');
+				    header ('Location:index.php?action=successExpense');
 					return;
 				case SERVER_ERROR:
 	                $application->setMessage("Błąd serwera!");
@@ -137,18 +139,24 @@ catch (Exception $e) {
                 case WRONG_DATE:
 	                $application->setMessage("Data musi być aktualna lub wcześniejsza.");
 	                break;
+				case NO_PAYMENT_METHOD:
+	                $application->setMessage("Wybierz metodę dla płatności.");
+	                break;	
 				case NO_CATEGORY:
 	                $application->setMessage("Wybierz kategorię dla wydatku.");
 	                break;
 				case COMMENT_TOO_LONG:
 	                $application->setMessage("Komentarz może mieć maksymalnie 100 znaków.");
 	                break;
+				case TEST:
+					$application->setMessage('TEST');
+					break;
 				default:
 					$application->setMessage('Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!');
 					break;
 				endswitch;
-				header ('Location: index.php?action=showIncomeForm');
-				break;	
+				header ('Location: index.php?action=expenseManagment&parametr=showEditForm&id=$id');
+				break;		
 		case 'savePeriod':
 			switch ($application->savePeriod()):
 			    case SELECTED_PERIOD:
