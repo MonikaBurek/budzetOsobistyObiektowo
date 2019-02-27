@@ -45,26 +45,20 @@ class ApplicationFront extends Application
 		$register = new Registration($this->connection);
 		return $register->register();
 	}
-  
-	function expenseManagment()
+
+	
+	function showEditExpenseForm($action, $id, $statement)
 	{
 		$userId = $this->userLoggedIn->id;
 		$expense = new ExpenseManagement($this->connection);
-		
-			
+		return $expense->showEditForm($action, $id, $userId, $statement);
 	}
 	
-	function showEditExpenseForm($action, $statement)
+	function editExpense($action,$id)
 	{
 		$userId = $this->userLoggedIn->id;
 		$expense = new ExpenseManagement($this->connection);
-		return $expense->showEditForm($action, $userId, $statement);
-	}
-	
-	function editExpense($action)
-	{
-		$userId = $this->userLoggedIn->id;
-		$expense = new ExpenseManagement($this->connection);
+		return $expense->editExpense($action,$id, $userId);
 		
 	}	
 	

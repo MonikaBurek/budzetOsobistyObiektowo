@@ -78,11 +78,11 @@
 							include 'templates/registrationForm.php';
 							break;
 						case 'showEditExpenseForm':
-							$application->showEditExpenseForm('edit', $statement);
+							$application->showEditExpenseForm('edit', $id, $statement);
 							break;
 						case 'showAddExpenseForm':
-							$application->showEditExpenseForm('add', $statement);
-							break;
+							$application->showEditExpenseForm('add', $id, $statement);
+							break; 
 						case 'successExpense':
 							include 'templates/successExpense.php';
 							break;
@@ -123,8 +123,8 @@
 							$application->showStatement($statement);
 							break;
 						case 'showMain':
-						include 'templates/home.php';
-						break;
+							include 'templates/home.php';
+							break;
 						default:
 						echo 'Błąd';
 							

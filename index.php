@@ -26,8 +26,10 @@ catch (Exception $e) {
     }
 
 	if (isset($_GET['id'])) {
-    $id = (int) $_GET['id'];
-    }
+    $id = $_GET['id'];
+	echo $id;
+    } else {
+	$id =0; }
 	
 	$statement = $application->getMessage();
 
@@ -73,7 +75,7 @@ catch (Exception $e) {
 			header ('Location: index.php?action=showRegistrationForm');
 			break;
 			case 'addExpense':
-				switch ($application->editExpense('add')):
+				switch ($application->editExpense('add', $id)):
 			    case ACTION_OK:
 				    $application->setMessage('Zapisano wydatek w bazie danych.');
 				    header ('Location:index.php?action=successExpense');
@@ -105,6 +107,15 @@ catch (Exception $e) {
 				case COMMENT_TOO_LONG:
 	                $application->setMessage("Komentarz może mieć maksymalnie 100 znaków.");
 	                break;
+				case INCORRECT_ID:
+	                $application->setMessage("Nieprawidłowy identyfikator wpisu.");
+	                break;
+				case NO_ID_PARAMETERS:
+	                $application->setMessage("Brak identyfikatora wpisu.");
+	                break;	
+				case NOT_ENOUGH_RIGHTS:
+	                $application->setMessage("Brak uprawnień do edycji wpisu.");
+	                break;
 				case TEST:
 					$application->setMessage('TEST');
 					break;
@@ -112,11 +123,10 @@ catch (Exception $e) {
 					$application->setMessage('Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!');
 					break;
 				endswitch;
-				header ('Location: index.php?action=showAddForm');
+				header ('Location: index.php?action=showAddExpenseForm');
 				break;	
 			case 'modifyExpense':
-			$id = 0;
-				switch ($expense->editExpense('edit',$id)):
+				switch ($application->editExpense('edit', $id)):
 			    case ACTION_OK:
 				    $application->setMessage('Zapisano wydatek w bazie danych.');
 				    header ('Location:index.php?action=successExpense');
@@ -155,7 +165,7 @@ catch (Exception $e) {
 					$application->setMessage('Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!');
 					break;
 				endswitch;
-				header ('Location: index.php?action=expenseManagment&parametr=showEditForm&id=$id');
+				header ('Location: index.php?action=showEditExpenseForm&id='.$id);
 				break;		
 		case 'savePeriod':
 			switch ($application->savePeriod()):
