@@ -43,242 +43,20 @@ catch (Exception $e) {
 			header ('Location:index.php');
 			break;
 		case 'registerUser':
-			switch ($application->registerUser()):
-			    case ACTION_OK:
-				    $application->setMessage('Rejestracja przebiegła prawidłowo. Możesz się zalogować.');
-				    header ('Location:index.php?action=showLoginForm');
-					return;
-				case FORM_DATA_MISSING:
-                    $application->setMessage("Podaj login i hasło!");
-                    break;
-				case BAD_LOGIN_LENGTH:
-					$application->setMessage('Login musi posiadać od 5 do 20 znaków!');
-					break;
-				case NON_ALPHANUMERIC_LOGIN:
-					$application->setMessage('Login może składać się tylko z liter(bez polskich liter) i cyfr!');
-					break;
-				case BAD_PASSWORD_LENGTH:
-					$application->setMessage('Hasło musi posiadać od 8 do 20 znaków!');
-					break;
-				case RECATCHA_FALIED:
-					$application->setMessage('Potwierdź, że nie jesteś botem!');
-					break;
-				case USER_NAME_ALREADY_EXISTS:
-				    $application->setMessage('Istnieje już konto dla podanego loginu.');
-					break;
-				case SERVER_ERROR:
-	                $application->setMessage("Błąd serwera!");
-	                break;
-				default:
-					$application->setMessage('Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!');
-					break;
-			endswitch;
-			header ('Location: index.php?action=showRegistrationForm');
+			include 'registerUser.php';
 			break;
-			case 'addExpense':
-				switch ($application->editExpense('add', $id)):
-			    case ACTION_OK:
-				    $application->setMessage('Zapisano wydatek w bazie danych.');
-				    header ('Location:index.php?action=successExpense');
-					return;
-				case SERVER_ERROR:
-	                $application->setMessage("Błąd serwera!");
-	                break;
-				case FORM_DATA_MISSING:
-                    $application->setMessage("Wypełnij wszystkie pola formularza.");
-                    break;	
-				case AMOUNT_NOT_NUMBER:
-	                $application->setMessage("Kwota musi być liczbą. Format:1234.45");
-	                break;	
-				case AMOUNT_TOO_HIGH:
-	                $application->setMessage("Kwota musi być liczbą mniejszą od 1 000 000 000.");
-	                break;
-				case NO_DATE:
-	                $application->setMessage("Wybierz datę dla wydatku.");
-	                break;
-                case WRONG_DATE:
-	                $application->setMessage("Data musi być aktualna lub wcześniejsza.");
-	                break;
-				case NO_PAYMENT_METHOD:
-	                $application->setMessage("Wybierz metodę dla płatności.");
-	                break;	
-				case NO_CATEGORY:
-	                $application->setMessage("Wybierz kategorię dla wydatku.");
-	                break;
-				case COMMENT_TOO_LONG:
-	                $application->setMessage("Komentarz może mieć maksymalnie 100 znaków.");
-	                break;
-				case INCORRECT_ID:
-	                $application->setMessage("Nieprawidłowy identyfikator wpisu.");
-	                break;
-				case NO_ID_PARAMETERS:
-	                $application->setMessage("Brak identyfikatora wpisu.");
-	                break;	
-				case NOT_ENOUGH_RIGHTS:
-	                $application->setMessage("Brak uprawnień do edycji wpisu.");
-	                break;
-				case TEST:
-					$application->setMessage('TEST');
-					break;
-				default:
-					$application->setMessage('Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!');
-					break;
-				endswitch;
-				header ('Location: index.php?action=showAddExpenseForm');
-				break;	
-			case 'modifyExpense':
-				switch ($application->editExpense('edit', $id)):
-			    case ACTION_OK:
-				    $application->setMessage('Zapisano wydatek w bazie danych.');
-				    header ('Location:index.php?action=viewBalance');
-					return;
-				case SERVER_ERROR:
-	                $application->setMessage("Błąd serwera!");
-	                break;
-				case FORM_DATA_MISSING:
-                    $application->setMessage("Wypełnij wszystkie pola formularza.");
-                    break;	
-				case AMOUNT_NOT_NUMBER:
-	                $application->setMessage("Kwota musi być liczbą. Format:1234.45");
-	                break;	
-				case AMOUNT_TOO_HIGH:
-	                $application->setMessage("Kwota musi być liczbą mniejszą od 1 000 000 000.");
-	                break;
-				case NO_DATE:
-	                $application->setMessage("Wybierz datę dla wydatku.");
-	                break;
-                case WRONG_DATE:
-	                $application->setMessage("Data musi być aktualna lub wcześniejsza.");
-	                break;
-				case NO_PAYMENT_METHOD:
-	                $application->setMessage("Wybierz metodę dla płatności.");
-	                break;	
-				case NO_CATEGORY:
-	                $application->setMessage("Wybierz kategorię dla wydatku.");
-	                break;
-				case COMMENT_TOO_LONG:
-	                $application->setMessage("Komentarz może mieć maksymalnie 100 znaków.");
-	                break;
-				case TEST:
-					$application->setMessage('TEST');
-					break;
-				case INCORRECT_ID:
-	                $application->setMessage("Nieprawidłowy identyfikator wpisu.");
-	                break;
-				case NO_ID_PARAMETERS:
-	                $application->setMessage("Brak identyfikatora wpisu.");
-	                break;	
-				case NOT_ENOUGH_RIGHTS:
-	                $application->setMessage("Brak uprawnień do edycji wpisu.");
-	                break;
-				default:
-					$application->setMessage('Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!');
-					break;
-				endswitch;
-				header ('Location: index.php?action=showEditExpenseForm&id='.$id);
-				break;	
+		case 'addExpense':
+			include 'addExpense.php';	
+			break;	
+		case 'modifyExpense':
+			include 'modifyExpense.php';	
+			break;	
         case 'addIncome':
-				switch ($application->editIncome('add', $id)):
-			    case ACTION_OK:
-				    $application->setMessage('Zapisano wydatek w bazie danych.');
-				    header ('Location:index.php?action=successIncome');
-					return;
-				case SERVER_ERROR:
-	                $application->setMessage("Błąd serwera!");
-	                break;
-				case FORM_DATA_MISSING:
-                    $application->setMessage("Wypełnij wszystkie pola formularza.");
-                    break;	
-				case AMOUNT_NOT_NUMBER:
-	                $application->setMessage("Kwota musi być liczbą. Format:1234.45");
-	                break;	
-				case AMOUNT_TOO_HIGH:
-	                $application->setMessage("Kwota musi być liczbą mniejszą od 1 000 000 000.");
-	                break;
-				case NO_DATE:
-	                $application->setMessage("Wybierz datę dla wydatku.");
-	                break;
-                case WRONG_DATE:
-	                $application->setMessage("Data musi być aktualna lub wcześniejsza.");
-	                break;
-				case NO_PAYMENT_METHOD:
-	                $application->setMessage("Wybierz metodę dla płatności.");
-	                break;	
-				case NO_CATEGORY:
-	                $application->setMessage("Wybierz kategorię dla wydatku.");
-	                break;
-				case COMMENT_TOO_LONG:
-	                $application->setMessage("Komentarz może mieć maksymalnie 100 znaków.");
-	                break;
-				case INCORRECT_ID:
-	                $application->setMessage("Nieprawidłowy identyfikator wpisu.");
-	                break;
-				case NO_ID_PARAMETERS:
-	                $application->setMessage("Brak identyfikatora wpisu.");
-	                break;	
-				case NOT_ENOUGH_RIGHTS:
-	                $application->setMessage("Brak uprawnień do edycji wpisu.");
-	                break;
-				case TEST:
-					$application->setMessage('TEST');
-					break;
-				default:
-					$application->setMessage('Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!');
-					break;
-				endswitch;
-				header ('Location: index.php?action=showAddIncomeForm');
-				break;	
-			case 'modifyIncome':
-				switch ($application->editIncome('edit', $id)):
-			    case ACTION_OK:
-				    $application->setMessage('Zapisano wydatek w bazie danych.');
-				    header ('Location:index.php?action=viewBalance');
-					return;
-				case SERVER_ERROR:
-	                $application->setMessage("Błąd serwera!");
-	                break;
-				case FORM_DATA_MISSING:
-                    $application->setMessage("Wypełnij wszystkie pola formularza.");
-                    break;	
-				case AMOUNT_NOT_NUMBER:
-	                $application->setMessage("Kwota musi być liczbą. Format:1234.45");
-	                break;	
-				case AMOUNT_TOO_HIGH:
-	                $application->setMessage("Kwota musi być liczbą mniejszą od 1 000 000 000.");
-	                break;
-				case NO_DATE:
-	                $application->setMessage("Wybierz datę dla wydatku.");
-	                break;
-                case WRONG_DATE:
-	                $application->setMessage("Data musi być aktualna lub wcześniejsza.");
-	                break;
-				case NO_PAYMENT_METHOD:
-	                $application->setMessage("Wybierz metodę dla płatności.");
-	                break;	
-				case NO_CATEGORY:
-	                $application->setMessage("Wybierz kategorię dla wydatku.");
-	                break;
-				case COMMENT_TOO_LONG:
-	                $application->setMessage("Komentarz może mieć maksymalnie 100 znaków.");
-	                break;
-				case TEST:
-					$application->setMessage('TEST');
-					break;
-				case INCORRECT_ID:
-	                $application->setMessage("Nieprawidłowy identyfikator wpisu.");
-	                break;
-				case NO_ID_PARAMETERS:
-	                $application->setMessage("Brak identyfikatora wpisu.");
-	                break;	
-				case NOT_ENOUGH_RIGHTS:
-	                $application->setMessage("Brak uprawnień do edycji wpisu.");
-	                break;
-				default:
-					$application->setMessage('Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!');
-					break;
-				endswitch;
-				header ('Location: index.php?action=showEditIncomeForm&id='.$id);
-				break;					
+			include 'addIncome.php';
+			break;	
+		case 'modifyIncome':
+			include 'modifyIncome.php';	
+			break;					
 		case 'savePeriod':
 			switch ($application->savePeriod()):
 			    case SELECTED_PERIOD:
@@ -292,158 +70,22 @@ catch (Exception $e) {
 			endswitch;
 			break;	
 		case 'saveDate':
-			switch ($application->saveDate()):
-			    case ACTION_OK:
-					header ('Location:index.php?action=viewBalance');
-					return;
-					break;
-				case ACTION_FAILED:
-				    $application->setMessage('action_field');
-				    break;
-				case NO_DATE:
-	                $application->setMessage("Wypełnij wszystkie pola formularza.");
-	                break;
-                case WRONG_DATE:
-	                $application->setMessage("Data musi być aktualna lub wcześniejsza.");
-	                break;
-				case END_DATE_TOO_SMALL:
-				    $application->setMessage("Data końca okresu nie może być mniejsza od daty początku okresu.");
-	                break;
-				case TEST:
-					$application->setMessage('TEST');
-					break;
-				default:
-					$application->setMessage('Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!');
-					break;
-			endswitch;
-			header ('Location: index.php?action=showDateForm');
+			include 'saveDate.php';
 			break;
         case 'saveNewPassword':
-		    switch ($application->saveNewPassword()):
-			    case ACTION_OK:
-					header ('Location:index.php?action=successPassword');
-					return;
-					break;
-				case BAD_PASSWORD_LENGTH:
-					$application->setMessage('Hasło musi posiadać od 8 do 20 znaków!');
-					break;
-				case DIFFERENT_PASSWORDS:
-					$application->setMessage('Hasła muszą być identyczne');
-					break;	
-				case SERVER_ERROR:
-	                $application->setMessage("Błąd serwera!");
-	                break;
-				default:
-					$application->setMessage('Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!');
-					break;
-			endswitch;
-			header ('Location: index.php?action=showChangePasswordForm');
+		    include 'saveNewPassword.php';
 			break;
 		case 'addNewCategory':
-		    switch ($application->addNewCategory($wtd)):
-			    case ACTION_OK:
-					header ('Location:index.php?action=showCategoryPersonalization');
-					return;
-					break;
-				case FORM_DATA_MISSING:
-                    $application->setMessage("Podaj nazwę kategorii.");
-                    break;
-				case CATEGORY_NAME_ALREADY_EXISTS:
-				    $application->setMessage('Istnieje już taka kategoria.');
-					break;
-				case CATEGORY_TOO_LONG:
-				    $application->setMessage("Nazwa kategorii może mieć maksymalnie 50 znaków.");
-	                break;
-				case SERVER_ERROR:
-	                $application->setMessage("Błąd serwera!");
-	                break;	
-				default:
-					$application->setMessage('Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!');
-					break;
-			endswitch;
-			header ('Location: index.php?action=addCategoryForm&wtd='.$wtd);
+		    include 'addNewCategory.php';
 			break;
 		case 'editCategory':
-		    switch ($application->editCategory($wtd)):
-			    case ACTION_OK:
-					header ('Location:index.php?action=showCategoryPersonalization');
-					return;
-					break;
-				case FORM_DATA_MISSING:
-                    $application->setMessage("Podaj nazwę kategorii.");
-                    break;
-				case NO_CATEGORY:
-	                $application->setMessage("Wybierz kategorię.");
-					break;
-				case CATEGORY_NAME_ALREADY_EXISTS:
-				    $application->setMessage('Istnieje już taka kategoria.');
-					break;
-				case CATEGORY_TOO_LONG:
-				    $application->setMessage("Nazwa kategorii może mieć maksymalnie 50 znaków.");
-	                break;
-				case SERVER_ERROR:
-	                $application->setMessage("Błąd serwera!");
-	                break;	
-				default:
-					$application->setMessage('Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!');
-					break;
-			endswitch;
-			header ('Location: index.php?action=editCategoryForm&wtd='.$wtd);
+			include 'editCategory.php';
 			break;
 		case 'deleteCategory':
-		    switch ($application->deleteCategory($wtd)):
-			    case ACTION_OK:
-					header ('Location:index.php?action=showCategoryPersonalization');
-					return;
-					break;
-				case FORM_DATA_MISSING:
-                    $application->setMessage("Podaj nową nazwę kategorii.");
-                    break;
-				case NO_CATEGORY:
-	                $application->setMessage("Wybierz kategorię, którą chcesz usunąć.");
-	                break;
-				case NO_DELETE_METHOD:
-				    $application->setMessage("Wybierz parametr usunięcia kategorii.");
-	                break;
-				case CATEGORY_TOO_LONG:
-				    $application->setMessage("Nazwa kategorii może mieć maksymalnie 50 znaków.");
-	                break;
-				case SERVER_ERROR:
-	                $application->setMessage("Błąd serwera!");
-	                break;
-				case NOT_ENOUGH_RIGHTS:
-	                $application->setMessage("Brak uprawnień do edycji wpisu.");
-	                break;
-				case TEST:
-	                $application->setMessage("TEST");
-	                break;	
-				default:
-					$application->setMessage('Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!');
-					break;
-			endswitch;
-			header ('Location: index.php?action=deleteCategoryForm&wtd='.$wtd);
+		    include 'deleteCategory.php';
 			break;
 		case 'deleteEntery':
-		    switch ($application->deleteEntry($wtd,$id)):
-			    case ACTION_OK:
-					header ('Location:index.php?action=viewBalance');
-					return;
-					break;
-				case SERVER_ERROR:
-	                $application->setMessage("Błąd serwera!");
-					break;
-	            case INCORRECT_ID :
-	                $application->setMessage("Błędny numer id");
-					break;
-                case NOT_ENOUGH_RIGHTS:
-	                $application->setMessage("Brak uprawnień do edycji wpisu.");
-	                break;					
-				default:
-					$application->setMessage('Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!');
-					break;
-				
-			endswitch;
-			header ('Location: index.php?action=showStatement');
+		    include 'deleteEntery.php';
 			break;
 		default:
 
