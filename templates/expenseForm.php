@@ -14,7 +14,6 @@
 	                </div>
 	        </div>
 		    <form action ="index.php?action=<?= $parametr?>&id=<?=$id?>" method = "post">
-				<input type="hidden" name="id" value="<?php $id?>">
 				<?php echo $id?>
 				<div class="row">
 					<div class="form-group">

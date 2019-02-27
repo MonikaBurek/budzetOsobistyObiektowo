@@ -102,12 +102,6 @@ class ExpenseManagement
 		
 		if (!isset($_POST['amount'])) return FORM_DATA_MISSING;
 		
-		if (isset($_POST['id'])) {
-			$id = $_POST['id'];
-			echo $id ;
-		$_SESSION['formId'] = $id;
-		}
-		
 		if(($case == 'edit' && $id < 1) || ($case == 'add' && $id < 0)) {
 			return INCORRECT_ID;
 		}
@@ -166,7 +160,7 @@ class ExpenseManagement
 				return NOT_ENOUGH_RIGHTS;			
 			}
 			
-			$query = "UPDATE expenses SET expense_category_assigned_to_user_id = (SELECT id FROM expenses_category_assigned_to_users WHERE user_id ='$userId' AND name ='$category'),payment_method_assigned_to_user_id = (SELECT id FROM payment_methods_assigned_to_users WHERE user_id ='$userId' AND name='$paymentMethod'),amount ='$amount',date_of_expense ='$date', expense_comment='$comment') WHERE id=$id";
+			$query = "UPDATE expenses SET expense_category_assigned_to_user_id = (SELECT id FROM expenses_category_assigned_to_users WHERE user_id ='$userId' AND name ='$category'),payment_method_assigned_to_user_id = (SELECT id FROM payment_methods_assigned_to_users WHERE user_id ='$userId' AND name='$paymentMethod'),amount ='$amount',date_of_expense ='$date', expense_comment='$comment' WHERE id=$id";
 			
 		} else {
 			$query = "INSERT INTO expenses VALUES (NULL, '$userId',(SELECT id FROM expenses_category_assigned_to_users WHERE user_id ='$userId' AND name ='$category'),(SELECT id FROM payment_methods_assigned_to_users WHERE user_id ='$userId' AND name='$paymentMethod'),'$amount','$date','$comment')";
