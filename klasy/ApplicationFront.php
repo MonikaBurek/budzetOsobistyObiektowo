@@ -62,21 +62,20 @@ class ApplicationFront extends Application
 		
 	}	
 	
-	function addIncome()
+	function showEditIncomeForm($action, $id, $statement)
 	{
 		$userId = $this->userLoggedIn->id;
-		$incomeM = new IncomeManagement($this->connection);
-		return $incomeM->addIncome($userId);
-		
+		$income = new IncomeManagement($this->connection);
+		return $income->showEditForm($action, $id, $userId, $statement);
 	}
 	
-	function showIncomeForm($statement)
+	function editIncome($action,$id)
 	{
 		$userId = $this->userLoggedIn->id;
-		$elementFormIncome = new Form($this->connection);
-		$strCategoryIncome = $elementFormIncome->displayInputForIncomesCategory($userId);
-		include 'templates/incomeForm.php';
-	}
+		$income = new IncomeManagement($this->connection);
+		return $income->editIncome($action,$id, $userId);
+		
+	}	
 	
 	function savePeriod()
 	{

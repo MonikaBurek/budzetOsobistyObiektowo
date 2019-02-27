@@ -45,9 +45,9 @@
 						<ul class="nav navbar-nav">
 							<li <?php if ($action == "showMain") {echo 'class="active"';} ?>>
 							<a href="index.php?action=showMain">Strona główna</a></li>
-							<li <?php if ($action == "showIncomeForm") {echo 'class="active"';}?>>
-							<a href="index.php?action=showIncomeForm">Dodaj przychód</a></li>
-							<li <?php if ($action == "showExpenseForm") {echo 'class="active"';} ?>>
+							<li <?php if ($action == "showAddIncomeForm") {echo 'class="active"';}?>>
+							<a href="index.php?action=showAddIncomeForm">Dodaj przychód</a></li>
+							<li <?php if ($action == "showAddExpenseForm") {echo 'class="active"';} ?>>
 							<a href="index.php?action=showAddExpenseForm">Dodaj wydatek</a></li>
 							<li <?php if ($action == "periodOfTimeForm" || $action =='viewBalance'|| $action == 'showDateForm' ) {echo 'class="active"';}?>><a href="index.php?action=periodOfTimeForm">Przeglądaj bilans</a></li>
 							<li <?php if ($action == "showChangePasswordForm" || $action =='showCategoryPersonalization') {echo 'class="active"';}?>class="dropdown">
@@ -86,9 +86,12 @@
 						case 'successExpense':
 							include 'templates/successExpense.php';
 							break;
-						case 'showIncomeForm':
-						    $application->showIncomeForm($statement);
+						case 'showEditIncomeForm':
+							$application->showEditIncomeForm('edit', $id, $statement);
 							break;
+						case 'showAddIncomeForm':
+							$application->showEditIncomeForm('add', $id, $statement);
+							break; 
 						case 'successIncome':
 							include 'templates/successIncome.php';
 							break;

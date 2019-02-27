@@ -14,7 +14,7 @@
 	                </div>
 	        </div>
 			
-		    <form action = "index.php?action=addIncome" method = "post">
+		    <form action = "index.php?action=<?= $parametr?>&id=<?=$id?>" method = "post">
 				<div class="row">
 					<div class="form-group">
 						<label class="control-label col-sm-1"  for="amount">Kwota:</label>
@@ -68,15 +68,17 @@
 				</div>
 				
 				<div class="row ">
-					<div class="col-sm-5 col-sm-offset-2">
-						<button type="submit" class="btnSetting">Dodaj</button>
-					</div>
-					<div class="col-sm-5">
-						<button type="submit" class="btnSetting">Anuluj</button>
+					<div class="col-sm-5 col-sm-offset-4">
+						<button type="submit" class="btnSetting">Zapisz</button>
 					</div>
 				</div>	
 			</form>	
-		</div>
+				<div class="row ">	
+					<div class="col-sm-5 col-sm-offset-8">
+						<a href="index.php?action=showMain" class="btnSetting" role="button"> Anuluj </a>
+					</div>
+				</div>	
+			</div>
 		<div class="col-md-2"></div>
 	</div>
 </div>
