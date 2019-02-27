@@ -10,7 +10,7 @@ if (isset($_SESSION['formCommentIncome'])) unset($_SESSION['formCommentIncome'])
 		<div class="col-md-4 col-md-offset-4 bg6">
 			Przychód został zapisany!
 			<br /><br />	
-			<a href="index.php?action=showIncomeForm" class="btnSetting" role="button"> Dodaj kolejny przychód!</a>
+			<a href="index.php?action=showAddIncomeForm" class="btnSetting" role="button"> Dodaj kolejny przychód!</a>
 			<br />								
 		</div>
 		<div class="col-md-4"></div>
