@@ -29,12 +29,7 @@ catch (Exception $e) {
     $id = $_GET['id'];
 	echo $id;
     } else {
-	    if (isset($_SESSION['formId'])) {
-		 $id = $_SESSION['formId']; 
-		 echo $id;
-		} else {
-			$id = 0;
-		}
+	    $id = 0;
 	}
 	
 	$statement = $application->getMessage();

@@ -1,4 +1,14 @@
-<?php if(!isset($this)) die(); ?>
+<?php if(!isset($this)) die();
+if (isset($_SESSION['formAmountExpense'])) unset($_SESSION['formAmountExpense']);
+if (isset($_SESSION['formDateExpense'])) unset($_SESSION['formDateExpense']);
+if (isset($_SESSION['formPaymentMethod'])) unset($_SESSION['formPaymentMethod']);
+if (isset($_SESSION['formCategoryExpense'])) unset($_SESSION['formCategoryExpense']);
+if (isset($_SESSION['formCommentExpense'])) unset($_SESSION['formCommentExpense']);
+if (isset($_SESSION['formAmountIncome'])) unset($_SESSION['formAmountIncome']);
+if (isset($_SESSION['formDateIncome'])) unset($_SESSION['formDateIncome']);
+if (isset($_SESSION['formCategoryIncome'])) unset($_SESSION['formCategoryIncome']);
+if (isset($_SESSION['formCommentIncome'])) unset($_SESSION['formCommentIncome']);
+ ?>
 <div class="viewBalanceDiv" onload="createPieChart()"> 
 	<div class="row text-center">
 	    <div class="col-md-4 col-md-offset-2 bg3">	
