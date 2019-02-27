@@ -43,7 +43,7 @@
 					</div>
 				</div>
 				<div class="col-sm-offset-1 col-sm-11">
-					<div class="g-recaptcha" data-sitekey="6LfuoY0UAAAAAFxcJ0GLvNWq1lr1kvh9cQLwRpEK"></div>
+					<div class="g-recaptcha" data-sitekey="6Lc8028UAAAAAFQCzQEqlfLdnLK5fwfNXgwzBvsB"></div>
 				</div>
 				
 				<div class="form-group"> 
