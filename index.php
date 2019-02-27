@@ -135,7 +135,7 @@ catch (Exception $e) {
 				switch ($application->editExpense('edit', $id)):
 			    case ACTION_OK:
 				    $application->setMessage('Zapisano wydatek w bazie danych.');
-				    header ('Location:index.php?action=successExpense');
+				    header ('Location:index.php?action=viewBalance');
 					return;
 				case SERVER_ERROR:
 	                $application->setMessage("Błąd serwera!");

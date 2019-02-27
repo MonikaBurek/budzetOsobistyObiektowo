@@ -50,13 +50,14 @@ class ExpenseManagement
 			if ($resultOfQuery = $this->connection->query($sql)) {
 			$how = $resultOfQuery->num_rows;
 				if ($how>0) {
-					$row = $resultOfQuery->fetch_assoc() ;
-					$_SESSION['formAmountExpense'] = $row['amount'];
-					$_SESSION['formDateExpense'] = $row['date_of_expense'];
+					$row = $resultOfQuery->fetch_assoc() ; 
+					if (!isset($_SESSION['formAmountExpense'])) {
+						$_SESSION['formAmountExpense'] = $row['amount'];
+						$_SESSION['formDateExpense'] = $row['date_of_expense'];
+						$_SESSION['formCommentExpense'] = $row['expense_comment'];
+					}
 					$expenseCategoryId = $row['expense_category_assigned_to_user_id'];
 					$paymentMethodId = $row['payment_method_assigned_to_user_id'];
-					$_SESSION['formCommentExpense'] = $row['expense_comment'];
-					
 				}
 		    }
 			$sql2 = "SELECT `name` FROM `expenses_category_assigned_to_users` WHERE id=$expenseCategoryId";
@@ -64,7 +65,9 @@ class ExpenseManagement
 			$how=$resultOfQuerySql2->num_rows;
 				if ($how>0) {
 					$row = $resultOfQuerySql2->fetch_assoc();
-					$_SESSION['formCategoryExpense'] =  $row['name'];	
+					if (!isset($_SESSION['formCategoryExpense'])) {
+					   $_SESSION['formCategoryExpense'] =  $row['name'];
+					}					   
 				}
 			}
 			
@@ -73,17 +76,22 @@ class ExpenseManagement
 			$how = $resultOfQuerySql3->num_rows;
 				if ($how>0) {
 					$row = $resultOfQuerySql3->fetch_assoc();
-					$_SESSION['formPaymentMethod'] =  $row['name'];	
+					if (!isset($_SESSION['formPaymentMethod'])) {
+					    $_SESSION['formPaymentMethod'] =  $row['name'];
+					}					
 				}
 			}
 		    $parametr = 'modifyExpense';
 		
 		} elseif ($case =='add') { //New expense
+		
+			if (!isset($_SESSION['formAmountExpense'])) {
 			$_SESSION['formAmountExpense'] = '';
 			$_SESSION['formDateExpense'] = date('Y-m-d');
 			$_SESSION['formCommentExpense'] = '';
 			$_SESSION['formCategoryExpense'] =  '';
-            $_SESSION['formPaymentMethod'] =  '';				
+            $_SESSION['formPaymentMethod'] =  '';
+			}			
 			$parametr = 'addExpense';
 		}
 		
