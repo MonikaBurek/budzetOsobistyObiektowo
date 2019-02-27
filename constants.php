@@ -34,5 +34,9 @@
   define('NO_DELETE_METHOD',63);
   
   define('INCORRECT_ID',70);
+  define('NO_ID_PARAMETERS', 71);
+  define('NOT_ENOUGH_RIGHTS',72);
+  define('USER_HAVE_RIGHTS',73);
+  
   
 ?>

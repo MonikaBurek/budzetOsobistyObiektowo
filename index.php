@@ -26,8 +26,16 @@ catch (Exception $e) {
     }
 
 	if (isset($_GET['id'])) {
-    $id = (int) $_GET['id'];
-    }
+    $id = $_GET['id'];
+	echo $id;
+    } else {
+	    if (isset($_SESSION['formId'])) {
+		 $id = $_SESSION['formId']; 
+		 echo $id;
+		} else {
+			$id = 0;
+		}
+	}
 	
 	$statement = $application->getMessage();
 
@@ -73,7 +81,7 @@ catch (Exception $e) {
 			header ('Location: index.php?action=showRegistrationForm');
 			break;
 			case 'addExpense':
-				switch ($application->addExpense()):
+				switch ($application->editExpense('add', $id)):
 			    case ACTION_OK:
 				    $application->setMessage('Zapisano wydatek w bazie danych.');
 				    header ('Location:index.php?action=successExpense');
@@ -105,6 +113,15 @@ catch (Exception $e) {
 				case COMMENT_TOO_LONG:
 	                $application->setMessage("Komentarz może mieć maksymalnie 100 znaków.");
 	                break;
+				case INCORRECT_ID:
+	                $application->setMessage("Nieprawidłowy identyfikator wpisu.");
+	                break;
+				case NO_ID_PARAMETERS:
+	                $application->setMessage("Brak identyfikatora wpisu.");
+	                break;	
+				case NOT_ENOUGH_RIGHTS:
+	                $application->setMessage("Brak uprawnień do edycji wpisu.");
+	                break;
 				case TEST:
 					$application->setMessage('TEST');
 					break;
@@ -112,12 +129,13 @@ catch (Exception $e) {
 					$application->setMessage('Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!');
 					break;
 				endswitch;
-				header ('Location: index.php?action=showExpenseForm');
+				header ('Location: index.php?action=showAddExpenseForm');
 				break;	
-		case 'addIncome':
-				switch ($application->addIncome()):
+			case 'modifyExpense':
+				switch ($application->editExpense('edit', $id)):
 			    case ACTION_OK:
-				    header ('Location:index.php?action=successIncome');
+				    $application->setMessage('Zapisano wydatek w bazie danych.');
+				    header ('Location:index.php?action=viewBalance');
 					return;
 				case SERVER_ERROR:
 	                $application->setMessage("Błąd serwera!");
@@ -137,18 +155,33 @@ catch (Exception $e) {
                 case WRONG_DATE:
 	                $application->setMessage("Data musi być aktualna lub wcześniejsza.");
 	                break;
+				case NO_PAYMENT_METHOD:
+	                $application->setMessage("Wybierz metodę dla płatności.");
+	                break;	
 				case NO_CATEGORY:
 	                $application->setMessage("Wybierz kategorię dla wydatku.");
 	                break;
 				case COMMENT_TOO_LONG:
 	                $application->setMessage("Komentarz może mieć maksymalnie 100 znaków.");
 	                break;
+				case TEST:
+					$application->setMessage('TEST');
+					break;
+				case INCORRECT_ID:
+	                $application->setMessage("Nieprawidłowy identyfikator wpisu.");
+	                break;
+				case NO_ID_PARAMETERS:
+	                $application->setMessage("Brak identyfikatora wpisu.");
+	                break;	
+				case NOT_ENOUGH_RIGHTS:
+	                $application->setMessage("Brak uprawnień do edycji wpisu.");
+	                break;
 				default:
 					$application->setMessage('Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!');
 					break;
 				endswitch;
-				header ('Location: index.php?action=showIncomeForm');
-				break;	
+				header ('Location: index.php?action=showEditExpenseForm&id='.$id);
+				break;		
 		case 'savePeriod':
 			switch ($application->savePeriod()):
 			    case SELECTED_PERIOD:
@@ -281,6 +314,9 @@ catch (Exception $e) {
 				case SERVER_ERROR:
 	                $application->setMessage("Błąd serwera!");
 	                break;
+				case NOT_ENOUGH_RIGHTS:
+	                $application->setMessage("Brak uprawnień do edycji wpisu.");
+	                break;
 				case TEST:
 	                $application->setMessage("TEST");
 	                break;	
@@ -301,28 +337,14 @@ catch (Exception $e) {
 					break;
 	            case INCORRECT_ID :
 	                $application->setMessage("Błędny numer id");
-					break;					
+					break;
+                case NOT_ENOUGH_RIGHTS:
+	                $application->setMessage("Brak uprawnień do edycji wpisu.");
+	                break;					
 				default:
 					$application->setMessage('Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!');
 					break;
-			endswitch;
-			header ('Location: index.php?action=showStatement');
-			break;
-		case 'editEntery':
-		    switch ($application->editEntery($wtd, $id)):
-			    case ACTION_OK:
-					header ('Location:index.php?action=viewBalance');
-					return;
-					break;
-				case SERVER_ERROR:
-	                $application->setMessage("Błąd serwera!");
-					break;
-	            case INCORRECT_ID :
-	                $application->setMessage("Błędny numer id");
-					break;					
-				default:
-					$application->setMessage('Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!');
-					break;
+				
 			endswitch;
 			header ('Location: index.php?action=showStatement');
 			break;

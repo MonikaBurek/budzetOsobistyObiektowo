@@ -45,24 +45,22 @@ class ApplicationFront extends Application
 		$register = new Registration($this->connection);
 		return $register->register();
 	}
-  
-	function addExpense()
+
+	
+	function showEditExpenseForm($action, $id, $statement)
 	{
 		$userId = $this->userLoggedIn->id;
-		$expenseM = new ExpenseManagement($this->connection);
-		return $expenseM->addExpense($userId);
-		
+		$expense = new ExpenseManagement($this->connection);
+		return $expense->showEditForm($action, $id, $userId, $statement);
 	}
 	
-	function showExpenseForm($statement)
+	function editExpense($action,$id)
 	{
 		$userId = $this->userLoggedIn->id;
-		$elementFormExpense = new Form($this->connection);
-		$strPayment = $elementFormExpense->displayInputForPaymentMethod($userId);
-		$strCategoryExpense = $elementFormExpense->displayInputForExpensesCategory($userId);
+		$expense = new ExpenseManagement($this->connection);
+		return $expense->editExpense($action,$id, $userId);
 		
-		include 'templates/expenseForm.php';
-	}
+	}	
 	
 	function addIncome()
 	{
@@ -180,30 +178,22 @@ class ApplicationFront extends Application
 		return $deleteCategory->deleteCategory($userId, $wtd);
 	}
 	
+	function showDeleteEnteryForm($wtd,$id)
+	{
+		$userId = $this->userLoggedIn->id;
+		$entry = new Entery($this->connection);
+		$strOneEnteryIncome = $entry->showTableOneEnteryIncome($id, $userId);
+		$strOneEnteryExpense = $entry->showTableOneEnteryExpense($id, $userId);
+		include 'templates/deleteEnteryForm.php';
+	}
+	
+	
 	function deleteEntry($wtd,$id)
 	{
+		$userId = $this->userLoggedIn->id;
 		$deleteEntry = new Entery($this->connection);
-		return $deleteEntry->deleteEntery($wtd,$id);
+		return $deleteEntry->deleteEntery($wtd,$id, $userId);
 		
-	}
-	
-	function editEntery($wtd, $id)
-	{
-		$editEntry = new Entery($this->connection);
-		return $editEntry->editEntery($wtd,$id);
-	}
-	
-	function showEnteryForm($wtd, $id, $statement)
-	{
-		$showEntryForm = new Entery($this->connection);
-		$showEntryForm->showEnteryForm($wtd,$id);
-		if ($wtd == 'expenseEdit') {
-		    $this->showExpenseForm($statement);
-		} elseif ($wtd == 'incomeEdit') {
-		    $this->showIncomeForm($statement);
-		} 
-		
-		return $wtd;
 	}
 	
 	function showStatement($statement)

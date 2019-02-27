@@ -11,7 +11,7 @@ if (isset($_SESSION['formCommentExpense'])) unset($_SESSION['formCommentExpense'
 		<div class="col-md-4 col-md-offset-4 bg6">
 			Wydatek został zapisany!
 			<br /><br />	
-			<a href="index.php?action=showExpenseForm" class="btnSetting" role="button"> Dodaj kolejny wydatek!</a>
+			<a href="index.php?action=showAddExpenseForm" class="btnSetting" role="button"> Dodaj kolejny wydatek!</a>
 			<br />								
 		</div>
 		<div class="col-md-4"></div>

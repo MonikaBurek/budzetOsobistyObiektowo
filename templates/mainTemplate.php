@@ -48,7 +48,7 @@
 							<li <?php if ($action == "showIncomeForm") {echo 'class="active"';}?>>
 							<a href="index.php?action=showIncomeForm">Dodaj przychód</a></li>
 							<li <?php if ($action == "showExpenseForm") {echo 'class="active"';} ?>>
-							<a href="index.php?action=showExpenseForm">Dodaj wydatek</a></li>
+							<a href="index.php?action=showAddExpenseForm">Dodaj wydatek</a></li>
 							<li <?php if ($action == "periodOfTimeForm" || $action =='viewBalance'|| $action == 'showDateForm' ) {echo 'class="active"';}?>><a href="index.php?action=periodOfTimeForm">Przeglądaj bilans</a></li>
 							<li <?php if ($action == "showChangePasswordForm" || $action =='showCategoryPersonalization') {echo 'class="active"';}?>class="dropdown">
 								<a class="dropdown-toggle" data-toggle="dropdown">Ustawienia <span class="caret"></span></a>
@@ -77,9 +77,12 @@
 						case 'showRegistrationForm':
 							include 'templates/registrationForm.php';
 							break;
-						case 'showExpenseForm':
-						    $application->showExpenseForm($statement);
+						case 'showEditExpenseForm':
+							$application->showEditExpenseForm('edit', $id, $statement);
 							break;
+						case 'showAddExpenseForm':
+							$application->showEditExpenseForm('add', $id, $statement);
+							break; 
 						case 'successExpense':
 							include 'templates/successExpense.php';
 							break;
@@ -119,12 +122,12 @@
 						case 'showStatement':
 							$application->showStatement($statement);
 							break;
-						case 'showEnteryForm':
-							$application->showEnteryForm($wtd, $id, $statement);
-							break;	
+						case 'deleteEnteryForm':
+							$application->showDeleteEnteryForm($wtd,$id);
+							break;
 						case 'showMain':
-						include 'templates/home.php';
-						break;
+							include 'templates/home.php';
+							break;
 						default:
 						echo 'Błąd';
 							
