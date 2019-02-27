@@ -29,7 +29,13 @@ catch (Exception $e) {
     $id = $_GET['id'];
 	echo $id;
     } else {
-	$id =0; }
+	    if (isset($_SESSION['formId'])) {
+		 $id = $_SESSION['formId']; 
+		 echo $id;
+		} else {
+			$id = 0;
+		}
+	}
 	
 	$statement = $application->getMessage();
 
@@ -161,6 +167,15 @@ catch (Exception $e) {
 				case TEST:
 					$application->setMessage('TEST');
 					break;
+				case INCORRECT_ID:
+	                $application->setMessage("Nieprawidłowy identyfikator wpisu.");
+	                break;
+				case NO_ID_PARAMETERS:
+	                $application->setMessage("Brak identyfikatora wpisu.");
+	                break;	
+				case NOT_ENOUGH_RIGHTS:
+	                $application->setMessage("Brak uprawnień do edycji wpisu.");
+	                break;
 				default:
 					$application->setMessage('Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!');
 					break;

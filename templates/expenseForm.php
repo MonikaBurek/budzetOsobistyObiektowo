@@ -13,8 +13,9 @@
                         </div>  
 	                </div>
 	        </div>
-		    <form action ="index.php?action=<?= $parametr?>" method = "post">
-			
+		    <form action ="index.php?action=<?= $parametr?>&id=<?=$id?>" method = "post">
+				<input type="hidden" name="id" value="<?php $id?>">
+				<?php echo $id?>
 				<div class="row">
 					<div class="form-group">
 						<label class="control-label col-sm-1"  for="amount">Kwota:</label>
