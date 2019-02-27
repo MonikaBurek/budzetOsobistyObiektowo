@@ -314,6 +314,9 @@ catch (Exception $e) {
 				case SERVER_ERROR:
 	                $application->setMessage("Błąd serwera!");
 	                break;
+				case NOT_ENOUGH_RIGHTS:
+	                $application->setMessage("Brak uprawnień do edycji wpisu.");
+	                break;
 				case TEST:
 	                $application->setMessage("TEST");
 	                break;	
@@ -334,28 +337,14 @@ catch (Exception $e) {
 					break;
 	            case INCORRECT_ID :
 	                $application->setMessage("Błędny numer id");
-					break;					
+					break;
+                case NOT_ENOUGH_RIGHTS:
+	                $application->setMessage("Brak uprawnień do edycji wpisu.");
+	                break;					
 				default:
 					$application->setMessage('Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!');
 					break;
-			endswitch;
-			header ('Location: index.php?action=showStatement');
-			break;
-		case 'editEntery':
-		    switch ($application->editEntery($wtd, $id)):
-			    case ACTION_OK:
-					header ('Location:index.php?action=viewBalance');
-					return;
-					break;
-				case SERVER_ERROR:
-	                $application->setMessage("Błąd serwera!");
-					break;
-	            case INCORRECT_ID :
-	                $application->setMessage("Błędny numer id");
-					break;					
-				default:
-					$application->setMessage('Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!');
-					break;
+				
 			endswitch;
 			header ('Location: index.php?action=showStatement');
 			break;

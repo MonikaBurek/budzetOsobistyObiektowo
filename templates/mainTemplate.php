@@ -122,6 +122,9 @@
 						case 'showStatement':
 							$application->showStatement($statement);
 							break;
+						case 'deleteEnteryForm':
+							$application->showDeleteEnteryForm($wtd,$id);
+							break;
 						case 'showMain':
 							include 'templates/home.php';
 							break;

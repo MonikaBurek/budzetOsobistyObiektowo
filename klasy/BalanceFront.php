@@ -230,7 +230,7 @@ class BalanceFront
 			$str .= '<table class="table table-striped table-bordered table-condensed">'; 
 			$str .= '<thead>'; 
 			$str .= '<tr>'; 
-			$str .= '<th>Id</th>'; 
+			$str .= '<th>Lp.</th>'; 
 			$str .= '<th>Kwota [zł]</th>'; 
 			$str .= '<th>Data</th>'; 
 			$str .= '<th>Sposób płatności</th>'; 
@@ -240,18 +240,20 @@ class BalanceFront
 			$str .= '<th>Usuń</th>';
 			$str .= '</tr>'; 
 			$str .= '</thead>'; 
-			$str .= '<tbody>';			
+			$str .= '<tbody>';	
+            $counter = 1;			
 			while ($row = $resultOfQuery->fetch_assoc()) {
 				$str .= '<tr>'; 
-				$str .= '<td>'.$row['id'].'</td>';
+				$str .= '<td>'.$counter.'</td>';
 				$str .= '<td>'.$row['amount'].'</td>';
 				$str .= '<td>'.$row['date_of_expense'].'</td>';
 				$str .= '<td>'.$row['payment'].'</td>';
 				$str .= '<td>'.$row['category'].'</td>';
 				$str .= '<td>'.$row['expense_comment'].'</td>';
 				$str .= '<td style="text-align:center;"><a href="index.php?action=showEditExpenseForm&amp;id='.$row['id'].'"><span class="colorIcon"><i class="icon-pencil"></i></span></a></td>';
-				$str .= '<td style="text-align:center;"><a href="index.php?action=deleteEntery&amp;wtd=expense&amp;id='.$row['id'].'"><span class="colorIcon"><i class="icon-trash"></i></span></a></td>';
-				$str .= '</tr>'; 				
+				$str .= '<td style="text-align:center;"><a href="index.php?action=deleteEnteryForm&amp;wtd=expense&amp;id='.$row['id'].'"><span class="colorIcon"><i class="icon-trash"></i></span></a></td>';
+				$str .= '</tr>'; 
+				$counter++;
 			} 
 			$resultOfQuery->free_result();
 			$str .= '</tbody>'; 
@@ -301,17 +303,19 @@ class BalanceFront
 			$str .= '<th>Usuń</th>';
 			$str .= '</tr>'; 
 			$str .= '</thead>'; 
-			$str .= '<tbody>';			
+			$str .= '<tbody>';
+            $counter = 1;			
 			while ($row = $resultOfQuery->fetch_assoc()) {
 				$str .= '<tr>'; 
-				$str .= '<td>'.$row['id'].'</td>';
+				$str .= '<td>'. $counter.'</td>';
 				$str .= '<td>'.$row['amount'].'</td>';
 				$str .= '<td>'.$row['date_of_income'].'</td>';
 				$str .= '<td>'.$row['category'].'</td>';
 				$str .= '<td>'.$row['income_comment'].'</td>';
 				$str .= '<td style="text-align:center;"><a href="index.php?action=showEnteryForm&amp;wtd=incomeEdit&amp;id='.$row['id'].'"><span class="colorIcon"><i class="icon-pencil"></i></span></a></td>';
-				$str .= '<td style="text-align:center;"><a href="index.php?action=deleteEntery&amp;wtd=income&amp;id='.$row['id'].'"><span class="colorIcon"><i class="icon-trash"></i></span></a></td>';
-				$str .= '</tr>'; 				
+				$str .= '<td style="text-align:center;"><a href="index.php?action=deleteEnteryForm&amp;wtd=income&amp;id='.$row['id'].'"><span class="colorIcon"><i class="icon-trash"></i></span></a></td>';
+				$str .= '</tr>';
+                $counter++; 				
 			} 
 			$resultOfQuery->free_result();
 			$str .= '</tbody>'; 

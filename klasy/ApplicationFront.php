@@ -62,7 +62,6 @@ class ApplicationFront extends Application
 		
 	}	
 	
-	
 	function addIncome()
 	{
 		$userId = $this->userLoggedIn->id;
@@ -179,19 +178,23 @@ class ApplicationFront extends Application
 		return $deleteCategory->deleteCategory($userId, $wtd);
 	}
 	
+	function showDeleteEnteryForm($wtd,$id)
+	{
+		$userId = $this->userLoggedIn->id;
+		$entry = new Entery($this->connection);
+		$strOneEnteryIncome = $entry->showTableOneEnteryIncome($id, $userId);
+		$strOneEnteryExpense = $entry->showTableOneEnteryExpense($id, $userId);
+		include 'templates/deleteEnteryForm.php';
+	}
+	
+	
 	function deleteEntry($wtd,$id)
 	{
+		$userId = $this->userLoggedIn->id;
 		$deleteEntry = new Entery($this->connection);
-		return $deleteEntry->deleteEntery($wtd,$id);
+		return $deleteEntry->deleteEntery($wtd,$id, $userId);
 		
 	}
-	
-	function editEntery($wtd, $id)
-	{
-		$editEntry = new Entery($this->connection);
-		return $editEntry->editEntery($wtd,$id);
-	}
-	
 	
 	function showStatement($statement)
 	{
