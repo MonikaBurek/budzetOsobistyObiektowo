@@ -526,18 +526,6 @@ h4.bilansHeader
 	padding-bottom: 75px;
 }
 
-@media(max-width: 720px)
-{
-	.bg9
-	{
-	   padding-top: 10px;
-	}
-	.bg3
-	{
-	    padding: 10px;
-	}
-}
-
 .title
 {
 	font-size: 20px;
@@ -553,6 +541,25 @@ h4.bilansHeader
 	padding-top: 10px;
 	text-align: center;
 }
+
+
+@media(max-width: 720px)
+{
+	.bg9
+	{
+	   padding-top: 10px;
+	}
+	.bg3
+	{
+	    padding: 15px;
+	}
+	.title
+	{
+		font-size:12px;
+	}
+}
+
+
 .bg10
 {
 	background-color:white;

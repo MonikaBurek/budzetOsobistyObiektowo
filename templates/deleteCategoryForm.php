@@ -1,7 +1,7 @@
 <?php if(!isset($this)) die(); ?>
 <div class="addCategoryForm">
     <div class="row">
-		<div class="col-md-6 col-md-offset-4 bg1">
+		<div class="col-md-6 col-md-offset-4 bg3">
 			<form action = "index.php?action=deleteCategory&amp;wtd=<?=$wtd?>" method = "post">
 				<div class="row rowExpense">
 				<?php if($wtd == 'expenseCategory'):?>
@@ -12,14 +12,14 @@
 				<?php endif;?>
 				</div>
 				
-				<div class="row rowExpense">
+				
 		            <?php if($wtd == 'expenseCategory'):?>
 			            <?php echo $strCategoryExpense ?>
 		            <?php endif;?>	
 		            <?php if($wtd == 'incomeCategory'):?>
 			        <?php echo $strCategoryIncome ?>
                     <?php endif;?>			
-	            </div>
+	            
 				
 				<div class="row rowExpense">
 				<div class="col-sm-11">
