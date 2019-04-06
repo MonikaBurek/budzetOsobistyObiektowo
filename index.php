@@ -35,26 +35,26 @@ catch (Exception $e) {
 
    switch ($action) {
         case 'login':
-	        include 'login.php';
+	        include 'phpfiles/login.php';
 			break;
 		case 'logout':
 	        $application->logout();
 			header ('Location:index.php');
 			break;
 		case 'registerUser':
-			include 'registerUser.php';
+			include 'phpfiles/registerUser.php';
 			break;
 		case 'addExpense':
-			include 'addExpense.php';	
+			include 'phpfiles/addExpense.php';	
 			break;	
 		case 'modifyExpense':
-			include 'modifyExpense.php';	
+			include 'phpfiles/modifyExpense.php';	
 			break;	
         case 'addIncome':
-			include 'addIncome.php';
+			include 'phpfiles/addIncome.php';
 			break;	
 		case 'modifyIncome':
-			include 'modifyIncome.php';	
+			include 'phpfiles/modifyIncome.php';	
 			break;					
 		case 'savePeriod':
 			switch ($application->savePeriod()):
@@ -69,22 +69,22 @@ catch (Exception $e) {
 			endswitch;
 			break;	
 		case 'saveDate':
-			include 'saveDate.php';
+			include 'phpfiles/saveDate.php';
 			break;
         case 'saveNewPassword':
-		    include 'saveNewPassword.php';
+		    include 'phpfiles/saveNewPassword.php';
 			break;
 		case 'addNewCategory':
-		    include 'addNewCategory.php';
+		    include 'phpfiles/addNewCategory.php';
 			break;
 		case 'editCategory':
-			include 'editCategory.php';
+			include 'phpfiles/editCategory.php';
 			break;
 		case 'deleteCategory':
-		    include 'deleteCategory.php';
+		    include 'phpfiles/deleteCategory.php';
 			break;
 		case 'deleteEntery':
-		    include 'deleteEntery.php';
+		    include 'phpfiles/deleteEntery.php';
 			break;
 		default:
 

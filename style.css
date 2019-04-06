@@ -154,7 +154,7 @@ textarea
 	padding:15px;
 	box-sizing: border-box;
 	resize: vertical;
-	margin-bottom:15px;
+	margin-bottom:5px;
 	
 }
 
@@ -595,4 +595,19 @@ h4.bilansHeader
 	font-size: 23px;
     color: #66B032;
 	font-weight: 700;
+}
+
+#feedback 
+{
+  color: #66B032;
+  font-weight: 700;
+  padding: 0px 0px 10px 85px;
+ }
+
+#feedback.warning {color: red;}
+#feedback.tip {color: #66B032;}
+
+.form-group
+{
+	margin-bottom: 5px;
 }
