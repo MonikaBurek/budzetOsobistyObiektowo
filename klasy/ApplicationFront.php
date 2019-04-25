@@ -199,6 +199,14 @@ class ApplicationFront extends Application
 	{
 		include 'templates/showStatement.php';
 	}
+	
+	function checkIfUserExistsInDatabase($name)
+	{
+		$register = new Registration($this->connection);
+		return $register->checkIfUserExists($name);
+		
+	}
+	
     function logout()
     {
 		session_start();
