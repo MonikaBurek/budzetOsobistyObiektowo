@@ -54,7 +54,7 @@ class Form
 	
 	function displayInputForExpensesCategory($userId)
 	{
-		$resultOfQuery=$this->connection->query("SELECT name FROM expenses_category_assigned_to_users WHERE user_id ='$userId'");
+		$resultOfQuery=$this->connection->query("SELECT name, limits FROM expenses_category_assigned_to_users WHERE user_id ='$userId'");
 			
 		if(!$resultOfQuery) return SERVER_ERROR;
 				
@@ -75,8 +75,15 @@ class Form
 						}
 					}
 					
-				$str .= '">'.$row['name'].'</label>';
-				$str .= '</div>';
+				$str .= '">'.$row['name']. '</br>';
+				
+					if ($row['limits'] > 0)
+					{
+						$str .= '<span class="limits"> Limit: '.$row['limits'].'</span>';
+					}
+				
+				
+				$str .= '</label></div>';
 				$str .= '<div class="col-sm-5"></div>';
 				$str .= '</div>';	
 			}

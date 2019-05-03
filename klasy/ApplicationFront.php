@@ -122,6 +122,9 @@ class ApplicationFront extends Application
 		$tableCategory = new Settings($this->connection);
 		$strCategoryExpenses = $tableCategory->showTableCategoryExpenses($userId);
 		$strCategoryIncomes = $tableCategory->showTableCategoryIncomes($userId);
+		$elementFormExpense = new Form($this->connection);
+		$strCategoryExpenseForm = $elementFormExpense->displayInputForExpensesCategory($userId);
+		 
 		
 		include 'templates/categoryPersonalization.php';
     }
@@ -204,6 +207,15 @@ class ApplicationFront extends Application
 	{
 		$register = new Registration($this->connection);
 		return $register->checkIfUserExists($name);
+		
+	}
+	
+	function saveLimitToDatabase($nameCategory,$limit)
+	{
+		$userId = $this->userLoggedIn->id;
+		$addLimit = new Settings($this->connection);
+		return $addLimit->addLimitForCategory($userId, $nameCategory, $limit);
+		
 		
 	}
 	

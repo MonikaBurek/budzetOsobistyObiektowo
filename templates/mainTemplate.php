@@ -154,6 +154,11 @@
 			<?php if($action =='showRegistrationForm'):?> 
 			<script src="js/registrationUsername.js"></script>
 			<?php endif;?>
+			<?php if($action =='showCategoryPersonalization'):?> 
+			<script src="js/categoryLimit.js"></script>
+			<?php endif;?>
+			
+			
 		</article>
     </body>
 </html>

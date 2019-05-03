@@ -43,7 +43,7 @@ class Settings
 	
 	function showTableCategoryExpenses($userId)
 	{
-		$sql = "SELECT name FROM expenses_category_assigned_to_users WHERE user_id ='$userId'";
+		$sql = "SELECT  name, limits FROM expenses_category_assigned_to_users WHERE user_id ='$userId'";
 		
 		$resultOfQuery=$this->connection->query($sql);
 		
@@ -59,7 +59,8 @@ class Settings
 			$str .= '<thead>'; 
 			$str .= '<tr>'; 
 			$str .= '<th>Lp.</th>'; 
-			$str .= '<th>Nazwa kategorii</th>'; 
+			$str .= '<th>Nazwa kategorii</th>';
+			$str .= '<th>Limit</th>'; 
 			$str .= '</tr>'; 
 			$str .= '</thead>'; 
 			$str .= '<tbody>'; 
@@ -70,6 +71,11 @@ class Settings
 					$str .= '<tr>'; 
 					$str .= '<td>'.$counter.'</td>'; 
 					$str .= '<td>'.$row['name'].'</td>'; 
+					if ($row['limits'] > 0) {
+						$str .= '<td>'.$row['limits'].'</td>';
+					} else {
+						$str .= '<td></td>';
+					}			
 					$str .= '</tr>'; 
 					$counter++;
 				} 
@@ -371,5 +377,26 @@ class Settings
 			} 
 			
 		}  	
+	}
+	
+	function addLimitForCategory($userId, $nameCategory, $limit)
+	{
+		if (!$this->connection) return SERVER_ERROR;
+		
+		$sqlId = "SELECT `id` FROM `expenses_category_assigned_to_users` WHERE `user_id`= $userId AND `name`= '$nameCategory'";
+		
+		$resultOfQuery=$this->connection->query($sqlId);
+		
+		if (!$resultOfQuery) return SERVER_ERROR;
+		$row = $resultOfQuery->fetch_assoc();
+		$idCategory = $row['id'];
+	
+		$sqlLimit = "UPDATE `expenses_category_assigned_to_users` SET `limits`= $limit WHERE id= $idCategory";
+		
+		if ($this->connection->query($sqlLimit)) {
+			return ACTION_OK;
+		}
+		
+		return SERVER_ERROR;
 	}
 }

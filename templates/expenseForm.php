@@ -73,7 +73,7 @@
 				
 				<div class="row ">
 					<div class="col-sm-5 col-sm-offset-4">
-						<button type="submit" class="btnSetting">Zapisz</button>
+						<button type="submit" class="btnSetting" data-toggle="modal" data-target="#exampleModalCenter">>Zapisz</button>
 					</div>
 				</div>	
 			</form>	
