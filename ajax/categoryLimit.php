@@ -16,15 +16,21 @@ catch (Exception $e) {
 	
 
 	if (is_numeric($limit)) { 
-		if ($application->saveLimitToDatabase($category,$limit) == ACTION_OK) {
-			$data["description"] = "Limit dla wydatku został dodany.";
-			$data["code"] = 1;
-		} else if ($application->saveLimitToDatabase($category,$limit) == SERVER_ERROR) {
-			$data["description"] = "Błąd serwera! Proszę spróbować później!";
-			$data["code"] = 0;
+		if ($limit > 99999999)
+		{
+			$data["description"] = "Podaj wartość mniejszą od 99 999 999.";
+			$data["code"] = 3;
+		} else {
+			if ($application->saveLimitToDatabase($category,$limit) == ACTION_OK) {
+				$data["description"] = "Limit dla wydatku został dodany.";
+				$data["code"] = 1;
+			} else if ($application->saveLimitToDatabase($category,$limit) == SERVER_ERROR) {
+				$data["description"] = "Błąd serwera! Proszę spróbować później!";
+				$data["code"] = 0;
+			}
 		}
 	} else {
-		$data["description"] = "Podaj limit dla wydatku.";
+		$data["description"] = "Podaj wartość dla limitu.";
 		$data["code"] = 2;
 	}
 	
