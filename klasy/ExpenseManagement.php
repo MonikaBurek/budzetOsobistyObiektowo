@@ -178,8 +178,7 @@ class ExpenseManagement
 			return ACTION_OK;
 		} else {
 			return SERVER_ERROR;
-		}
-		
-		
+		}	
 	}
+	
 }

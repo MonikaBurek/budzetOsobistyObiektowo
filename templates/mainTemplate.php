@@ -157,7 +157,9 @@
 			<?php if($action =='showCategoryPersonalization'):?> 
 			<script src="js/categoryLimit.js"></script>
 			<?php endif;?>
-			
+			<?php if($action =='showAddExpenseForm'):?> 
+			<script src="js/infoLimit.js"></script>
+			<?php endif;?>
 			
 		</article>
     </body>

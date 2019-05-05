@@ -62,7 +62,7 @@ class Form
 		$str = '';	
 		if ($howNames>0) {
 			while ($row = $resultOfQuery->fetch_assoc()) {
-				$str .= '<div class="row ">';
+				$str .= '<div class="row">';
 				$str .= '<div class="col-sm-4 col-sm-offset-1">';
 				$str .= '<label class="radio-inline">';
 				$str .= '<input type="radio" name="categoryOfExpense" value="'.$row['name'];
@@ -143,5 +143,62 @@ class Form
 		}
 	
 	    return $str;
+	}
+	
+	function strLimitTable($userId, $nameCategory, $amount)
+	{
+		$sql ="SELECT SUM(e.amount), c.limits FROM users u 
+		INNER JOIN expenses e ON u.id = e.user_id 
+		INNER JOIN expenses_category_assigned_to_users c ON e.expense_category_assigned_to_user_id = c.id
+		WHERE u.id = $userId AND c.name = '$nameCategory'";
+			
+		$resultOfQuery=$this->connection->query($sql);
+			
+		if(!$resultOfQuery) return SERVER_ERROR;
+				
+		$how=$resultOfQuery->num_rows;
+		$str = '';	
+		if($how>0)
+		{
+			$row = $resultOfQuery->fetch_assoc();
+			$sumExpenses = $row['SUM(e.amount)'];
+			$limits = $row['limits'];
+			$difference = $limits - $sumExpenses;
+			$result =$sumExpenses + $amount;
+			
+			$str .= 'Możesz wydać jeszcze '.$difference.' zł w kategorii '.$nameCategory.'<br/>';
+			$str .= '<div id="limitTable">';
+			$str .= '<div class="table-responsive text-center">';                
+			$str .= '<table class="tableInfo table-condensed">'; 
+			$str .= '<thead>'; 
+			$str .= '<tr>'; 
+			$str .= '<th>Limit</th>'; 
+			$str .= '<th>Dotychczas wydano</th>'; 
+			$str .= '<th>Różnica</th>'; 
+			$str .= '<th>Wydatki + wpisana kwota</th>'; 
+			$str .= '</tr>'; 
+			$str .= '</thead>'; 
+			$str .= '<tbody>';	
+           		
+			
+			$str .= '<tr>'; 
+			$str .= '<td>'.$limits.'</td>';
+			$str .= '<td>'.$sumExpenses.'</td>';
+			
+			$str .= '<td>'.$difference.'</td>';
+			$str .= '<td>'.$result.'</td>';
+			$str .= '</tr>'; 	
+			
+			$resultOfQuery->free_result();
+			$str .= '</tbody>'; 
+			$str .= '</table>'; 
+			$str .= '</div>'; 
+			$str .= '</div>'; 											
+		} else {
+			$str .= '';
+			
+		}
+        return $str;
+	
 	}
 }

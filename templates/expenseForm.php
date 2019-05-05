@@ -14,6 +14,11 @@
 	                </div>
 	        </div>
 			
+			<div class="row">
+		             <div id="statementLimit">Informacja o limicie:</div>	
+					 <div id="infoLimit">Wpisz kwotę</div>             
+	        </div>
+			
 			
 		    <form action ="index.php?action=<?= $parametr?>&id=<?=$id?>" method = "post">
 				<div class="row">
@@ -26,7 +31,7 @@
 												echo $_SESSION['formAmountExpense'];
 												unset($_SESSION['formAmountExpense']);
 											}
-										?>" name="amount">	
+										?>" name="amount" id="amount">	
 						</div>
 						<div class="col-sm-5"></div>
 					</div>

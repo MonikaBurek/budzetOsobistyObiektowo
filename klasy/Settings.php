@@ -399,4 +399,21 @@ class Settings
 		
 		return SERVER_ERROR;
 	}
+	
+	function ifCategoryHasLimit($userId, $nameCategory)
+	{
+		$sql = "SELECT limits FROM `expenses_category_assigned_to_users` WHERE `user_id`= $userId AND `name`= '$nameCategory'";
+	
+		$resultOfQuery=$this->connection->query($sql);
+		
+		if (!$resultOfQuery) return SERVER_ERROR;
+		$row = $resultOfQuery->fetch_assoc();
+		$limits = $row['limits'];
+		if ($limits > 0) {
+			return LIMIT_OK;
+		} else {
+			return NO_LIMIT;
+		}
+		
+	}
 }
