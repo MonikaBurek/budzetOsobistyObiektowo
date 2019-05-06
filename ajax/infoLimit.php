@@ -21,14 +21,13 @@ catch (Exception $e) {
 			$data["code"] = 3;
 		} else {
 			if ($application->ifCategoryHasLimit($category) == LIMIT_OK) {
-				$strTable = $application->informationAboutLimitTable($category,$amount);
-				
+				$strTable = $application->informationAboutLimitTable($category, $amount);
 				$data["description"] = $strTable;
 				$data["code"] = 1;
 			} else if ($application->ifCategoryHasLimit($category) == NO_LIMIT) {
 				$data["description"] = "Nie jest ustwiony limit dla danej kategorii";
 				$data["code"] = 4;	
-			} else if ($application->ifCategoryHasLimit($nameCategory) == SERVER_ERROR) {
+			} else if ($application->ifCategoryHasLimit($category) == SERVER_ERROR) {
 				$data["description"] = "Błąd serwera! Proszę spróbować później!";
 				$data["code"] = 0;
 			}

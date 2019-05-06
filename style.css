@@ -706,8 +706,11 @@ h4.bilansHeader
 #limitTable > div > table > tbody > tr > td
 {
 	padding: 5px 15px 5px 5px;
-	font-weight: 700;
+	font-weight: normal;
 }
+
+#limitTable.success {background-color: #99ff99;}
+#limitTable.fail {background-color: #ffe6e6}
 
 .tableInfo
 {
