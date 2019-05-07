@@ -5,7 +5,7 @@
 
 		    <div class="row text-center ">
 		             <div class="col-md-10 col-md-offset-1 bg1">
-	                     <div class="statement">
+	                     <div class="statement" id="statementExpense">
                          <?php
                             if($statement):
                                echo $statement;
@@ -19,7 +19,7 @@
 					 <div id="infoLimit">Wpisz kwotę</div>             
 	        </div>
 			
-			
+
 		    <form action ="index.php?action=<?= $parametr?>&id=<?=$id?>" method = "post">
 				<div class="row">
 					<div class="form-group">
@@ -80,7 +80,7 @@
 				
 				<div class="row ">
 					<div class="col-sm-5 col-sm-offset-4">
-						<button type="submit" class="btnSetting" >Zapisz</button>
+						<button type="submit" class="btnSetting" id="saveExpense">Zapisz</button>
 					</div>
 				</div>	
 			</form>	
