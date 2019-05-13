@@ -12,25 +12,28 @@ catch (Exception $e) {
 }
     
 	$category = $_POST['category'];
-	$limit = $_POST['limit'];
+	$amount = $_POST['amount'];
 	
-
-	if (is_numeric($limit)) { 
-		if ($limit > 99999999)
+	if (is_numeric($amount)) { 
+		if ($amount > 99999999)
 		{
-			$data["description"] = "Podaj wartość mniejszą od 99 999 999.";
+			$data["description"] = "Podaj kwotę mniejszą od 99 999 999.";
 			$data["code"] = 3;
 		} else {
-			if ($application->saveLimitToDatabase($category,$limit) == ACTION_OK) {
-				$data["description"] = "Limit dla wydatku został dodany.";
+			if ($application->ifCategoryHasLimit($category) == LIMIT_OK) {
+				$strTable = $application->informationAboutLimitTable($category, $amount);
+				$data["description"] = $strTable;
 				$data["code"] = 1;
-			} else if ($application->saveLimitToDatabase($category,$limit) == SERVER_ERROR) {
+			} else if ($application->ifCategoryHasLimit($category) == NO_LIMIT) {
+				$data["description"] = "Nie jest ustwiony limit dla danej kategorii";
+				$data["code"] = 4;	
+			} else if ($application->ifCategoryHasLimit($category) == SERVER_ERROR) {
 				$data["description"] = "Błąd serwera! Proszę spróbować później!";
 				$data["code"] = 0;
 			}
 		}
 	} else {
-		$data["description"] = "Podaj wartość dla limitu.";
+		$data["description"] = "Podaj kwotę.";
 		$data["code"] = 2;
 	}
 	

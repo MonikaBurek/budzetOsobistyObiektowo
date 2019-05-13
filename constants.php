@@ -38,5 +38,7 @@
   define('NOT_ENOUGH_RIGHTS',72);
   define('USER_HAVE_RIGHTS',73);
   
+  define('LIMIT_OK',81);
+  define('NO_LIMIT',82);
   
 ?>

@@ -194,8 +194,7 @@ class ApplicationFront extends Application
 	{
 		$userId = $this->userLoggedIn->id;
 		$deleteEntry = new Entery($this->connection);
-		return $deleteEntry->deleteEntery($wtd,$id, $userId);
-		
+		return $deleteEntry->deleteEntery($wtd,$id, $userId);	
 	}
 	
 	function showStatement($statement)
@@ -206,8 +205,7 @@ class ApplicationFront extends Application
 	function checkIfUserExistsInDatabase($name)
 	{
 		$register = new Registration($this->connection);
-		return $register->checkIfUserExists($name);
-		
+		return $register->checkIfUserExists($name);	
 	}
 	
 	function saveLimitToDatabase($nameCategory,$limit)
@@ -215,8 +213,20 @@ class ApplicationFront extends Application
 		$userId = $this->userLoggedIn->id;
 		$addLimit = new Settings($this->connection);
 		return $addLimit->addLimitForCategory($userId, $nameCategory, $limit);
-		
-		
+	}
+	
+	function ifCategoryHasLimit($nameCategory)
+	{
+		$userId = $this->userLoggedIn->id;
+		$limit = new Settings($this->connection);
+		return $limit->ifCategoryHasLimit($userId,$nameCategory);
+	}
+	
+	function informationAboutLimitTable($nameCategory,$amount)
+	{
+		$userId = $this->userLoggedIn->id;
+		$expense = new Form($this->connection);
+		return $expense->strLimitTable($userId, $nameCategory, $amount);
 	}
 	
     function logout()

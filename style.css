@@ -673,3 +673,47 @@ h4.bilansHeader
 	color: #ff0000;
 	background-color: #ffe6e6; 
 }
+
+#statementLimit
+{
+	float: left;
+	padding-bottom: 20px;
+	text-decoration: underline;
+}
+
+#infoLimit
+{
+	float:left;
+	padding-bottom: 20px;
+	padding-left: 5px;
+	font-weight: 700;
+	color: #66B032;
+	
+}
+
+#limitTable
+{
+	margin-top: 15px;
+	color: #092834;
+	border: 1px dotted #092834;
+	background-color: white;	
+}
+#limitTable > div > table > thead > tr > th
+{
+	padding: 5px 15px 5px 5px;
+}
+
+#limitTable > div > table > tbody > tr > td
+{
+	padding: 5px 15px 5px 5px;
+	font-weight: normal;
+}
+
+#limitTable.success {background-color: #99ff99;}
+#limitTable.fail {background-color: #ffe6e6}
+
+.tableInfo
+{
+	
+	
+}

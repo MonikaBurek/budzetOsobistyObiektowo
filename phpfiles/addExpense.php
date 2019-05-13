@@ -3,9 +3,16 @@
 
 	switch ($application->editExpense('add', $id)):
 		case ACTION_OK:
-			$application->setMessage('Zapisano wydatek w bazie danych.');
-			header ('Location:index.php?action=successExpense');
-			return;
+			$application->setMessage('Dodano wydatek.');
+		
+			if (isset($_SESSION['formAmountExpense'])) unset($_SESSION['formAmountExpense']);
+			if (isset($_SESSION['formDateExpense'])) unset($_SESSION['formDateExpense']);
+			if (isset($_SESSION['formPaymentMethod'])) unset($_SESSION['formPaymentMethod']);
+			if (isset($_SESSION['formCategoryExpense'])) unset($_SESSION['formCategoryExpense']);
+			if (isset($_SESSION['formCommentExpense'])) unset($_SESSION['formCommentExpense']);
+			
+			break;
+			
 		case SERVER_ERROR:
 	        $application->setMessage("Błąd serwera!");
 	        break;
