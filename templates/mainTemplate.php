@@ -99,6 +99,9 @@
 						case 'successIncome':
 							include 'templates/successIncome.php';
 							break;
+						case 'successExpense':
+							include 'templates/successExpense.php';
+							break;
 						case 'periodOfTimeForm':
 							include 'templates/periodOfTimeForm.php';
 							break;
