@@ -4,7 +4,7 @@
 	<div class="row text-center">
 		<div class="col-md-8 col-md-offset-2 info">
 		    
-				<h3> Chcesz zapanować nad swoimi finansami? Maszysz o mieszkaniu, wakacjach na Wyspach Karaibskich, a może o nowym samochodzie?</h3>
+				<h3> Chcesz zapanować nad swoimi finasami? Maszysz o mieszkaniu, wakacjach na Wyspach Karaibskich, a może o nowym samochodzie?</h3>
 				<h4> Jeśli tak, zacznij zarządzać swoimi wydatkami. Skorzystaj z aplikacji, która została stworzona specjalnie dla Ciebie. 
 				Zaloguj się lub zarejestuj się, jeśli nie masz konta.
 				</h4> 
@@ -49,7 +49,7 @@
 					</div>
 				</div>
 				<div class="col-sm-offset-1 col-sm-11">
-					<div class="g-recaptcha" data-sitekey="6LfuoY0UAAAAAFxcJ0GLvNWq1lr1kvh9cQLwRpEK"></div>
+					<div class="g-recaptcha" data-sitekey="6Lc8028UAAAAAFQCzQEqlfLdnLK5fwfNXgwzBvsB"></div>
 				</div>
 				
 				<div class="form-group"> 

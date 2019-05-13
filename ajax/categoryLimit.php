@@ -4,7 +4,7 @@ spl_autoload_register('classLoader');
 session_start();
 
 try {
-  $application = new ApplicationFront("localhost", "root", "", "personal_budget");
+  $application = new ApplicationFront("localhost", "mburek_ubuzet","!BazaBudzet123", "mburek_budzetosobisty");
 }
 catch (Exception $e) {
   echo 'Problem z bazą danych. ' . $e->getMessage();
