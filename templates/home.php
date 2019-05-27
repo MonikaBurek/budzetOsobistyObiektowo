@@ -3,10 +3,10 @@
     <div class="col-md-8 col-md-offset-2 bg3">
         <article>
             <h3 class="articleHeader">Budżet domowy</h3>
-			<p>Dzięki prowadzeniu budżetu domowego wiemy, ile wydajemy pieniędzy na poszczególne rzeczy: rachunki, jedzenie, podróże, przyjemności. Możemy dowiedzieć się ile z wydanych pieniędzy były przeznaczone na rzeczy, które są nam nie potrzebne. Gdy mamy pełną kontrolę nad wydatkami, łatwiej jest zaoszczędzić pieniądze na wyznaczony cel np. na nowy samochód czy wakacje. Można pomyśleć o odkładaniu pieniędzy na emeryturę lub "czarną godzinę". Gdy brakuje pieniędzy wiemy o jaką podwyżkę poprosić, ile trzeba zarobić w dodatkowej pracy, aby nie mieć długów.</p>
+			<p>Dzięki prowadzeniu budżetu domowego wiemy, ile wydajemy pieniędzy na poszczególne rzeczy: rachunki, jedzenie, podróże, przyjemności. Możemy dowiedzieć się ile z wydanych pieniędzy, przeznaczyliśmy na rzeczy, które są nam niepotrzebne. Gdy mamy pełną kontrolę nad wydatkami, łatwiej jest zaoszczędzić na wybrany cel np. na nowy samochód czy wakacje. Można pomyśleć o odkładaniu pieniędzy na emeryturę lub "czarną godzinę". Gdy brakuje funduszy wiemy, o jaką podwyżkę poprosić, ile trzeba zarobić w dodatkowej pracy, aby nie mieć długów.</p>
 
 			<h3 class="articleHeader">Jak działa aplikacja?</h3>
-			<p>Za pomocą zakładek menu głównego dodajemy przychody i wydatki (Dodaj przychód, Dodaj wydatek - wypełniamy formularz, przypisujemy kategorie). Używając zakładki Przeglądaj bilans możemy analizować nasze wydatki i przychody w danym okresie dla danych kategorii. Jest możliwość zmiany wpisów oraz personalizacji kategorii przychodów i wydatków.</p>
+			<p>Za pomocą zakładek menu głównego dodajemy przychody i wydatki (<span class="titleCursive">Dodaj przychód</span>, <span class="titleCursive">Dodaj wydatek</span> - wypełniamy formularz, przypisujemy kategorie). Używając zakładki <span class="titleCursive">Przeglądaj bilans</span>, możemy analizować nasze wydatki i przychody w danym okresie dla danych kategorii. Jest możliwość zmiany wpisów oraz personalizacji kategorii przychodów i wydatków.</p>
 						
 		</article>		
 	</div>

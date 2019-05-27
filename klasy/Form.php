@@ -145,9 +145,38 @@ class Form
 	    return $str;
 	}
 	
-	function strLimitTable($userId, $nameCategory, $amount)
+	function datesForQuery($dateExpense)
 	{
-		$sql ="SELECT SUM(amount) FROM `expenses` WHERE `user_id`=$userId AND `expense_category_assigned_to_user_id`=(SELECT id FROM expenses_category_assigned_to_users WHERE user_id ='$userId' AND name ='$nameCategory')";
+		$now = date('Y-m-d');
+		
+		if ($dateExpense == $now) {
+			
+			$date[0] = date('Y-m-d',mktime(0,0,0,date('m'), 1, date('Y')));
+			$date[1] = date('Y-m-d',strtotime("now"));
+			
+		} else if ($dateExpense < $now) {
+			
+			$month = date("n",strtotime($dateExpense));
+			$year = date("Y",strtotime($dateExpense));
+			$lastDayMonth = date("t",strtotime($dateExpense));
+			$date[0] = date('Y-m-d',mktime(0,0,0,$month, 1, $year));
+			$date[1] = date('Y-m-d',mktime(0,0,0,$month, $lastDayMonth, $year));; 
+		}
+		
+		return $date;
+	}
+	
+	
+	function strLimitTable($userId, $nameCategory, $amount, $dateExpense)
+	{
+		
+		$date = $this->datesForQuery($dateExpense);
+		$startDate = $date[0];
+		$endDate = $date[1];
+		
+		$sql ="SELECT SUM(amount) FROM `expenses` WHERE `user_id`=$userId AND `expense_category_assigned_to_user_id`=(SELECT id FROM expenses_category_assigned_to_users WHERE user_id ='$userId' AND name ='$nameCategory') AND date_of_expense >= '$startDate' 
+		AND  date_of_expense <= '$endDate'";
+		
 		
 		$resultOfQuery=$this->connection->query($sql);
 			

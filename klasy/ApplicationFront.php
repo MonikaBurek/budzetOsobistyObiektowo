@@ -222,11 +222,11 @@ class ApplicationFront extends Application
 		return $limit->ifCategoryHasLimit($userId,$nameCategory);
 	}
 	
-	function informationAboutLimitTable($nameCategory,$amount)
+	function informationAboutLimitTable($nameCategory,$amount, $dateExpense)
 	{
 		$userId = $this->userLoggedIn->id;
 		$expense = new Form($this->connection);
-		return $expense->strLimitTable($userId, $nameCategory, $amount);
+		return $expense->strLimitTable($userId, $nameCategory, $amount, $dateExpense);
 	}
 	
     function logout()

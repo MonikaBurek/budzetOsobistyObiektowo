@@ -13,6 +13,7 @@ catch (Exception $e) {
     
 	$category = $_POST['category'];
 	$amount = $_POST['amount'];
+	$dateExpense = $_POST['dateExpense'];
 	
 	if (is_numeric($amount)) { 
 		if ($amount > 99999999)
@@ -21,7 +22,7 @@ catch (Exception $e) {
 			$data["code"] = 3;
 		} else {
 			if ($application->ifCategoryHasLimit($category) == LIMIT_OK) {
-				$strTable = $application->informationAboutLimitTable($category, $amount);
+				$strTable = $application->informationAboutLimitTable($category, $amount, $dateExpense);
 				$data["description"] = $strTable;
 				$data["code"] = 1;
 			} else if ($application->ifCategoryHasLimit($category) == NO_LIMIT) {
