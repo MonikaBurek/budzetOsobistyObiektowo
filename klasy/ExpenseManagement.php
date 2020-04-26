@@ -90,7 +90,7 @@ class ExpenseManagement
 			$_SESSION['formDateExpense'] = date('Y-m-d');
 			$_SESSION['formCommentExpense'] = '';
 			$_SESSION['formCategoryExpense'] =  '';
-            $_SESSION['formPaymentMethod'] =  '';
+            $_SESSION['formPaymentMethod'] =  'Karta debetowa';
 			}			
 			$parametr = 'addExpense';
 		}

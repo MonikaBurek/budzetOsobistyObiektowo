@@ -213,7 +213,7 @@ class BalanceFront
 		INNER JOIN expenses_category_assigned_to_users c ON e.expense_category_assigned_to_user_id = c.id
 		INNER JOIN payment_methods_assigned_to_users p ON e.payment_method_assigned_to_user_id = p.id
 		WHERE u.id = $userId AND e.date_of_expense >= '$startDate' 
-		AND  e.date_of_expense <= '$endDate'";
+		AND  e.date_of_expense <= '$endDate' ORDER BY e.date_of_expense DESC";
 			
 		$resultOfQuery=$this->connection->query($sql);
 			
@@ -277,7 +277,7 @@ class BalanceFront
 		INNER JOIN incomes i ON u.id = i.user_id 
 		INNER JOIN incomes_category_assigned_to_users c ON i.income_category_assigned_to_user_id = c.id
 		WHERE u.id = $userId AND i.date_of_income >= '$startDate' 
-		AND  i.date_of_income <= '$endDate'";
+		AND  i.date_of_income <= '$endDate' ORDER BY i.date_of_income DESC";
 			
 		$resultOfQuery=$this->connection->query($sql);
 			
